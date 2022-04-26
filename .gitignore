@@ -128,8 +128,9 @@ public-dist
 **/*/typings/auto-generated
 
 # for TiddlyWiki
-src/demo/*.js.dist.tid
+src/**/*.js.dist.tid
 output/
+wiki/tiddlers/*.json.dist.json
 wiki/tiddlers/$__language.tid
 wiki/tiddlers/$__StoryList.tid
 wiki/tiddlers/$__keepstate_*

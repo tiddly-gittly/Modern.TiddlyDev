@@ -1,6 +1,33 @@
+created: 20220426154809325
+modified: 20220426161150610
 title: Index
 type: text/vnd.tiddlywiki
 
-{{$:/snippets/minilanguageswitcher}}
+Change the language: {{$:/snippets/minilanguageswitcher}}
 
-Some readme here.
+---
+
+<$list filter="[[$:/language]get[text]removeprefix[$:/languages/]else[en-GB]]" variable="lang">
+<$list filter="[<lang>search[zh]]">
+
+!! 这是什么
+
+''Modern.TiddlyDev'' 是基于现代前端技术栈打造、面向TiddlyWIki插件开发爱好者的一个''All-In-One''开发环境，支持如下功能：
+
+* 同时开发多款插件；
+* 支持`.ts`, `.tsx`, `.jsx`, `.mjs`代码工程构建，名称与入口数量无限制（只要符合规范）；
+* 基于[[esbuild|https://esbuild.github.io/]]和[[chokidar|https://github.com/paulmillr/chokidar]]的独立构建与运行时构建预览系统，可实时增量编译插件，使用起来就像React和Vue那样！
+* 插件文档Wiki(也就是现在这个页面)，并支持一键构建静态页面(核心JS分离与不分离两种版本)和一键生成插件库；
+* 基于[[TW5-Typed|https://github.com/tiddly-gittly/TW5-Typed]]的TiddlyWiki API文档，填补`$tw`没有API说明与补全的短板。
+
+别担心，虽然这里有很多工作，但是对你来讲，它就是开箱即用的。快来使用它，步入现代化的TiddlyWiki插件开发之旅吧！
+
+!! 开始使用
+
+</$list>
+<$list filter="[<lang>!search[zh]]">
+
+!! Coming soon...
+
+</$list>
+</$list>
