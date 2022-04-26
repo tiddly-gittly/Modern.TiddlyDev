@@ -3,7 +3,6 @@ import tw from 'tiddlywiki';
 import { findAllEntries, buildEntries, exportPlugins, initTiddlyWiki } from './packup.mjs';
 
 let twServer = undefined;
-let previousEntryList = [];
 const $tw1 = await initTiddlyWiki();
 let $tw2 = undefined;
 
@@ -19,8 +18,7 @@ const watcher = chokidar.watch('src', {
 
 const refresh = async () => {
   try {
-    const [entryList, metaMap, _entryChanged] = await findAllEntries(previousEntryList);
-    previousEntryList = entryList;
+    const [entryList, metaMap, _entryChanged] = await findAllEntries();
     await buildEntries(entryList, metaMap, false);
     await exportPlugins($tw1, false, true);
   } catch (e) {
@@ -37,8 +35,7 @@ const refresh = async () => {
 };
 
 watcher.on('ready', async () => {
-  const [entryList, metaMap, _] = await findAllEntries(previousEntryList);
-  previousEntryList = entryList;
+  const [entryList, metaMap, _] = await findAllEntries();
   await buildEntries(entryList, metaMap, false);
   await exportPlugins($tw1, false, true);
   $tw2 = tw.TiddlyWiki();
