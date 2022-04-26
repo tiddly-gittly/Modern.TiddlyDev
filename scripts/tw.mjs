@@ -184,5 +184,5 @@ export const buildLibrary = async (pluginFilter, distDir, minify) => {
     const result = await htmlMinify(fs.readFileSync(rawHTMLPath).toString('utf-8'), htmlMinifierOptions);
     fs.writeFileSync(rawHTMLPath, result);
   }
-  fs.moveSync(rawHTMLPath, path.join(distDir, htmlName), { overwrite: true });
+  fs.moveSync(rawHTMLPath, path.join(distDir, 'index.html'), { overwrite: true });
 };
