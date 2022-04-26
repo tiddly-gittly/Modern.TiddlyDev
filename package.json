@@ -21,7 +21,7 @@
     "@types/prettier": "2.6.0",
     "@typescript-eslint/eslint-plugin": "5.20.0",
     "@typescript-eslint/parser": "5.20.0",
-    "browserslist": "4.20.2",
+    "browserslist": "4.20.3",
     "chokidar": "^3.5.3",
     "clean-css": "^5.3.0",
     "esbuild": "0.14.38",
