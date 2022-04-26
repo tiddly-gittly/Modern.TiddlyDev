@@ -18,7 +18,7 @@ class ExampleWidget extends Widget {
     this.parentDomNode = parent;
     this.execute();
 
-    const containerElement = document.createElement('div');
+    const containerElement = document.createElement('p');
     containerElement.innerHTML = 'This is a widget!';
     this.domNodes.push(containerElement);
     parent.appendChild(containerElement);
