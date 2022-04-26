@@ -2,5 +2,5 @@ import { findAllEntries, buildEntries, exportPlugins, initTiddlyWiki } from './p
 
 const [entryList, metaMap, _] = await findAllEntries();
 const [$tw, __] = await Promise.all([initTiddlyWiki(), buildEntries(entryList, metaMap)]);
-exportPlugins($tw, true, true, false);
+exportPlugins($tw, true, false, true);
 process.exit(0);

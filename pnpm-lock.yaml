@@ -37,13 +37,16 @@ specifiers:
   html-minifier-terser: ^7.0.0-alpha.2
   prettier: 2.6.2
   prettier-eslint: ^14.0.1
-  tiddlywiki: 5.2.2
+  tiddlywiki: ^5.2.2
   tslib: 2.4.0
   tw5-typed: 0.2.5
   typescript: 4.6.3
   typesync: 0.9.0
   uglify-js: ^3.15.4
   workbox-cli: ^6.5.3
+
+dependencies:
+  tiddlywiki: registry.npmmirror.com/tiddlywiki/5.2.2
 
 devDependencies:
   '@types/eslint': registry.npmmirror.com/@types/eslint/8.4.1
@@ -82,7 +85,6 @@ devDependencies:
   html-minifier-terser: registry.npmmirror.com/html-minifier-terser/7.0.0-alpha.2
   prettier: registry.npmmirror.com/prettier/2.6.2
   prettier-eslint: registry.npmmirror.com/prettier-eslint/14.0.1
-  tiddlywiki: registry.npmmirror.com/tiddlywiki/5.2.2
   tslib: registry.npmmirror.com/tslib/2.4.0
   tw5-typed: registry.npmmirror.com/tw5-typed/0.2.5
   typescript: registry.npmmirror.com/typescript/4.6.3
@@ -6393,7 +6395,7 @@ packages:
     version: 5.2.2
     engines: {node: '>=0.8.2'}
     hasBin: true
-    dev: true
+    dev: false
     bundledDependencies: []
 
   registry.npmmirror.com/tmp/0.0.33:

@@ -1,5 +1,8 @@
 import path from 'path';
 import fs from 'fs-extra';
+import { execSync } from 'child_process';
+
+const repoFolder = process.cwd();
 
 export const walkFilesAsync = async (dir, callback) => {
   const statObj = fs.statSync(dir);

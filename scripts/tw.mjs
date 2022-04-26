@@ -1,9 +1,9 @@
 import path from 'path';
-import tw from 'tiddlywiki';
 import fs from 'fs-extra';
+import tw from 'tiddlywiki';
 import UglifyJS from 'uglify-js';
 import { minify as htmlMinify } from 'html-minifier-terser';
-import { tryCopy, htmlMinifierOptions } from './utils.mjs';
+import { tryCopy, htmlMinifierOptions, shell } from './utils.mjs';
 
 /** 项目路径 */
 const repoFolder = process.cwd();
@@ -12,9 +12,7 @@ const tiddlersFolder = path.join(wikiFolder, 'tiddlers');
 const publicFolder = path.join(repoFolder, 'public');
 
 const runTiddlyWiki = (argv) => {
-  const $tw = tw.TiddlyWiki();
-  $tw.boot.argv = argv;
-  return $tw;
+  shell(`npx tiddlywiki ${argv.join(' ')}`);
 };
 
 /**
@@ -24,11 +22,15 @@ const runTiddlyWiki = (argv) => {
  * @param {boolean} minify 是否最小化JS和HTML，默认为true
  * @param {string} excludeFilter 要排除的tiddler的过滤表达式，默认为'-[is[draft]]'
  */
-export const buildOnlineHTML = (distDir, htmlName, minify, excludeFilter) => {
+export const buildOnlineHTML = async (distDir, htmlName, minify, excludeFilter) => {
   distDir = path.resolve(typeof distDir !== 'string' || distDir.length === 0 ? 'dist' : distDir);
   if (typeof htmlName !== 'string' || htmlName.length === 0) htmlName = 'index.html';
   minify = minify !== false;
   if (typeof excludeFilter !== 'string') excludeFilter = '-[is[draft]]';
+
+  const $tw = tw.TiddlyWiki();
+  $tw.boot.argv = ['.'];
+  $tw.boot.boot();
 
   // 静态资源拷贝
   fs.mkdirsSync(distDir);
@@ -42,31 +44,40 @@ export const buildOnlineHTML = (distDir, htmlName, minify, excludeFilter) => {
   const backupFolder = path.join(wikiFolder, 'tmp_tiddlers_backup');
   fs.mkdirsSync(backupFolder);
   fs.copySync(tiddlersFolder, backupFolder, { overwrite: true });
-  const $tw = runTiddlyWiki([
+  runTiddlyWiki([
     wikiFolder /* 指定wiki路径 */,
     ...['--output', distDir] /* 指定输出路径 */,
-    ...['--deletetiddlers', '[[$:/UpgradeLibrary]] [[$:/UpgradeLibrary/List]]'] /* 删掉一些没必要导出而且占用很大的条目 */,
+    ...['--deletetiddlers', "'[[$:/UpgradeLibrary]] [[$:/UpgradeLibrary/List]]'"] /* 删掉一些没必要导出而且占用很大的条目 */,
     ...[
       '--setfield',
-      '[is[image]] [is[binary]] [type[application/msword]] [type[image/svg+xml]]',
+      "'[is[image]] [is[binary]] [type[application/msword]] [type[image/svg+xml]]'",
       '_canonical_uri',
       '$:/core/templates/canonical-uri-external-image',
       'text/plain',
     ] /* 媒体条目转外链 */,
     ...[
       '--setfield',
-      '[is[image]] [is[binary]] [type[application/msword]] [type[image/svg+xml]]',
+      "'[is[image]] [is[binary]] [type[application/msword]] [type[image/svg+xml]]'",
       'text',
-      '',
+      "''",
       'text/plain',
     ] /* 媒体条目内容清空：注意这一步也会把所有媒体文件的内容变成空的 */,
-    ...['--rendertiddler', '$:/core/save/offline-external-js', 'index-raw.html', 'text/plain', '', 'publishFilter', excludeFilter] /* 导出无核心的HTML文件 */,
+    ...[
+      '--rendertiddler',
+      '$:/core/save/offline-external-js',
+      'index-raw.html',
+      'text/plain',
+      "''",
+      'publishFilter',
+      `'${excludeFilter}'`,
+    ] /* 导出无核心的HTML文件 */,
     ...['--rendertiddler', '$:/core/templates/tiddlywiki5.js', 'tiddlywikicore.js', 'text/plain'] /* 导出核心 */,
   ]);
 
   // 将所有的二进制文件(媒体文件, 参考$tw.utils.registerFileType)导出
-  const binaryExtensionMap = [];
-  $tw.config.fileExtensionInfo.forEach((ext, _info) => {
+  const binaryExtensionMap = {};
+  Object.keys($tw.config.fileExtensionInfo).forEach((ext) => {
+    const _info = $tw.config.fileExtensionInfo[ext];
     const info = $tw.config.contentTypeInfo[_info.type];
     if (info && info.encoding === 'base64') binaryExtensionMap[ext.toLowerCase()] = true;
   });
@@ -75,6 +86,7 @@ export const buildOnlineHTML = (distDir, htmlName, minify, excludeFilter) => {
   fs.copySync(backupFolder, distMediaFolder, {
     overwrite: true,
     filter: (src, _dest) => {
+      if (src === backupFolder) return true;
       return binaryExtensionMap[path.extname(src).toLowerCase()] === true;
     },
   });
@@ -88,7 +100,7 @@ export const buildOnlineHTML = (distDir, htmlName, minify, excludeFilter) => {
   const rawHTMLPath = path.join(distDir, 'index-raw.html');
   if (minify) {
     // 核心
-    let result = UglifyJS.minify(fs.readFileSync(rawCoreJsPath), {
+    let result = UglifyJS.minify(fs.readFileSync(rawCoreJsPath).toString('utf-8'), {
       warnings: false,
       v8: true,
       ie: true,
@@ -96,7 +108,7 @@ export const buildOnlineHTML = (distDir, htmlName, minify, excludeFilter) => {
     });
     fs.writeFileSync(rawCoreJsPath, result.code);
     // 网页
-    result = htmlMinify(fs.readFileSync(rawHTMLPath), htmlMinifierOptions);
+    result = await htmlMinify(fs.readFileSync(rawHTMLPath).toString('utf-8'), htmlMinifierOptions);
     fs.writeFileSync(rawHTMLPath, result);
   }
   fs.moveSync(rawCoreJsPath, path.join(distDir, `tiddlywikicore-${$tw.packageInfo.version}.js`), { overwrite: true });
@@ -110,7 +122,7 @@ export const buildOnlineHTML = (distDir, htmlName, minify, excludeFilter) => {
  * @param {boolean} minify 是否最小化JS和HTML，默认为true
  * @param {string} excludeFilter 要排除的tiddler的过滤表达式，默认为'-[is[draft]]'
  */
-export const buildOfflineHTML = (distDir, htmlName, minify, excludeFilter) => {
+export const buildOfflineHTML = async (distDir, htmlName, minify, excludeFilter) => {
   distDir = path.resolve(typeof distDir !== 'string' || distDir.length === 0 ? 'dist' : distDir);
   if (typeof htmlName !== 'string' || htmlName.length === 0) htmlName = 'index.html';
   minify = minify !== false;
@@ -121,22 +133,22 @@ export const buildOfflineHTML = (distDir, htmlName, minify, excludeFilter) => {
   runTiddlyWiki([
     wikiFolder /* 指定wiki路径 */,
     ...['--output', distDir] /* 指定输出路径 */,
-    ...['--deletetiddlers', '[[$:/UpgradeLibrary]] [[$:/UpgradeLibrary/List]]'] /* 删掉一些没必要导出而且占用很大的条目 */,
+    ...['--deletetiddlers', "'[[$:/UpgradeLibrary]] [[$:/UpgradeLibrary/List]]'"] /* 删掉一些没必要导出而且占用很大的条目 */,
     ...[
       '--rendertiddler',
       '$:/plugins/tiddlywiki/tiddlyweb/save/offline',
       'index-raw.html',
       'text/plain',
-      '',
+      "''",
       'publishFilter',
-      excludeFilter,
+      `'${excludeFilter}'`,
     ] /* 将wiki导出为HTML */,
   ]);
 
   // 最小化：HTML
   const rawHTMLPath = path.join(distDir, 'index-raw.html');
   if (minify) {
-    const result = htmlMinify(fs.readFileSync(rawHTMLPath), htmlMinifierOptions);
+    const result = await htmlMinify(fs.readFileSync(rawHTMLPath).toString('utf-8'), htmlMinifierOptions);
     fs.writeFileSync(rawHTMLPath, result);
   }
   fs.moveSync(rawHTMLPath, path.join(distDir, htmlName), { overwrite: true });
@@ -148,7 +160,7 @@ export const buildOfflineHTML = (distDir, htmlName, minify, excludeFilter) => {
  * @param {string} distDir 目标路径，空或者不填则默认为'dist/library'
  * @param {boolean} minify 是否最小化HTML，默认为true
  */
-export const buildLibrary = (pluginFilter, distDir, minify) => {
+export const buildLibrary = async (pluginFilter, distDir, minify) => {
   if (typeof pluginFilter !== 'string' || pluginFilter.length === 0)
     pluginFilter = '[prefix[$:/plugins/]!prefix[$:/plugins/tiddlywiki/]!prefix[$:/languages/]!prefix[$:/themes/tiddlywiki/]!tag[$:/tags/PluginLibrary]]';
   distDir = path.resolve(typeof distDir !== 'string' || distDir.length === 0 ? 'dist/library' : distDir);
@@ -160,16 +172,16 @@ export const buildLibrary = (pluginFilter, distDir, minify) => {
     wikiFolder /* 指定wiki路径 */,
     ...['--output', distDir] /* 指定输出路径 */,
     ...['--makelibrary', '$:/UpgradeLibrary'] /* 收集所有已安装插件 */,
-    ...['--savelibrarytiddlers', '$:/UpgradeLibrary', pluginFilter, 'recipes/library/tiddlers/', '$:/UpgradeLibrary/List'] /* 导出指定的插件 */,
+    ...['--savelibrarytiddlers', '$:/UpgradeLibrary', `'${pluginFilter}'`, 'recipes/library/tiddlers/', '$:/UpgradeLibrary/List'] /* 导出指定的插件 */,
     ...['--savetiddler', '$:/UpgradeLibrary/List', 'recipes/library/tiddlers.json'] /* 生成插件集合JSON文件 */,
     ...['--rendertiddler', '$:/plugins/tiddlywiki/pluginlibrary/library.template.html', 'index-raw.html', 'text/plain'] /* 生成插件库HTML文件 */,
-    ...['--deletetiddlers', '[[$:/UpgradeLibrary]] [[$:/UpgradeLibrary/List]]'] /* 删掉中间内容 */,
+    ...['--deletetiddlers', "'[[$:/UpgradeLibrary]] [[$:/UpgradeLibrary/List]]'"] /* 删掉中间内容 */,
   ]);
 
   // 最小化：HTML
   const rawHTMLPath = path.join(distDir, 'index-raw.html');
   if (minify) {
-    const result = htmlMinify(fs.readFileSync(rawHTMLPath), htmlMinifierOptions);
+    const result = await htmlMinify(fs.readFileSync(rawHTMLPath).toString('utf-8'), htmlMinifierOptions);
     fs.writeFileSync(rawHTMLPath, result);
   }
   fs.moveSync(rawHTMLPath, path.join(distDir, htmlName), { overwrite: true });

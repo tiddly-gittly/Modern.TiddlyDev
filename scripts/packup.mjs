@@ -51,7 +51,7 @@ export const findAllEntries = async (previousEntryList) => {
   return [entryList, outputMetaMap, entryChanged];
 };
 
-export const buildEntries = async (entries, metaMap, devMode) => {
+export const buildEntries = async (entries, metaMap) => {
   // Build .ts, .tsx, .jsx to .js.dist.tid
   const buildResult = await esbuild.build({
     entryPoints: entries,
@@ -61,7 +61,7 @@ export const buildEntries = async (entries, metaMap, devMode) => {
     incremental: true,
     outdir: SOURCE_DIRECTORY,
     outbase: SOURCE_DIRECTORY,
-    sourcemap: devMode ? 'inline' : false,
+    sourcemap: false,
     format: 'cjs',
     treeShaking: true,
     // platform: 'browser',
@@ -128,7 +128,7 @@ const minifyPlugin = (pluginInfo) => {
 
 const excludeFiles = /^.*\.(tsx?|jsx|meta|swp|mjs)$|^\.(git|hg|lock-wscript|svn|DS_Store|(wafpickle-|_).*)$|^CVS$|^npm-debug\.log$/;
 
-export const exportPlugins = ($tw, exportToDist, exportToWiki) => {
+export const exportPlugins = ($tw, minify, exportToDist, exportToWiki) => {
   if (fs.existsSync(SOURCE_DIRECTORY)) {
     // Ignore ts, tsx, jsm and jsx
     if (exportToDist) fs.mkdirsSync(DISTNATION_DIRECTORY);
@@ -136,10 +136,10 @@ export const exportPlugins = ($tw, exportToDist, exportToWiki) => {
       const dir = path.join(SOURCE_DIRECTORY, _dir);
       const dirStat = fs.statSync(dir);
       if (!dirStat.isDirectory()) return;
-      const pluginInfo = $tw.loadPluginFolder(dir, excludeFiles);
+      const pluginInfo = minify ? minifyPlugin($tw.loadPluginFolder(dir, excludeFiles)) : $tw.loadPluginFolder(dir, excludeFiles);
       const pluginTiddlerName = `${path.basename($tw.utils.generateTiddlerFilepath(pluginInfo.title, {}))}.json`;
       if (exportToWiki) fs.writeJSONSync(path.join(WIKI_TIDDLERS_DIRECTORY, `${pluginTiddlerName}.dist.json`), pluginInfo);
-      if (exportToDist) fs.writeJSONSync(path.join('dist', pluginTiddlerName), minifyPlugin(pluginInfo));
+      if (exportToDist) fs.writeJSONSync(path.join('dist', pluginTiddlerName), pluginInfo);
     });
   }
 };

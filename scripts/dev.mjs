@@ -19,8 +19,8 @@ const watcher = chokidar.watch('src', {
 const refresh = async () => {
   try {
     const [entryList, metaMap, _entryChanged] = await findAllEntries();
-    await buildEntries(entryList, metaMap, false);
-    await exportPlugins($tw1, false, true);
+    await buildEntries(entryList, metaMap);
+    await exportPlugins($tw1, false, false, true);
   } catch (e) {
       console.error(e);
     return;
@@ -36,8 +36,8 @@ const refresh = async () => {
 
 watcher.on('ready', async () => {
   const [entryList, metaMap, _] = await findAllEntries();
-  await buildEntries(entryList, metaMap, false);
-  await exportPlugins($tw1, false, true);
+  await buildEntries(entryList, metaMap);
+  await exportPlugins($tw1, false, false, true);
   $tw2 = tw.TiddlyWiki();
   $tw2.boot.argv = ['wiki', '--listen'];
   $tw2.hooks.addHook('th-server-command-post-start', (_listenCommand, server, _nodeServer) => {
