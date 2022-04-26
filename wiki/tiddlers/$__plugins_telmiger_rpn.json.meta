@@ -1,0 +1,11 @@
+author: Thomas Elmiger
+core-version: >=5.1.14
+dependents: 
+description: rpn – Basic Math in Reverse Polish Notation
+list: readme usage examples fields support
+name: rpn
+plugin-type: plugin
+source: https://tid.li/tw5/plugins.html
+title: $:/plugins/telmiger/rpn
+type: application/json
+version: 0.7.3
