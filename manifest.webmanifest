@@ -1,0 +1,23 @@
+{
+  "background_color": "#323232",
+  "theme_color": "#323232",
+  "description": "Logseq-like TiddlyWiki Template ",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "TiddlySeq/TiddlyWikiIconBlack.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "TiddlySeq/TiddlyWikiIconWhite.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ],
+  "name": "TiddlyWiki",
+  "short_name": "TiddlySeq",
+  "lang": "zh-CN",
+  "start_url": "TiddlySeq/",
+  "scope": "TiddlySeq/"
+}
