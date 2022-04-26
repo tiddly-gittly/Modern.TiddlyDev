@@ -6,15 +6,21 @@ on:
       - 'v*.*.*'
     paths-ignore:
       - 'README.md'
-      - 'docs/**'
+      - 'wiki/**'
+      - 'public/**'
+      - 'scripts/**'
       - '.vscode'
+      - '.idea'
   pull_request:
     branches:
       - master
     paths-ignore:
-      - 'docs/**'
       - 'README.md'
+      - 'wiki/**'
+      - 'public/**'
+      - 'scripts/**'
       - '.vscode'
+      - '.idea'
 
 concurrency:
   group: release-ci-group
@@ -28,18 +34,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - id: setPluginInfoJSON
-        run: |
-          content=`cat ./src/plugin.info`
-          # the following lines are only required for multi line json
-          content="${content//'%'/'%25'}"
-          content="${content//$'\n'/'%0A'}"
-          content="${content//$'\r'/'%0D'}"
-          # here we replace "title": "$:/plugins/linonetwo/tw-example-plugin", to "title": "linonetwo/tw-example-plugin",
-          # so it can be used in tiddly-gittly/tw5-plugin-packer to find output path
-          content="${content//$\:\/plugins\//}"
-          # end of optional handling for multi line json
-          echo "::set-output name=pluginInfoJSON::$content"
+      - name: Setup NodeJS
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: '16'
 
       - name: Get npm cache directory
         uses: actions/cache@v3
@@ -50,42 +48,28 @@ jobs:
             ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
             ${{ runner.os }}-node-
 
-      - name: Install dependencies
-        run: npm i
-
-      - name: Make Plugins
-        run: npm run make
-        env:
-          CI: true
-          CI_PULL_REQUEST: ${{ github.event_name == 'pull_request' }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # this should be the same as `scripts/run-action.mjs`
-      - uses: tiddly-gittly/tw5-plugin-packer@v0.0.10
+      - name: Cache dependencies
+        uses: actions/cache@v3
         with:
-          minify: 'true'
-          # here we read plugin author and name from pluginInfoJSON, and pluginInfoJSON is read in the step above with id `setPluginInfoJSON`
-          source: 'dist/plugins/${{fromJson(steps.setPluginInfoJSON.outputs.pluginInfoJSON).title}}'
-          output: 'dist/out'
-          uglifyjs-options: '{ "warnings": false, "ie8": false, "safari10": false }'
-          cleancss-options: '{ "compatibility": "*", "level": 2 }'
+          path: |
+            **/node_modules
+            ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+            ${{ runner.os }}-node-
 
-      - name: Make Demo Site
-        run: npx zx ./scripts/build-demo-html.mjs
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Plugins
+        run: npm run build
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            dist/out/*.json
-            dist/out/*.zip
+            dist/*.json
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          # location is described in ./scripts/build-demo-html.mjs
-          publish_dir: ./dist/output
