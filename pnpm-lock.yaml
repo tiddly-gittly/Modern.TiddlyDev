@@ -34,6 +34,7 @@ specifiers:
   eslint-plugin-unicorn: 42.0.0
   eslint-plugin-unused-imports: 2.0.0
   fs-extra: 10.1.0
+  get-port: ^6.1.2
   html-minifier-terser: ^7.0.0-alpha.2
   prettier: 2.6.2
   prettier-eslint: ^14.0.1
@@ -44,6 +45,7 @@ specifiers:
   typesync: 0.9.0
   uglify-js: ^3.15.4
   workbox-cli: ^6.5.3
+  ws: ^8.5.0
 
 dependencies:
   tiddlywiki: registry.npmmirror.com/tiddlywiki/5.2.2
@@ -82,6 +84,7 @@ devDependencies:
   eslint-plugin-unicorn: registry.npmmirror.com/eslint-plugin-unicorn/42.0.0_eslint@8.14.0
   eslint-plugin-unused-imports: registry.npmmirror.com/eslint-plugin-unused-imports/2.0.0_db01d3a4c2149c3dc7df38eeb083b476
   fs-extra: registry.npmmirror.com/fs-extra/10.1.0
+  get-port: registry.npmmirror.com/get-port/6.1.2
   html-minifier-terser: registry.npmmirror.com/html-minifier-terser/7.0.0-alpha.2
   prettier: registry.npmmirror.com/prettier/2.6.2
   prettier-eslint: registry.npmmirror.com/prettier-eslint/14.0.1
@@ -91,6 +94,7 @@ devDependencies:
   typesync: registry.npmmirror.com/typesync/0.9.0
   uglify-js: registry.npmmirror.com/uglify-js/3.15.4
   workbox-cli: registry.npmmirror.com/workbox-cli/6.5.3
+  ws: registry.npmmirror.com/ws/8.5.0
 
 packages:
 
@@ -4174,6 +4178,13 @@ packages:
     version: 3.0.2
     dev: true
 
+  registry.npmmirror.com/get-port/6.1.2:
+    resolution: {integrity: sha512-BrGGraKm2uPqurfGVj/z97/zv8dPleC6x9JBNRTrDNtCkkRF4rPwrQXFgL7+I+q8QSdU4ntLQX2D7KIxSy8nGw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/get-port/-/get-port-6.1.2.tgz}
+    name: get-port
+    version: 6.1.2
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+    dev: true
+
   registry.npmmirror.com/get-stream/4.1.0:
     resolution: {integrity: sha512-GMat4EJ5161kIy2HevLlr4luNjBgvmj413KaQA7jt4V8B4RDsfpHk7WQ9GVqfYyyx8OS/L66Kox+rJRNklLK7w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/get-stream/-/get-stream-4.1.0.tgz}
     name: get-stream
@@ -7006,6 +7017,21 @@ packages:
       is-typedarray: registry.npmmirror.com/is-typedarray/1.0.0
       signal-exit: registry.npmmirror.com/signal-exit/3.0.7
       typedarray-to-buffer: registry.npmmirror.com/typedarray-to-buffer/3.1.5
+    dev: true
+
+  registry.npmmirror.com/ws/8.5.0:
+    resolution: {integrity: sha512-BWX0SWVgLPzYwF8lTzEy1egjhS4S4OEAHfsO8o65WOVsrnSRGaSiUaa9e0ggGlkMTtBlmOpEXiie9RUcBO86qg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/ws/-/ws-8.5.0.tgz}
+    name: ws
+    version: 8.5.0
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: ^5.0.2
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
     dev: true
 
   registry.npmmirror.com/xdg-basedir/4.0.0:

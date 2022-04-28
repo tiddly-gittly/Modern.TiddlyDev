@@ -133,8 +133,11 @@ output/
 wiki/tiddlers/*.json.dist.json
 wiki/tiddlers/$__language.tid
 wiki/tiddlers/$__StoryList.tid
+wiki/tiddlers/$__StoryList_*.tid
 wiki/tiddlers/$__keepstate_*
 wiki/tiddlers/$__Import.tid
+wiki/tiddlers/$__UpgradeLibrary
+wiki/tiddlers/$__UpgradeLibrary_List
 wiki/tiddlers/$__temp_*
 wiki/tiddlers/$__plugins_felixhayashi_tiddlymap_misc_defaultViewHolder.tid
 wiki/tiddlers/$__view.tid
