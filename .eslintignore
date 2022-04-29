@@ -2,6 +2,7 @@ resources/
 settings-dev/
 out/
 logs/
+dist/
 wiki/
 template/
 .webpack/
