@@ -44,7 +44,7 @@ specifiers:
   typesync: 0.9.0
   uglify-js: 3.15.4
   workbox-cli: 6.5.3
-  ws: 8.5.0
+  ws: 8.6.0
 
 dependencies:
   tiddlywiki: 5.2.2
@@ -92,7 +92,7 @@ devDependencies:
   typesync: 0.9.0
   uglify-js: 3.15.4
   workbox-cli: 6.5.3
-  ws: 8.5.0
+  ws: 8.6.0
 
 packages:
 
@@ -4519,8 +4519,8 @@ packages:
       typedarray-to-buffer: 3.1.5
     dev: true
 
-  /ws/8.5.0:
-    resolution: {integrity: sha512-BWX0SWVgLPzYwF8lTzEy1egjhS4S4OEAHfsO8o65WOVsrnSRGaSiUaa9e0ggGlkMTtBlmOpEXiie9RUcBO86qg==}
+  /ws/8.6.0:
+    resolution: {integrity: sha512-AzmM3aH3gk0aX7/rZLYvjdvZooofDu3fFOzGqcSnQ1tOcTWwhM/o+q++E8mAyVVIyUdajrkzWUGftaVSDLn1bw==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
