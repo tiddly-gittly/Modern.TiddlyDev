@@ -26,7 +26,7 @@ specifiers:
   eslint-plugin-prettier: 4.0.0
   eslint-plugin-promise: 6.0.0
   eslint-plugin-react: 7.29.4
-  eslint-plugin-react-hooks: 4.4.0
+  eslint-plugin-react-hooks: 4.5.0
   eslint-plugin-security: 1.5.0
   eslint-plugin-security-node: 1.1.1
   eslint-plugin-typescript-sort-keys: 2.1.0
@@ -75,7 +75,7 @@ devDependencies:
   eslint-plugin-prettier: registry.npmmirror.com/eslint-plugin-prettier/4.0.0_mzpligoj26dazigcet37nxg2zy
   eslint-plugin-promise: registry.npmmirror.com/eslint-plugin-promise/6.0.0_eslint@8.14.0
   eslint-plugin-react: registry.npmmirror.com/eslint-plugin-react/7.29.4_eslint@8.14.0
-  eslint-plugin-react-hooks: registry.npmmirror.com/eslint-plugin-react-hooks/4.4.0_eslint@8.14.0
+  eslint-plugin-react-hooks: 4.5.0_eslint@8.14.0
   eslint-plugin-security: registry.npmmirror.com/eslint-plugin-security/1.5.0
   eslint-plugin-security-node: registry.npmmirror.com/eslint-plugin-security-node/1.1.1
   eslint-plugin-typescript-sort-keys: registry.npmmirror.com/eslint-plugin-typescript-sort-keys/2.1.0_lnjlwhtxjffjmj5o7dnwvwyqxq
@@ -2462,6 +2462,15 @@ packages:
   /escape-string-regexp/1.0.5:
     resolution: {integrity: sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=}
     engines: {node: '>=0.8.0'}
+    dev: true
+
+  /eslint-plugin-react-hooks/4.5.0_eslint@8.14.0:
+    resolution: {integrity: sha512-8k1gRt7D7h03kd+SAAlzXkQwWK22BnK6GKZG+FJA6BAGy22CFvl8kCIXKpVux0cCxMWDQUPqSok0LKaZ0aOcCw==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0
+    dependencies:
+      eslint: registry.npmmirror.com/eslint/8.14.0
     dev: true
 
   /eslint-scope/5.1.1:
@@ -5191,18 +5200,6 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0
-    dependencies:
-      eslint: registry.npmmirror.com/eslint/8.14.0
-    dev: true
-
-  registry.npmmirror.com/eslint-plugin-react-hooks/4.4.0_eslint@8.14.0:
-    resolution: {integrity: sha512-U3RVIfdzJaeKDQKEJbz5p3NW8/L80PCATJAfuojwbaEL+gBjfGdhUcGde+WGUW46Q5sr/NgxevsIiDtNXrvZaQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-4.4.0.tgz}
-    id: registry.npmmirror.com/eslint-plugin-react-hooks/4.4.0
-    name: eslint-plugin-react-hooks
-    version: 4.4.0
-    engines: {node: '>=10'}
-    peerDependencies:
-      eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0
     dependencies:
       eslint: registry.npmmirror.com/eslint/8.14.0
     dev: true
