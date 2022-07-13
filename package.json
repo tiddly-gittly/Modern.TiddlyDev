@@ -23,7 +23,7 @@
     "@typescript-eslint/parser": "5.22.0",
     "browserslist": "4.20.3",
     "chokidar": "3.5.3",
-    "clean-css": "5.2.4",
+    "clean-css": "5.3.1",
     "esbuild": "0.14.38",
     "esbuild-plugin-browserslist": "0.4.9",
     "eslint": "8.16.0",
