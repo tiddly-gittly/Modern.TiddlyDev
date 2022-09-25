@@ -39,7 +39,7 @@ specifiers:
   prettier-eslint: 14.0.2
   tiddlywiki: 5.2.2
   tslib: 2.4.0
-  tw5-typed: 0.2.7
+  tw5-typed: 0.2.9
   typescript: 4.6.4
   typesync: 0.9.1
   uglify-js: 3.15.4
@@ -87,7 +87,7 @@ devDependencies:
   prettier: registry.npmmirror.com/prettier/2.6.2
   prettier-eslint: registry.npmmirror.com/prettier-eslint/14.0.2
   tslib: 2.4.0
-  tw5-typed: 0.2.7
+  tw5-typed: 0.2.9
   typescript: 4.6.4
   typesync: 0.9.1
   uglify-js: 3.15.4
@@ -4445,8 +4445,8 @@ packages:
       typescript: 4.6.4
     dev: true
 
-  /tw5-typed/0.2.7:
-    resolution: {integrity: sha512-zpT67QdttbHNgEkkjfaQ2avOhKVSLX7v25G0mk4HVQhMqkCmHKWnTrtolvsandF6/d8nH2r0y02l9x2/AAQnSQ==}
+  /tw5-typed/0.2.9:
+    resolution: {integrity: sha512-MghC8C0SMUly9qu3/H6XzVJs7NDWlLKOsqkL793KEanRUwCICHHcMtJq3qpr9vj0g8sIuemAcP0KRR1Ts4+8oQ==}
     dev: true
 
   /type-check/0.4.0:
