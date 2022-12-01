@@ -22,6 +22,7 @@ jobs:
         with:
           path: |
             **/node_modules
+            ~/.pnpm-store
             ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
@@ -29,16 +30,10 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install Dependencies
-        run: npm install
+        run: npm install -g pnpm && pnpm install
 
-      - name: Build Online/Offline HTML
-        run: npm run build-online && npm run build-offline
-
-      - name: Make cache
-        run: npx workbox injectManifest .workbox-config.js
-
-      - name: Make Library
-        run: npm run build-library
+      - name: Build Library and static website
+        run: pnpm run publish
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

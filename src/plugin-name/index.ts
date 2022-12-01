@@ -1,8 +1,11 @@
 import type { Widget as IWidget, IChangedTiddlers } from 'tiddlywiki';
 
-const Widget = (require('$:/core/modules/widgets/widget.js') as { widget: typeof IWidget }).widget;
+const Widget = (
+  require('$:/core/modules/widgets/widget.js') as { widget: typeof IWidget }
+).widget;
 
 class ExampleWidget extends Widget {
+  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor(parseTreeNode: any, options: any) {
     super(parseTreeNode, options);
   }

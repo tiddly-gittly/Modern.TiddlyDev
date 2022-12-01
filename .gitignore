@@ -128,7 +128,7 @@ public-dist
 **/*/typings/auto-generated
 
 # for TiddlyWiki
-src/**/*.js.dist.tid
+dist/
 output/
 wiki/tiddlers/*.json.dist.json
 wiki/tiddlers/$__language.tid
