@@ -18,7 +18,7 @@ on:
       - 'README.md'
       - 'wiki/**'
       - 'public/**'
-      - 'scripts/**'
+      - '.scripts/**'
       - '.vscode'
       - '.idea'
 
@@ -39,20 +39,12 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Get npm cache directory
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-            ${{ runner.os }}-node-
-
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
           path: |
             **/node_modules
+            ~/.pnpm-store
             ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
@@ -60,10 +52,10 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install Dependencies
-        run: npm install
+        run: npm install -g pnpm && pnpm install
 
       - name: Build Plugins
-        run: npm run build
+        run: pnpm run build
 
       - name: Create Release
         uses: softprops/action-gh-release@v1

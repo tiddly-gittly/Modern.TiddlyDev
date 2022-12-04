@@ -1,4 +1,5 @@
 import type { Widget as IWidget, IChangedTiddlers } from 'tiddlywiki';
+import './index.css';
 
 const Widget = (
   require('$:/core/modules/widgets/widget.js') as { widget: typeof IWidget }

@@ -8,8 +8,8 @@
       "@/*": ["./src/*"]
     },
     "types": ["node", "tw5-typed"],
-    "lib": ["DOM"]
+    "lib": ["DOM", "ESNext"]
   },
-  "include": ["src", "scripts"],
-  "exclude": ["*.js", "*.jsx"]
+  "include": ["src", ".scripts"],
+  "exclude": ["*.js"]
 }
