@@ -38,10 +38,8 @@
     "typescript": "^4.6.4"
   },
   "dependencies": {
-    "ansi-colors": "^4.1.3",
-    "cli-progress": "^3.11.2",
     "commander": "^9.4.1",
     "tiddlywiki": "^5.2.3",
-    "tiddlywiki-plugin-dev": "^0.0.4"
+    "tiddlywiki-plugin-dev": "^0.0.9"
   }
 }

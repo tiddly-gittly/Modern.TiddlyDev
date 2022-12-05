@@ -1,0 +1,9 @@
+{
+  "title": "$:/plugins/Modern.TiddlyDev/doc",
+  "author": "Sttot(Gk0Wk)",
+  "description": "Document of Modern.TiddlyDev",
+  "core-version": ">=5.1.0",
+  "plugin-type": "plugin",
+  "version": "2022.12.5",
+  "list": "readme"
+}

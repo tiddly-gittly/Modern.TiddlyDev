@@ -1,6 +1,6 @@
 created: 20220426153918791
-modified: 20220426154741225
+modified: 20221205121451451
 title: $:/SiteTitle
 type: text/vnd.tiddlywiki
 
-`Modern.TiddlyDev`
+<$text text="Modern.TiddlyDev" />
