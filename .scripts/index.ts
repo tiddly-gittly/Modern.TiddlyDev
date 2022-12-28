@@ -145,11 +145,7 @@ const buildOnlineHTML = async (
   });
   tryCopy(
     path.resolve(backupFolder, '$__favicon.ico'),
-    path.resolve(
-      distDir,
-      'images',
-      encodeURIComponent(encodeURIComponent('$:/favicon.ico')),
-    ),
+    path.resolve(distDir, 'images', encodeURIComponent('$:/favicon.ico')),
   );
 
   // 恢复被清空内容的媒体文件
