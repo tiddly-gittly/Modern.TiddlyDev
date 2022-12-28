@@ -1,7 +1,7 @@
 title: $:/plugins/Modern.TiddlyDev/doc/tutorials
 type: text/vnd.tiddlywiki
 
-@@display:flex;align-items:center;justify-content:center;background:#1c1c1c;border-radius:10px;overflow:hidden;
+@@display:flex;align-items:center;justify-content:center;background:#222222;border-radius:10px;overflow:hidden;
 [img class="modern-tiddlydev-banner" [$:/plugins/Modern.TiddlyDev/doc/banner.png]]
 @@
 
