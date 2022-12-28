@@ -1,0 +1,24 @@
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials/tenplate
+type: text/vnd.tiddlywiki
+
+<$tiddler tiddler=<<currentTab>>>
+
+@@background:#03fffc12;padding:5px 10px;border-left:3px solid #03fffc;font-weight:750;
+<$list filter="[<currentTab>has[authors]]">
+<$list filter="[[$:/language]get[text]removeprefix[$:/languages/]else[en-GB]]" variable="lang">
+<$list filter="[<lang>search[zh]]">
+
+作者: <$text text={{{ [<currentTab>get[authors]join[, ]] }}} />
+
+</$list>
+<$list filter="[<lang>!search[zh]]">
+
+Authors: <$text text={{{ [<currentTab>get[authors]join[, ]] }}} />
+
+</$list>
+</$list>
+</$list>
+@@
+
+<$transclude mode="block" />
+</$tiddler>

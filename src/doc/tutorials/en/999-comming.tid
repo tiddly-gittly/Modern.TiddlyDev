@@ -1,0 +1,8 @@
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials/en/999-comming
+caption: More...
+authors: Sttot(Gk0Wk)
+type: text/vnd.tiddlywiki
+
+<$text text="Modern.TiddlyDev" /> tutorials are currently being improved! I have limited energy and can only write in my free time, so if you are interested in writing tutorials, making suggestions, or fixing errors, please feel free to submit a PR, Issue, or contact me to join the project as a co-author, thank you very much!
+
+To add/modify a tutorial, please refer to the other tutorials written in [[this directory|https://github.com/tiddly-gittly/Modern.TiddlyDev/tree/master/src/doc/tutorials/zh]].

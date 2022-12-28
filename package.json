@@ -40,6 +40,6 @@
   "dependencies": {
     "commander": "^9.4.1",
     "tiddlywiki": "^5.2.3",
-    "tiddlywiki-plugin-dev": "^0.0.10"
+    "tiddlywiki-plugin-dev": "^0.0.11"
   }
 }

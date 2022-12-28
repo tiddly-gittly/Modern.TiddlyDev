@@ -1,0 +1,33 @@
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials
+type: text/vnd.tiddlywiki
+
+@@display:flex;align-items:center;justify-content:center;background:#1c1c1c;border-radius:10px;overflow:hidden;
+[img class="modern-tiddlydev-banner" [$:/plugins/Modern.TiddlyDev/doc/banner.png]]
+@@
+
+<style>
+.modern-tiddlydev-banner {
+  max-height: 200px;
+}
+</style>
+
+<$list filter="[[$:/language]get[text]removeprefix[$:/languages/]else[en-GB]]" variable="lang">
+<$list filter="[<lang>search[zh]]">
+
+选择语言: {{$:/snippets/minilanguageswitcher}}
+
+<div class="tc-more-sidebar">
+<$macrocall $name="tabs" tabsList="[all[tiddlers+shadows]prefix[$:/plugins/Modern.TiddlyDev/doc/tutorials/zh/]sort[title]]" default={{{ [all[tiddlers+shadows]prefix[$:/plugins/Modern.TiddlyDev/doc/tutorials/zh/]sort[title]first[]] }}} state="$:/state/Modern.TiddlyDev/tutorials-tab" explicitState="$:/state/Modern.TiddlyDev/tutorials-tab-zh" class="tc-vertical" template="$:/plugins/Modern.TiddlyDev/doc/tutorials/tenplate"/>
+</div>
+
+</$list>
+<$list filter="[<lang>!search[zh]]">
+
+Change the language: {{$:/snippets/minilanguageswitcher}}
+
+<div class="tc-more-sidebar">
+<$macrocall $name="tabs" tabsList="[all[tiddlers+shadows]prefix[$:/plugins/Modern.TiddlyDev/doc/tutorials/en/]sort[title]]" default={{{ [all[tiddlers+shadows]prefix[$:/plugins/Modern.TiddlyDev/doc/tutorials/en/]sort[title]first[]] }}} state="$:/state/Modern.TiddlyDev/tutorials-tab" explicitState="$:/state/Modern.TiddlyDev/tutorials-tab-en" class="tc-vertical" template="$:/plugins/Modern.TiddlyDev/doc/tutorials/tenplate"/>
+</div>
+
+</$list>
+</$list>
