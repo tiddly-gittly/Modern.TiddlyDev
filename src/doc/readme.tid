@@ -1,7 +1,5 @@
 title: $:/plugins/Modern.TiddlyDev/doc/readme
 type: text/vnd.tiddlywiki
-capital: 111
-caption: 222
 
 @@display:flex;align-items:center;justify-content:center;background:#1c1c1c;border-radius:10px;overflow:hidden;
 [img class="modern-tiddlydev-banner" [$:/plugins/Modern.TiddlyDev/doc/banner.png]]
@@ -59,6 +57,8 @@ caption: 222
 虽然这里有很多工作，但是对你来讲，它就是开箱即用的。快来使用它，步入现代化的 <$text text="TiddlyWiki" /> 插件开发之旅吧！
 
 > 运用插件构建工具的优势，本框架的文档也被封装为插件并发布于 [[CPL 插件源|https://github.com/tiddly-gittly/TiddlyWiki-CPL]]，以便你下载并安装与任意项目中并保持文档的最新；
+
+接下来请点击上方的 [tutorials] 标签进入教程页面，如果你是在插件库中看到该插件的话，请先安装或者浏览[[官方文档|https://tiddly-gittly.github.io/Modern.TiddlyDev/]]。
 
 </$list>
 <$list filter="[<lang>!search[zh]]">

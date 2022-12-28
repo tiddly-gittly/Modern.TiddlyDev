@@ -139,10 +139,18 @@ const buildOnlineHTML = async (
   fs.cpSync(backupFolder, distMediaFolder, {
     force: true,
     recursive: true,
-    filter: (src, _dest) =>
+    filter: (src, dest) =>
       src === backupFolder ||
       binaryExtensionMap[path.extname(src).toLowerCase()] === true,
   });
+  tryCopy(
+    path.resolve(backupFolder, '$__favicon.ico'),
+    path.resolve(
+      distDir,
+      'images',
+      encodeURIComponent(encodeURIComponent('$:/favicon.ico')),
+    ),
+  );
 
   // 恢复被清空内容的媒体文件
   tryCopy(backupFolder, tiddlersFolder);

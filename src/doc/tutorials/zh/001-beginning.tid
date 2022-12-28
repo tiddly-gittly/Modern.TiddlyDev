@@ -29,6 +29,10 @@ git clone https://github.com/xxx/tw5-plugins.git
 npm install
 ```
 
+@@color:red;background:yellow;padding:10px 5px;
+''随后，请帮忙将 src/doc 文件夹删除，否则你的本地教程可能无法进行更新！''
+@@
+
 使用你的代码编辑器打开这个项目文件夹，就可以正式进入插件开发环节了。
 
 ! 体验所见即所得的开发流程
