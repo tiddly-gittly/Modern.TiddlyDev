@@ -9,7 +9,7 @@ specifiers:
   lint-staged: ^13.0.4
   rimraf: ^3.0.2
   tiddlywiki: ^5.2.3
-  tiddlywiki-plugin-dev: ^0.0.9
+  tiddlywiki-plugin-dev: ^0.0.10
   ts-node: ^10.9.1
   tsconfig-paths: ^3.14.1
   tslib: ^2.4.0
@@ -19,7 +19,7 @@ specifiers:
 dependencies:
   commander: registry.npmmirror.com/commander/9.4.1
   tiddlywiki: registry.npmmirror.com/tiddlywiki/5.2.3
-  tiddlywiki-plugin-dev: registry.npmmirror.com/tiddlywiki-plugin-dev/0.0.9_u4h5waoa4cjgwq3ce46qikrwsm
+  tiddlywiki-plugin-dev: registry.npmmirror.com/tiddlywiki-plugin-dev/0.0.10_u4h5waoa4cjgwq3ce46qikrwsm
 
 devDependencies:
   '@modern-js/app-tools': registry.npmmirror.com/@modern-js/app-tools/1.21.5_zpmqj2xgugcpjzxnox5xlzbalu
@@ -9592,11 +9592,11 @@ packages:
     version: 2.3.8
     dev: true
 
-  registry.npmmirror.com/tiddlywiki-plugin-dev/0.0.9_u4h5waoa4cjgwq3ce46qikrwsm:
-    resolution: {integrity: sha512-RmQj5MqXkH/QOVKpgOn8dNjVxvTkb1xK6EvgeuAARpMRr+0cdIYLYFv4t5eFi6keL1tzZRC9ZUXxadAigOmWJw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/tiddlywiki-plugin-dev/-/tiddlywiki-plugin-dev-0.0.9.tgz}
-    id: registry.npmmirror.com/tiddlywiki-plugin-dev/0.0.9
+  registry.npmmirror.com/tiddlywiki-plugin-dev/0.0.10_u4h5waoa4cjgwq3ce46qikrwsm:
+    resolution: {integrity: sha512-2QB/6cymmCRB7nQ/VhRVpBKi8gDLhA5IIqMBv0Mfdh3T5U46SSQixYPGujDBriXMK75iCfmWKeW/bGYQGX7yPA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/tiddlywiki-plugin-dev/-/tiddlywiki-plugin-dev-0.0.10.tgz}
+    id: registry.npmmirror.com/tiddlywiki-plugin-dev/0.0.10
     name: tiddlywiki-plugin-dev
-    version: 0.0.9
+    version: 0.0.10
     engines: {node: '>=14.17.6'}
     hasBin: true
     peerDependencies:

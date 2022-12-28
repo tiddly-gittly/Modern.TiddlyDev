@@ -53,7 +53,6 @@ const waitForFile = (path: string) =>
 /** 项目路径 */
 const repoFolder = process.cwd();
 const wikiFolder = path.resolve(repoFolder, 'wiki');
-const publicFolder = path.resolve(repoFolder, 'public');
 const tiddlersFolder = path.resolve(wikiFolder, 'tiddlers');
 
 /**
@@ -72,18 +71,10 @@ const buildOnlineHTML = async (
 
   // 静态资源拷贝
   mkdirsForFileSync(path.resolve(distDir, htmlName));
-  tryCopy(publicFolder, distDir);
+  // tryCopy(publicFolder, distDir);
   tryCopy(
-    path.resolve(tiddlersFolder, 'favicon.ico'),
+    path.resolve(tiddlersFolder, '$__favicon.ico'),
     path.resolve(distDir, 'favicon.ico'),
-  );
-  tryCopy(
-    path.resolve(tiddlersFolder, 'TiddlyWikiIconWhite.png'),
-    path.resolve(distDir, 'TiddlyWikiIconWhite.png'),
-  );
-  tryCopy(
-    path.resolve(tiddlersFolder, 'TiddlyWikiIconBlack.png'),
-    path.resolve(distDir, 'TiddlyWikiIconBlack.png'),
   );
 
   // 构建HTML

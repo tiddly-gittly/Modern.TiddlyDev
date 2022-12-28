@@ -6,11 +6,6 @@ const Widget = (
 ).widget;
 
 class ExampleWidget extends Widget {
-  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
-  constructor(parseTreeNode: any, options: any) {
-    super(parseTreeNode, options);
-  }
-
   refresh(_changedTiddlers: IChangedTiddlers) {
     return false;
   }
@@ -21,7 +16,6 @@ class ExampleWidget extends Widget {
   render(parent: Node, _nextSibling: Node) {
     this.parentDomNode = parent;
     this.execute();
-
     const containerElement = document.createElement('p');
     containerElement.innerHTML = 'This is a widget!';
     this.domNodes.push(containerElement);
