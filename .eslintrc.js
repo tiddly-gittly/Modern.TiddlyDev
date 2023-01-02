@@ -1,4 +1,4 @@
 module.exports = {
-    root: true,
-    extends: ['@modern-js'],
-  };
+  root: true,
+  extends: ['@modern-js/eslint-config'],
+};

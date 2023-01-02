@@ -1,7 +1,7 @@
 {
   "url": "https://tiddly-gittly.github.io/Modern.TiddlyDev/",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "reset": "rimraf ./**/node_modules",
     "clean": "rimraf dist",
@@ -25,21 +25,19 @@
     ]
   },
   "devDependencies": {
-    "@modern-js/app-tools": "^1.21.5",
-    "@modern-js/tsconfig": "^1.21.5",
+    "@modern-js/eslint-config": "latest",
+    "@modern-js/tsconfig": "latest",
     "@types/node": "^18.11.9",
     "husky": "^8.0.2",
-    "lint-staged": "^13.0.4",
+    "lint-staged": "^13.1.0",
     "rimraf": "^3.0.2",
     "ts-node": "^10.9.1",
-    "tsconfig-paths": "^3.14.1",
-    "tslib": "^2.4.0",
-    "tw5-typed": "^0.2.7",
-    "typescript": "^4.6.4"
+    "tw5-typed": "latest",
+    "typescript": "^4.9.4"
   },
   "dependencies": {
     "commander": "^9.4.1",
-    "tiddlywiki": "^5.2.3",
-    "tiddlywiki-plugin-dev": "^0.0.11"
+    "tiddlywiki": "latest",
+    "tiddlywiki-plugin-dev": "latest"
   }
 }
