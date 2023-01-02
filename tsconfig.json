@@ -1,5 +1,5 @@
 {
-  "extends": "@modern-js/tsconfig/base",
+  "extends": "@modern-js/tsconfig/base.json",
   "compilerOptions": {
     "declaration": false,
     "jsx": "preserve",
