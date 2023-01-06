@@ -2,8 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import { tmpdir } from 'os';
 import { program } from 'commander';
-import { ITiddlyWiki } from 'tw5-typed';
 import { TiddlyWiki } from 'tiddlywiki';
+import { ITiddlyWiki, ITiddlerFields } from 'tw5-typed';
 
 /**
  * 初始化 TiddlyWiki
@@ -53,7 +53,6 @@ const waitForFile = (path: string) =>
 /** 项目路径 */
 const repoFolder = process.cwd();
 const wikiFolder = path.resolve(repoFolder, 'wiki');
-const tiddlersFolder = path.resolve(wikiFolder, 'tiddlers');
 
 /**
  * 构建在线HTML版本：核心JS和资源文件不包括在HTML中， 下载后不能使用
@@ -68,39 +67,61 @@ const buildOnlineHTML = async (
   excludeFilter = '-[is[draft]]',
 ) => {
   const distDir = path.resolve(dist);
+  const mediaDir = path.resolve(path.dirname(path.resolve(distDir, htmlName)), 'media');
+  mkdirsForFileSync(path.resolve(mediaDir, '1'));
 
-  // 静态资源拷贝
-  mkdirsForFileSync(path.resolve(distDir, htmlName));
-  // tryCopy(publicFolder, distDir);
-  tryCopy(
-    path.resolve(tiddlersFolder, '$__favicon.ico'),
-    path.resolve(distDir, 'favicon.ico'),
+  // 读取、导出外置资源、处理 tiddler
+  const $tw = tiddlywiki([], wikiFolder);
+  const tiddlers: ITiddlerFields[] = [];
+  const savePromises: Promise<any>[] = [];
+  const bypassTiddlers = new Set([
+    '$:/core',
+    '$:/UpgradeLibrary',
+    '$:/UpgradeLibrary/List',
+  ]);
+  ($tw.wiki as any).each(
+    ({ fields }: { fields: ITiddlerFields }, title: string) => {
+      if (
+        bypassTiddlers.has(title) ||
+        title.startsWith('$:/boot/') ||
+        title.startsWith('$:/temp/')
+      ) {
+        return;
+      }
+      if (
+        ($tw.wiki as any).isBinaryTiddler(title) ||
+        ($tw.wiki as any).isImageTiddler(title)
+      ) {
+        const { extension, encoding } = $tw.config.contentTypeInfo[
+          fields.type || 'text/vnd.tiddlywiki'
+        ] ?? { extension: '.bin', encoding: 'base64' };
+        const fileName = encodeURIComponent(title.endsWith(extension) ? title : `${title}${extension}`);
+        savePromises.push(
+          new Promise(resolve =>
+            fs.writeFile(
+              path.resolve(distDir, 'media', fileName),
+              fields.text,
+              encoding as any,
+              resolve,
+            ),
+          ),
+        );
+        tiddlers.push({
+          ...fields,
+          text: '',
+          _canonical_uri: `./media/${encodeURIComponent(fileName)}`,
+        });
+      } else {
+        tiddlers.push({ ...fields });
+      }
+    },
   );
 
-  // 构建HTML
-  // 备份 因为下面有改变tiddler的field的操作(媒体文件全部转为canonical)
-  const backupFolder = fs.mkdtempSync(path.resolve(tmpdir(), 'tiddlywiki-'));
-  tryCopy(tiddlersFolder, backupFolder);
-  const $tw = tiddlywiki([], wikiFolder, [
+  // 构建
+  const tmpFolder = fs.mkdtempSync(path.resolve(tmpdir(), 'tiddlywiki-'));
+  fs.cpSync(path.resolve(wikiFolder, 'tiddlywiki.info'), path.resolve(tmpFolder, 'tiddlywiki.info'))
+  tiddlywiki(tiddlers, tmpFolder, [
     ...['--output', distDir] /* 指定输出路径 */,
-    ...[
-      '--deletetiddlers',
-      '[[$:/UpgradeLibrary]] [[$:/UpgradeLibrary/List]]',
-    ] /* 删掉一些没必要导出而且占用很大的条目 */,
-    ...[
-      '--setfield',
-      '[is[image]] [is[binary]] [type[application/msword]] [type[image/svg+xml]]',
-      '_canonical_uri',
-      '$:/core/templates/canonical-uri-external-image',
-      'text/plain',
-    ] /* 媒体条目转外链 */,
-    ...[
-      '--setfield',
-      '[is[image]] [is[binary]] [type[application/msword]] [type[image/svg+xml]]',
-      'text',
-      '',
-      'text/plain',
-    ] /* 媒体条目内容清空：注意这一步也会把所有媒体文件的内容变成空的 */,
     ...[
       '--rendertiddler',
       '$:/core/save/offline-external-js',
@@ -113,44 +134,14 @@ const buildOnlineHTML = async (
     ...[
       '--rendertiddler',
       '$:/core/templates/tiddlywiki5.js',
-      'tiddlywikicore.js',
+      `tiddlywikicore-${$tw.version}.js`,
       'text/plain',
     ] /* 导出核心 */,
   ]);
 
-  const rawCoreJsPath = path.join(distDir, 'tiddlywikicore.js');
-  await waitForFile(rawCoreJsPath);
-  fs.renameSync(
-    rawCoreJsPath,
-    path.join(distDir, `tiddlywikicore-${($tw as any).packageInfo.version}.js`),
-  );
-
-  // 将所有的二进制文件(媒体文件, 参考$tw.utils.registerFileType)导出
-  const binaryExtensionMap: Record<string, boolean> = {};
-  Object.keys($tw.config.fileExtensionInfo).forEach(ext => {
-    const _info = $tw.config.fileExtensionInfo[ext];
-    const info = $tw.config.contentTypeInfo[_info.type];
-    if (info?.encoding === 'base64') {
-      binaryExtensionMap[ext.toLowerCase()] = true;
-    }
-  });
-  const distMediaFolder = path.resolve(distDir, 'images');
-  mkdirsForFileSync(path.resolve(distMediaFolder, '1'));
-  fs.cpSync(backupFolder, distMediaFolder, {
-    force: true,
-    recursive: true,
-    filter: (src, dest) =>
-      src === backupFolder ||
-      binaryExtensionMap[path.extname(src).toLowerCase()] === true,
-  });
-  tryCopy(
-    path.resolve(backupFolder, '$__favicon.ico'),
-    path.resolve(distDir, 'images', encodeURIComponent('$:/favicon.ico')),
-  );
-
-  // 恢复被清空内容的媒体文件
-  tryCopy(backupFolder, tiddlersFolder);
-  fs.rmSync(backupFolder, { recursive: true, force: true });
+  await waitForFile(path.resolve(distDir, `tiddlywikicore-${$tw.version}.js`));
+  fs.rmSync(tmpFolder, { recursive: true, force: true });
+  await Promise.all(savePromises);
 };
 
 /**
@@ -194,7 +185,7 @@ const buildOfflineHTML = async (
  * @param {string} dist 目标路径，空或者不填则默认为'dist/library'
  * @param {boolean} minify 是否最小化HTML，默认为true
  */
-const buildLibrary = async (
+export const buildLibrary = async (
   pluginFilter = '[prefix[$:/plugins/]!prefix[$:/plugins/tiddlywiki/]!prefix[$:/languages/]!prefix[$:/themes/tiddlywiki/]!tag[$:/tags/PluginLibrary]]',
   dist = 'dist/library',
 ) => {
