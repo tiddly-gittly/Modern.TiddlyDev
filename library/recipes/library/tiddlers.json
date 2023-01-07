@@ -24,7 +24,7 @@
         "list": "readme",
         "dependents": "",
         "type": "application/json",
-        "Modern.TiddlyDev::SHA256-Hashed": "67cb633ffd2e10cf3019c467bc8eebb9bc87bc66c31333dd1aa4aa9040c64c2f",
+        "Modern.TiddlyDev::SHA256-Hashed": "41ca50e62c35df5b14ed55258ccae91bae2cc904d3dd681930650b484a29e0b2",
         "readme": "!! Read Me\n\nThe quick brown fox jumps over a lazy dog.\n",
         "requires-reload": "yes"
     }
