@@ -6,11 +6,12 @@
     "reset": "rimraf ./**/node_modules",
     "clean": "rimraf dist",
     "prepare": "husky install",
+    "new": "tiddlywiki-plugin-dev new",
     "dev": "tiddlywiki-plugin-dev dev",
     "build": "npm run clean && tiddlywiki-plugin-dev build",
     "build:library": "npm run clean && tiddlywiki-plugin-dev build --library --output dist/library",
-    "publish": "npm run clean && ts-node .scripts",
-    "publish:offline": "npm run clean && ts-node .scripts --offline"
+    "publish": "npm run clean && tiddlywiki-plugin-dev publish",
+    "publish:offline": "npm run clean && tiddlywiki-plugin-dev publish --offline"
   },
   "engines": {
     "node": ">=16"
@@ -40,7 +41,6 @@
     "typescript": "^4.9.4"
   },
   "dependencies": {
-    "commander": "^9.4.1",
     "tiddlywiki": "^5.2.5",
     "tiddlywiki-plugin-dev": "latest"
   }

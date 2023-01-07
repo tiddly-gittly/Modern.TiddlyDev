@@ -19,7 +19,30 @@ jobs:
           cp -r * /tmp/moderntiddlydev/
           find . -maxdepth 1 ! -name .git -exec cp -r -t /tmp/moderntiddlydev/ {} +
           mv /tmp/moderntiddlydev upload
-          rm -rf upload/.git upload/README.md
+          rm -rf upload/.git upload/README.md upload/pnpm-lock.yaml
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: '16'
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            **/node_modules
+            ~/.pnpm-store
+            ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+            ${{ runner.os }}-node-
+
+      - name: Install Dependencies
+        run: npm install -g pnpm && pnpm install
+
+      - name: Build Plugins
+        run: pnpm run build && cp dist/\$__plugins_Modern.TiddlyDev_doc.json wiki/tiddlers/\$__plugins_Modern.TiddlyDev_doc.json
 
       - name: Deploy
         uses: s0/git-publish-subdir-action@develop

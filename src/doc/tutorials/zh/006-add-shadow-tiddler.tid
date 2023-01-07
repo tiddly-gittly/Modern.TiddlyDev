@@ -1,0 +1,138 @@
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials/zh/006-add-shadow-tiddler.tid
+caption: 添加 shadow tiddler 的多种方法
+authors: Sttot(Gk0Wk)
+type: text/vnd.tiddlywiki
+
+万事开头难，我们已经成功创建了一个插件，可喜可贺！不过...如何为插件添加内容呢？直接在文件夹内创建文件就可以吗？如何排除掉不想包括的文件？我们继续来探究。
+
+! 最简单的方法：直接在文件夹内添加文件
+
+尝试在`plugins/XiaoMing/abc/`下添加一个叫`readme.tid`的文件，文件的内容为：
+
+```tiddlywiki5
+title: $:/plugins/XiaoMing/abc/readme
+
+Hello!
+```
+
+会发现插件`$:/plugins/XiaoMing/abc`里多了一个`$:/plugins/XiaoMing/abc/readme`的shadow tiddler，说明添加成功了！所以以最简单的方式就是直接添加`.tid`文件。
+
+现在尝试添加一些别的，比如添加一张`example.png`的图片，会发生什么？
+
+图片确实被加载进来了，不过其对应的shadow tiddler的名字变成了文件的绝对路径...我认为这绝不是我们想看到的。事实上`.js`、`.css`等文件也会出现一样的状况。同时，这些文件没法附带元数据(例如标题、tags、类型和各种field)，这肯定是不行的，所以必须用别的办法为其添加元数据。
+
+最简单的办法是，将其改为`.tid`后缀，然后用`.tid`的格式在开头定义元数据，同时定义`type`，最后把本来的内容作为`.tid`的文本内容。
+
+但这样做的弊端也很大，首先就是不便于编辑；其次对于二进制还需要转换为base64格式，这是很麻烦而且占空间的做法。
+
+---
+
+! 我想保留原始后缀名，但也想为其加上元数据...
+
+如果你观察过`tiddlers`文件夹，你会看到一种`.meta`格式的文件，没错，它们就是对非`.tid`格式的文件进行辅助说明的元数据文件。
+
+假如，对于上文提到的`example.png`，我们希望能够将其命名为`$:/plugins/XiaoMing/abc/exmaple.png`，并且带上一个叫`12345`的标签，我们可以在同目录下创建一个`example.png.meta`，它会自动与`esample.png`绑定，我们在里面写上：
+
+```properties
+title: $:/plugins/XiaoMing/abc/exmaple.png
+type: image/png
+tags: 12345
+```
+
+好，这次舒服多了！
+
+---
+
+! 目录套目录？
+
+如果在`lugins/XiaoMing/abc/`下面再加一个`1`目录，会发生什么呢？动手试一下会发现，什么都没有；但是如果在`1`中再加一个文件，就会发现被添加的文件出现在了插件中。
+
+因此插件内是可以继续套目录的，只不过最终读取的是文件而不是目录，所以如果目录为空，那么什么都不会有。
+
+! `tiddlywiki.files`: 这个目录下，我说了算！
+
+如果我想要排除掉一些文件和文件夹，该怎么办？可以在想要排除文件的那一层目录下创建一个`tiddlywiki.files`文件。当TiddlyWiki解析插件时，如果看到目录下面有`tiddlywiki.files`，就不会继续搜索该文件夹下的其他文件和文件夹，在这一个文件夹下面，`tiddlywiki.files`一个人说了算！
+
+`tiddlywiki.files`文件描述了在这个文件夹下，应当加载哪些文件，以及哪些子文件夹下的哪些文件，而且可以为文件添加元数据信息，接下来我们来看看它怎么用。
+
+注意`tiddlywiki.files`也是JSON文件，以下是一个例子：
+
+```json
+{
+  "tiddlers": [
+    {
+      "file": "example/example1.tid",
+      "isTiddlerFile": true,
+      "type": "text/vnd.tiddlywiki",
+      "fields": {
+        "title": "$:/plugins/XiaoMing/abc/example/example1",
+        "tags": ["MyExample"],
+        "type": "text/vnd.tiddlywiki",
+        "created": { "source": "created" },
+        "file": {
+          "source": "filename",
+          "prefix": "[Prefix]"
+        }
+      },
+      "prefix": "",
+      "suffix": ""
+    }
+  ],
+  "directories": [
+    "dir1",
+    {
+      "path": "dir2",
+      "filesRegExp": "\\.jpe?g$",
+      "isTiddlerFile": false,
+      "fields": {
+        "type": "image/jpg"
+      },
+      "isEditableFile": false
+    },
+    {
+      "path": "i18n/zh-Hans",
+      "filesRegExp": "\\.tid$",
+      "isTiddlerFile": true,
+      "fields": {
+        "title": {
+          "source": "basename",
+          "prefix": "$:/plugins/XiaoMing/abc/i18n/zh-Hans/"
+        }
+      }
+    }
+  ]
+}
+```
+
+看起来有点复杂，但很多字段都是可选的，我们按层级来一个一个解读：
+
+* `tiddlers`【可选】：包含的tiddler，没有出现在里面的，就是被排除的；
+** `file`【必填】：以`tiddlywiki.files`所在文件夹为根目录，被包括的tiddler的相对位置。
+** `isTiddlerFile`【可选】：是不是原生的TiddyWiki文件类型(如`.tid`)，如果不是或者不填，则会自动根据文件后缀名来判断文件到底是纯文本还是二进制，从而选择使用`utf8`编码读入或者`base64`读入。不会影响到`type`。
+** `fields.type`【可选】：写在`fields`中，指tiddler的类型，如果不写就根据文件后缀名做推断，推断不出来就视为`text/plain`。
+** `fields`【可选】：就是字段了。字段接受三种类型：字符串、数组(等同于为以空格分隔的字符串)以及对象，这里说一下对象，虽然不常用，但是或许用的上：
+**: [[fields中的对象类型数据|tiddlywiki.files/fields中的对象类型数据]]
+**: <<alert danger "''注意：''无论有无`fields`，TiddlyWiki都会尝试寻找文件对应的`.meta`元数据文件，最后会将`fields`和`.meta`内的元数据合并作为tiddler的元数据；对于同名的field，`.meta`会覆盖`fields`的。">>
+** `prefix`【可选】：为tiddler的内容添加前缀，等价于在`fields`中写：
+**: <div>
+
+```json
+"text": { "prefix": "xxx" }
+```
+</div>
+** `suffix`【可选】：为tiddler的内容添加后缀，等价于在`fields`中写：
+**: <div>
+
+```json
+"text": { "suffix": "xxx" }
+```
+</div>
+
+* `directories`【可选】：包含的子路径，如果没有出现在里面的子文件夹就是被排除的；`directories`数组内可能有两种类型的数据：
+** 如果是字符串类型，那么就是包含对应名称的文件夹；
+** 如果是对象类型，就说明是指定了要读取子路径下的指定文件，其内可能有如下字段：
+*** `path`【必填】：要读取的子路径(相对路径)；
+*** `filesRegExp`【可选】：子路径下要包含的文件，基于正则表达式筛选，不写就是全部文件；
+*** `isTiddlerFile`【可选】：同`tiddlers.isTiddlerFile`，会应用到子路径下所有匹配的文件上；
+*** `fields`【可选】：同`tiddlers.fields`，会应用到子路径下所有匹配的文件上，也会去寻找`.meta`文件，规则同上；
+*** `isEditableFile`【可选】：如果为`true`，那么这个tiddler就不是shadow tiddler，修改它就会变更插件对应的文件，而不是创建一个新的tiddler来覆盖它。

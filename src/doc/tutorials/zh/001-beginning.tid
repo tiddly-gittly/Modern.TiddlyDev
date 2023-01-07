@@ -15,25 +15,17 @@ type: text/vnd.tiddlywiki
 
 ! 从一个空的开发模板开始
 
-由于 Modern 是一个基于 npm 的开发架构，包含了各种工具，因此你需要创建一个标准的空模板。你可以在 [[GitHub|https://github.com/tiddly-gittly/Modern.TiddlyDev]] 上找到这个模板，并以此创建一个你自己的项目。点击 <$text text="GitHub" /> 页面上的 [Use this template] 按钮，创建一个自己的项目。
-
-就假设你的项目叫 `tw5-plugins` 吧，当你在 <$text text="GitHub" /> 上创建这个项目后，进入对应的项目首页，将它 clone 下来：
+首先确保你已安装了 git 和 NodeJS ，随后请选择你希望创建项目的路径，并确定项目文件夹的名称，并在命令行输入如下指令：
 
 ```bash
-git clone https://github.com/xxx/tw5-plugins.git
+npx tiddlywiki-plugin-dev@latest init <项目文件夹名称>
 ```
 
-随后，你需要为这个项目安装 npm 依赖：
-
-```bash
-npm install
-```
-
-@@color:red;background:yellow;padding:10px 5px;
-''随后，请帮忙将 src/doc 文件夹删除，否则你的本地教程可能无法进行更新！''
-@@
+接下来会进行模板项目的下载和各种工具的安装，请稍作等待。如果需要手动下载模板项目，[[可以看这里|https://github.com/tiddly-gittly/Modern.TiddlyDev/tree/template]]。
 
 使用你的代码编辑器打开这个项目文件夹，就可以正式进入插件开发环节了。
+
+注意：在这里需要你选择自己的包管理器，如果你并不清楚应当选择什么，请选择 npm。而若你选择的不是 npm，请将后续教程中任意 npm 命令都替换成你使用的包管理器来执行。
 
 ! 体验所见即所得的开发流程
 
@@ -41,7 +33,6 @@ npm install
 
 * .git 是一个隐藏的文件夹，保存了这个 git 项目的各种信息，删除之后就无法使用 git 指令了；
 * .github 是一个隐藏的文件夹，其中保存了 <$text text="GitHub" /> 的 CI/CD 自动化脚本；
-* .scripts 是一个隐藏文件夹，保存了用于自动化发布的脚本；
 * node_modules 是 npm 包的安装路径，可以删除，删除后使用 npm install 重新安装所有 npm 包；
 * src 是插件开发的主要目录，其中的每一个文件夹都是一个插件；
 * wiki 是开发模式和发布模式所展示的 wiki 项目，用于开发测试，以及文档生成；

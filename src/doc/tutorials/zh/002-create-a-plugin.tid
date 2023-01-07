@@ -23,20 +23,63 @@ type: text/vnd.tiddlywiki
 
 其次确定插件的名称，不多解释。
 
-在确定以上两点后，你的插件的 title 就应当是 `$:/<作者名>/<插件名>`。
+在确定以上两点后，你的插件的 title 就应当是 `$:/plugins/<作者名>/<插件名>`。
 
-接下来在 `src` 路径下，创建一个文件夹，命名为你的插件名（实际上这里起什么名字都不影响，只是为了方便你区分）。
+执行命令：
 
-接下来，请在这个文件下创建一个名为 `plugin.info` 的文件，用你的代码编辑器打开它，指定格式为 JSON。在其中填写如下内容，并将括号的内容替换：
-
-```json
-{
-  "title": "$:/plugins/<作者名>/<插件名>",
-  "name": "<插件名 不一定与 title 中的插件名一致>",
-  "author": "<作者名 不一定与 title 中的作者名一致>",
-  "description": "<对你插件的描述>",
-  "plugin-type": "plugin",
-  "version": "<版本号 一般是 0.0.1 这样的格式>",
-  "list": "readme"
-}
+```bash
+npm run new
 ```
+
+选择你需要添加的插件的类型、作者名和插件名，并添加插件的说明，即可创建一个插件文件夹，即 `src/<插件名>`（下文称为 该文件夹）。
+
+在该文件夹中，可以看到一个 `plugin.info` 文件，其描述了插件的各种属性与信息，其格式为 JSON，你可以手动修改它，其中每个字段的意义可以在教程 [plugin.info文件介绍] 中找到。
+
+还有一个 readme.tid 文件，其中的内容对应你的插件展示页面。
+
+运行 `npm run dev` 打开网页，可以看到增加了一个插件：
+
+<a class="tc-tiddlylink tc-tiddlylink-resolves tc-plugin-info tc-popup-handle tc-popup-absolute"><div class="tc-plugin-info-chunk tc-plugin-info-toggle"><button class="tc-btn-invisible tc-btn-dropdown">{{$:/core/images/chevron-right}}</button></div><div class="tc-plugin-info-chunk tc-plugin-info-icon">{{$:/core/images/plugin-generic-plugin}}</div><div class="tc-plugin-info-chunk tc-plugin-info-description"><h1><strong>my-plugin</strong>:&nbsp;My first plugin</h1><h2>~$:/plugins/my-name/my-plugin</h2><h2><div><em>0.0.1</em></div></h2></div></a>
+
+! 添加 Shadow Tiddler
+
+现在这个插件还是空的，只有一个 readme，我们需要添加其他 shadow tiddler。为插件添加其他内容的是通过直接在插件文件夹中新增文件来实现的。而在网页中直接修改插件内容或者新增 tiddler 则是不可以的，请牢记。
+
+现在，我们在该文件夹下仿照 `readme.tid` 创建一个新的 tid 文件，其第一行改成你希望的 title (应当以`$:/xxx/xxx/xxx/`为前缀)，后面的每一行都是`字段: 内容`，直到遇到一个空行，在空行之后都是 text 字段的内容。这样我们就为插件新增了一个 shadow tiddler。
+
+我们同样可以用这样的方式为插件添加其他内容，例如 css 文件、js 代码、图片、视频等。但请注意，若文件并非是`.tid`或`.json`，或者其中不包含title字段，就不会被插件所包含。因此，对于这样的文件，我们需要一个额外的 meta 文件来为其进行说明：
+
+加入你希望添加一个图片 1.jpg，请在其同目录下创建一个 1.jpg.meta，使用文本编辑器打开 meta 文件进行编辑：
+
+```
+title: $:/plugin/my-name/my-plugin/1.jpg
+type: image/jpeg
+```
+
+可以看出来，meta 文件的格式为逐行`字段名: 字段值`，title 是必要的，而 type 则是指文件是什么格式的。这是官网给出的常见文件对应的 ContentType：
+
+|!Group |!Type |!Content of `type` field |
+|^''Developer'' |Data dictionary |application/x-tiddler-dictionary|
+|~|~JavaScript code |application/javascript|
+|~|JSON data |application/json|
+|~|Static stylesheet |text/css|
+|^''Image''|GIF image |image/gif|
+|~|ICO format icon file |image/x-icon|
+|~|JPEG image |image/jpeg|
+|~|PDF image |application/pdf|
+|~|PNG image |image/png|
+|~|Structured Vector Graphics image |image/svg+xml|
+|^''Text''|HTML markup |text/html|
+|~|[[CSS|Cascading Style Sheets]] stylesheet |text/css|
+|~|[[Comma-separated values|Comma-Separated Values]] |text/csv|
+|~|Plain text |text/plain|
+|~|~TiddlyWiki 5 |text/vnd.tiddlywiki|
+|~|~TiddlyWiki Classic |text/x-tiddlywiki|
+
+更多文件对应的 ContentType 请自行百度。
+
+同理，如果希望给1.jpg添加更多字段，可以照猫画虎，例如添加 tags 等字段。
+
+以上，是为插件添加 shadow tiddler 的最简单最常用的方法，如果希望了解更多高级方法，请参考后文 [添加 shadow tiddler 的多种方法] 篇。
+
+接下来，我们就该进入激动人心的 TypeScript 插件开发环节了，快进入下一页学习吧！
