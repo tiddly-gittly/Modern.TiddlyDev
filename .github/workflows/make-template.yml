@@ -11,15 +11,19 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Clear
-        run: rm -rf .github/workflows/make-template.yml src/doc
+        run: |
+          rm -rf .github/workflows/make-template.yml src/doc .git
+          git init
+          git add -A
+          git commit -m "template"
 
       - name: Deploy
-        uses: s0/git-publish-subdir-action@develop
-        env:
-          REPO: self
-          BRANCH: template
-          FOLDER: .
-          SQUASH_HISTORY: true
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          force_with_lease: true
+          branch: template
