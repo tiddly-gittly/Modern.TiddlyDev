@@ -42,7 +42,10 @@ jobs:
         run: npm install -g pnpm && pnpm install
 
       - name: Build Plugins
-        run: pnpm run build && cp dist/\$__plugins_Modern.TiddlyDev_doc.json wiki/tiddlers/\$__plugins_Modern.TiddlyDev_doc.json
+        run: |
+          pnpm run build
+          ls dist
+          cp dist/\$__plugins_Modern.TiddlyDev_doc.json wiki/tiddlers/\$__plugins_Modern.TiddlyDev_doc.json
 
       - name: Deploy
         uses: s0/git-publish-subdir-action@develop
