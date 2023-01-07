@@ -20,8 +20,9 @@ jobs:
           git config --global user.name Gk0Wk
           rm -rf .github/workflows/make-template.yml src/doc .git
           git init
+          git branch -m template
+          echo https://github.com/$GITHUB_REPOSITORY.git
           git add -A
           git commit -m "template"
           git remote add origin https://github.com/$GITHUB_REPOSITORY.git
-          git branch -m template
           git push --set-upstream origin template
