@@ -17,9 +17,9 @@ jobs:
           rm -rf .github/workflows/make-template.yml src/doc
           mkdir /tmp/moderntiddlydev
           cp -r * /tmp/moderntiddlydev/
-          find . -type f -maxdepth 1 -exec cp -t /tmp/moderntiddlydev/ {} +
+          find . -maxdepth 1 ! -name .git -exec cp -t /tmp/moderntiddlydev/ {} +
           mv /tmp/moderntiddlydev upload
-          rm -rf upload/.git
+          rm -rf upload/.git upload/README.md
 
       - name: Deploy
         uses: s0/git-publish-subdir-action@develop
