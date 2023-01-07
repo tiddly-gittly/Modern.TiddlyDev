@@ -15,14 +15,13 @@ jobs:
           fetch-depth: 0
 
       - name: Clear
-        run: |
-          git config --global user.email nmg_wk@yeah.net
-          git config --global user.name Gk0Wk
-          rm -rf .github/workflows/make-template.yml src/doc .git
-          git init
-          git branch -m template
-          echo https://github.com/$GITHUB_REPOSITORY.git
-          git add -A
-          git commit -m "template"
-          git remote add origin https://github.com/$GITHUB_REPOSITORY.git
-          git push --set-upstream origin template
+        run: rm -rf .github/workflows/make-template.yml src/doc
+
+      - name: Deploy
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: self
+          BRANCH: template
+          FOLDER: .
+          SQUASH_HISTORY: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
