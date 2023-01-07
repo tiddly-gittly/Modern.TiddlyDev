@@ -16,6 +16,7 @@ jobs:
 
       - name: Clear
         run: |
+          git config --get user.email
           echo $(git config --get user.email)
           git config --global user.email $(git config --get user.email)
           echo $(git config --get user.name)
