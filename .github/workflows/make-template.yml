@@ -18,6 +18,7 @@ jobs:
           cp -r . /tmp/moderntiddlydev/
           mv /tmp/moderntiddlydev upload
           rm -rf upload/.git upload README.md
+          pwd
 
       - name: Deploy
         uses: s0/git-publish-subdir-action@develop
