@@ -14,7 +14,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - run: git config --local --get user.email && git config --get user.name
       - name: Clear
         run: |
           git config --global user.email nmg_wk@yeah.net
