@@ -16,11 +16,17 @@ jobs:
 
       - name: Clear
         run: |
+          echo $(git config --get user.email)
           git config --global user.email $(git config --get user.email)
+          echo $(git config --get user.name)
           git config --global user.name $(git config --get user.name)
+          echo rm
           rm -rf .github/workflows/make-template.yml src/doc .git
+          echo init
           git init
+          echo add
           git add -A
+          echo commit
           git commit -m "template"
 
       - name: Deploy
