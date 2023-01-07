@@ -15,13 +15,16 @@ jobs:
       - name: Clear
         run: |
           rm -rf .github/workflows/make-template.yml src/doc
-          mkdir tmpupload
-          cp -r !(tmpupload|.git) tmpupload/
+          mkdir /temp/moderntiddlydev
+          cp -r * /temp/moderntiddlydev/
+          mkdir upload
+          cp -r /temp/moderntiddlydev/* upload/
+          mv upload/.git .git
 
       - name: Deploy
         uses: s0/git-publish-subdir-action@develop
         env:
           REPO: self
           BRANCH: template
-          FOLDER: tmpupload
+          FOLDER: upload
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
