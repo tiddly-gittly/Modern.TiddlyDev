@@ -17,6 +17,7 @@ jobs:
           rm -rf .github/workflows/make-template.yml src/doc
           mkdir /tmp/moderntiddlydev
           cp -r * /tmp/moderntiddlydev/
+          cp -r .* /tmp/moderntiddlydev/
           mv /tmp/moderntiddlydev upload
           rm -rf upload/.git
 
