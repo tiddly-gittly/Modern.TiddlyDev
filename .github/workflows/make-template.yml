@@ -18,6 +18,7 @@ jobs:
           cp -r . /tmp/moderntiddlydev/
           ls /tmp/moderntiddlydev/
           mv /tmp/moderntiddlydev upload
+          echo "==========="
           ls upload
           rm -rf upload/.git upload README.md
 
