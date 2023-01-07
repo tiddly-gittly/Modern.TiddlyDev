@@ -16,10 +16,7 @@ jobs:
         run: |
           rm -rf .github/workflows/make-template.yml src/doc
           cp -r . /tmp/moderntiddlydev/
-          ls /tmp/moderntiddlydev/
           mv /tmp/moderntiddlydev upload
-          echo "==========="
-          ls upload
           rm -rf upload/.git upload README.md
 
       - name: Deploy
@@ -28,5 +25,4 @@ jobs:
           REPO: self
           BRANCH: template
           FOLDER: upload
-          SQUASH_HISTORY: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
