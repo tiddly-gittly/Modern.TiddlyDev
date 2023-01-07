@@ -14,21 +14,14 @@ jobs:
         with:
           fetch-depth: 0
 
-      - run: git config --local --get user.email && git config --local --get user.name
+      - run: git config --local --get user.email && git config --get user.name
       - name: Clear
         run: |
-          git config --get user.email
-          echo $(git config --get user.email)
-          git config --global user.email $(git config --get user.email)
-          echo $(git config --get user.name)
-          git config --global user.name $(git config --get user.name)
-          echo rm
+          git config --global user.email nmg_wk@yeah.net
+          git config --global user.name Gk0Wk
           rm -rf .github/workflows/make-template.yml src/doc .git
-          echo init
           git init
-          echo add
           git add -A
-          echo commit
           git commit -m "template"
 
       - name: Deploy
