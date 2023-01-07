@@ -23,5 +23,4 @@ jobs:
           REPO: self
           BRANCH: template
           FOLDER: .
-          SQUASH_HISTORY: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
