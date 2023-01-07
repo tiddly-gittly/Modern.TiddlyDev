@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Clear
-        run: rm -rf .github/workflows/make-template.yml src/doc .git && git init
+        run: rm -rf .github/workflows/make-template.yml src/doc
 
       - name: Deploy
         uses: s0/git-publish-subdir-action@develop
@@ -22,4 +22,3 @@ jobs:
           BRANCH: template
           FOLDER: .
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
