@@ -7,11 +7,10 @@
     "clean": "rimraf dist",
     "prepare": "husky install",
     "dev": "tiddlywiki-plugin-dev dev",
-    "build": "rimraf dist && tiddlywiki-plugin-dev build",
-    "build:library": "rimraf dist && tiddlywiki-plugin-dev build --library --output dist/library",
-    "inject": "tiddlywiki-plugin-dev build --output wiki/tiddlers",
-    "publish": "npm run build:library && npm run inject && ts-node .scripts",
-    "publish:offline": "npm run build:library && npm run inject && ts-node .scripts --offline"
+    "build": "npm run clean && tiddlywiki-plugin-dev build",
+    "build:library": "npm run clean && tiddlywiki-plugin-dev build --library --output dist/library",
+    "publish": "npm run clean && ts-node .scripts",
+    "publish:offline": "npm run clean && ts-node .scripts --offline"
   },
   "engines": {
     "node": ">=16"
@@ -32,8 +31,8 @@
   "devDependencies": {
     "@modern-js/eslint-config": "latest",
     "@modern-js/tsconfig": "latest",
-    "@types/node": "^18.11.9",
-    "husky": "^8.0.2",
+    "@types/node": "^18.11.18",
+    "husky": "^8.0.3",
     "lint-staged": "^13.1.0",
     "rimraf": "^3.0.2",
     "ts-node": "^10.9.1",
@@ -42,7 +41,7 @@
   },
   "dependencies": {
     "commander": "^9.4.1",
-    "tiddlywiki": "latest",
+    "tiddlywiki": "^5.2.5",
     "tiddlywiki-plugin-dev": "latest"
   }
 }

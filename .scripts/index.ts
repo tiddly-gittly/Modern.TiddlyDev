@@ -2,57 +2,22 @@ import fs from 'fs';
 import path from 'path';
 import { tmpdir } from 'os';
 import { program } from 'commander';
-import { TiddlyWiki } from 'tiddlywiki';
-import { ITiddlyWiki, ITiddlerFields } from 'tw5-typed';
-
-/**
- * 初始化 TiddlyWiki
- *
- * @param {Record<string, unknown>[]} [preloadTiddlers=[]] 额外的 tiddler
- * @param {string} [dir='.'] 工作路径
- * @param {string[]} [commands=[]] 附加指令
- * @return {ITiddlyWiki}
- */
-export const tiddlywiki = (
-  preloadTiddlers: Record<string, unknown>[] = [],
-  dir = '.',
-  commands: string[] = [],
-): ITiddlyWiki => {
-  const $tw = TiddlyWiki();
-  $tw.boot.argv = [dir, ...commands];
-  $tw.preloadTiddlerArray(preloadTiddlers);
-  $tw.boot.boot();
-  return $tw;
-};
-
-export const mkdirsForFileSync = (fileName: string) => {
-  const _path = path.dirname(fileName);
-  if (!fs.existsSync(_path)) {
-    mkdirsForFileSync(_path);
-    fs.mkdirSync(_path);
-  }
-};
-
-export const tryCopy = (from: string, to: string) => {
-  if (fs.existsSync(from)) {
-    fs.cpSync(from, to, { force: true, errorOnExist: false, recursive: true });
-  }
-};
-
-const waitForFile = (path: string) =>
-  new Promise<void>(resolve => {
-    const id = setInterval(() => {
-      resolve();
-      if (fs.existsSync(path)) {
-        resolve();
-        clearInterval(id);
-      }
-    }, 100);
-  });
+import {
+  buildLibrary,
+  tiddlywiki,
+  mkdirsForFileSync,
+  waitForFile,
+} from 'tiddlywiki-plugin-dev';
+import { ITiddlerFields } from 'tw5-typed';
 
 /** 项目路径 */
 const repoFolder = process.cwd();
 const wikiFolder = path.resolve(repoFolder, 'wiki');
+const bypassTiddlers = new Set([
+  '$:/core',
+  '$:/UpgradeLibrary',
+  '$:/UpgradeLibrary/List',
+]);
 
 /**
  * 构建在线HTML版本：核心JS和资源文件不包括在HTML中， 下载后不能使用
@@ -66,82 +31,92 @@ const buildOnlineHTML = async (
   htmlName = 'index.html',
   excludeFilter = '-[is[draft]]',
 ) => {
+  // 构建插件库，导出插件
   const distDir = path.resolve(dist);
-  const mediaDir = path.resolve(path.dirname(path.resolve(distDir, htmlName)), 'media');
-  mkdirsForFileSync(path.resolve(mediaDir, '1'));
+  const plugins = await buildLibrary(path.join(dist, 'library'));
 
   // 读取、导出外置资源、处理 tiddler
   const $tw = tiddlywiki([], wikiFolder);
-  const tiddlers: ITiddlerFields[] = [];
-  const savePromises: Promise<any>[] = [];
-  const bypassTiddlers = new Set([
-    '$:/core',
-    '$:/UpgradeLibrary',
-    '$:/UpgradeLibrary/List',
-  ]);
-  ($tw.wiki as any).each(
-    ({ fields }: { fields: ITiddlerFields }, title: string) => {
-      if (
-        bypassTiddlers.has(title) ||
-        title.startsWith('$:/boot/') ||
-        title.startsWith('$:/temp/')
-      ) {
-        return;
-      }
-      if (
-        ($tw.wiki as any).isBinaryTiddler(title) ||
-        ($tw.wiki as any).isImageTiddler(title)
-      ) {
-        const { extension, encoding } = $tw.config.contentTypeInfo[
-          fields.type || 'text/vnd.tiddlywiki'
-        ] ?? { extension: '.bin', encoding: 'base64' };
-        const fileName = encodeURIComponent(title.endsWith(extension) ? title : `${title}${extension}`);
-        savePromises.push(
-          new Promise(resolve =>
-            fs.writeFile(
-              path.resolve(distDir, 'media', fileName),
-              fields.text,
-              encoding as any,
-              resolve,
-            ),
+  const tiddlers: Record<string, ITiddlerFields> = {};
+  const savePromises: Promise<NodeJS.ErrnoException | null>[] = [];
+  mkdirsForFileSync(path.resolve(distDir, 'media', '1'));
+  $tw.wiki.each(({ fields }, title: string) => {
+    if (
+      bypassTiddlers.has(title) ||
+      title.startsWith('$:/boot/') ||
+      title.startsWith('$:/temp/')
+    ) {
+      return;
+    }
+    if ($tw.wiki.isBinaryTiddler(title) || $tw.wiki.isImageTiddler(title)) {
+      const { extension, encoding } = $tw.config.contentTypeInfo[
+        fields.type || 'text/vnd.tiddlywiki'
+      ] ?? { extension: '.bin', encoding: 'base64' };
+      const fileName = encodeURIComponent(
+        title.endsWith(extension) ? title : `${title}${extension}`,
+      );
+      savePromises.push(
+        new Promise(resolve =>
+          fs.writeFile(
+            path.resolve(distDir, 'media', fileName),
+            fields.text,
+            encoding as any,
+            resolve,
           ),
-        );
-        tiddlers.push({
-          ...fields,
-          text: '',
-          _canonical_uri: `./media/${encodeURIComponent(fileName)}`,
-        });
-      } else {
-        tiddlers.push({ ...fields });
-      }
-    },
+        ),
+      );
+      tiddlers[title] = {
+        ...fields,
+        text: '',
+        _canonical_uri: `./media/${encodeURIComponent(fileName)}`,
+      };
+    } else {
+      tiddlers[title] = { ...fields };
+    }
+  });
+
+  // 将构建好的插件注入
+  Object.entries(plugins).forEach(
+    ([title, tiddler]) => (tiddlers[title] = tiddler),
   );
 
   // 构建
   const tmpFolder = fs.mkdtempSync(path.resolve(tmpdir(), 'tiddlywiki-'));
-  fs.cpSync(path.resolve(wikiFolder, 'tiddlywiki.info'), path.resolve(tmpFolder, 'tiddlywiki.info'))
-  tiddlywiki(tiddlers, tmpFolder, [
-    ...['--output', distDir] /* 指定输出路径 */,
-    ...[
-      '--rendertiddler',
-      '$:/core/save/offline-external-js',
-      htmlName,
-      'text/plain',
-      '',
-      'publishFilter',
-      excludeFilter,
-    ] /* 导出无核心的HTML文件 */,
-    ...[
-      '--rendertiddler',
-      '$:/core/templates/tiddlywiki5.js',
-      `tiddlywikicore-${$tw.version}.js`,
-      'text/plain',
-    ] /* 导出核心 */,
-  ]);
-
-  await waitForFile(path.resolve(distDir, `tiddlywikicore-${$tw.version}.js`));
+  try {
+    fs.cpSync(
+      path.resolve(wikiFolder, 'tiddlywiki.info'),
+      path.resolve(tmpFolder, 'tiddlywiki.info'),
+    );
+    tiddlywiki(Object.values(tiddlers), tmpFolder, [
+      ...['--output', distDir] /* 指定输出路径 */,
+      ...[
+        '--rendertiddler',
+        '$:/core/save/offline-external-js',
+        htmlName,
+        'text/plain',
+        '',
+        'publishFilter',
+        excludeFilter,
+      ] /* 导出无核心的HTML文件 */,
+      ...[
+        '--rendertiddler',
+        '$:/core/templates/tiddlywiki5.js',
+        `tiddlywikicore-${$tw.version}.js`,
+        'text/plain',
+      ] /* 导出核心 */,
+    ]);
+    await waitForFile(
+      path.resolve(distDir, `tiddlywikicore-${$tw.version}.js`),
+    );
+  } catch (e) {
+    console.error(e);
+  }
   fs.rmSync(tmpFolder, { recursive: true, force: true });
-  await Promise.all(savePromises);
+  (await Promise.all(savePromises)).forEach(error => {
+    if (error) {
+      console.error(error);
+    }
+  });
 };
 
 /**
@@ -156,27 +131,54 @@ const buildOfflineHTML = async (
   htmlName = 'index.html',
   excludeFilter = '-[is[draft]]',
 ) => {
+  // 构建插件库，导出插件
   const distDir = path.resolve(dist);
-  // 构建HTML
-  mkdirsForFileSync(path.resolve(distDir, htmlName));
-  tiddlywiki([], wikiFolder, [
-    ...['--output', distDir] /* 指定输出路径 */,
-    ...[
-      '--deletetiddlers',
-      "'[[$:/UpgradeLibrary]] [[$:/UpgradeLibrary/List]]'",
-    ] /* 删掉一些没必要导出而且占用很大的条目 */,
-    ...[
-      '--rendertiddler',
-      '$:/plugins/tiddlywiki/tiddlyweb/save/offline',
-      htmlName,
-      'text/plain',
-      '',
-      'publishFilter',
-      excludeFilter,
-    ] /* 将wiki导出为HTML */,
-  ]);
-  // 由于导出是异步的，因此等待完成
-  await waitForFile(path.join(distDir, htmlName));
+  const plugins = await buildLibrary(path.join(dist, 'library'));
+
+  // 读取所有 tiddler
+  const $tw = tiddlywiki([], wikiFolder);
+  const tiddlers: Record<string, ITiddlerFields> = {};
+  $tw.wiki.each(({ fields }, title: string) => {
+    if (
+      bypassTiddlers.has(title) ||
+      title.startsWith('$:/boot/') ||
+      title.startsWith('$:/temp/')
+    ) {
+      return;
+    }
+    tiddlers[title] = { ...fields };
+  });
+
+  // 将构建好的插件注入
+  Object.entries(plugins).forEach(
+    ([title, tiddler]) => (tiddlers[title] = tiddler),
+  );
+
+  // 构建
+  const tmpFolder = fs.mkdtempSync(path.resolve(tmpdir(), 'tiddlywiki-'));
+  try {
+    fs.cpSync(
+      path.resolve(wikiFolder, 'tiddlywiki.info'),
+      path.resolve(tmpFolder, 'tiddlywiki.info'),
+    );
+    tiddlywiki(Object.values(tiddlers), tmpFolder, [
+      ...['--output', distDir] /* 指定输出路径 */,
+      ...[
+        '--rendertiddler',
+        '$:/plugins/tiddlywiki/tiddlyweb/save/offline',
+        htmlName,
+        'text/plain',
+        '',
+        'publishFilter',
+        excludeFilter,
+      ] /* 将wiki导出为HTML */,
+    ]);
+    // 由于导出是异步的，因此等待完成
+    await waitForFile(path.join(distDir, htmlName));
+  } catch (e) {
+    console.error(e);
+  }
+  fs.rmSync(tmpFolder, { recursive: true, force: true });
 };
 
 /**
@@ -185,7 +187,7 @@ const buildOfflineHTML = async (
  * @param {string} dist 目标路径，空或者不填则默认为'dist/library'
  * @param {boolean} minify 是否最小化HTML，默认为true
  */
-export const buildLibrary = async (
+const _buildLibrary = async (
   pluginFilter = '[prefix[$:/plugins/]!prefix[$:/plugins/tiddlywiki/]!prefix[$:/languages/]!prefix[$:/themes/tiddlywiki/]!tag[$:/tags/PluginLibrary]]',
   dist = 'dist/library',
 ) => {
@@ -244,10 +246,11 @@ program
       { offline, excludeFilter }: { offline: boolean; excludeFilter: string },
     ) => {
       if (offline) {
-        buildOfflineHTML(dist, 'index.html', excludeFilter);
+        await buildOfflineHTML(dist, 'index.html', excludeFilter);
       } else {
-        buildOnlineHTML(dist, 'index.html', excludeFilter);
+        await buildOnlineHTML(dist, 'index.html', excludeFilter);
       }
+      process.exit(0);
     },
   )
   .parse();
