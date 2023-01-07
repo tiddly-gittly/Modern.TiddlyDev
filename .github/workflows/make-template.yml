@@ -23,4 +23,5 @@ jobs:
           git add -A
           git commit -m "template"
           git remote add origin https://github.com/$GITHUB_REPOSITORY.git
+          git branch -m template
           git push --set-upstream origin template
