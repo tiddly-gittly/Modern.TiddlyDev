@@ -14,12 +14,11 @@ jobs:
 
       - name: Clear
         run: |
-          rm -rf .github/workflows/make-template.yml src/doc
           mkdir /tmp/moderntiddlydev
           cp -r * /tmp/moderntiddlydev/
           find . -maxdepth 1 ! -name .git -exec cp -r -t /tmp/moderntiddlydev/ {} +
           mv /tmp/moderntiddlydev upload
-          rm -rf upload/.git upload/README.md upload/pnpm-lock.yaml
+          rm -rf upload/.git upload/README.md upload/pnpm-lock.yaml upload/src/doc upload/.github/workflows/make-template.yml
 
       - name: Setup NodeJS
         uses: actions/setup-node@v2-beta
@@ -44,7 +43,6 @@ jobs:
       - name: Build Plugins
         run: |
           pnpm run build
-          ls dist
           cp dist/\$__plugins_Modern.TiddlyDev_doc.json wiki/tiddlers/\$__plugins_Modern.TiddlyDev_doc.json
 
       - name: Deploy

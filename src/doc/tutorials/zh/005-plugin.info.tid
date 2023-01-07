@@ -37,10 +37,3 @@ type: text/vnd.tiddlywiki
 * `text-direction`【选填】：文字方向，适用于语言包；
 
 也可以添加其他的字段，最后将会变成插件 tiddler 的元数据。
-
----
-
-本教程为原创，主要阅读了[[boot.js|https://github.com/Jermolene/TiddlyWiki5/blob/master/boot/boot.js]]内的以下函数：
-
-* `$tw.loadPluginFolder`
-* `$tw.Wiki.unpackPluginTiddlers`
