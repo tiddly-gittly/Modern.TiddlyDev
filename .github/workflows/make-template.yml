@@ -15,11 +15,10 @@ jobs:
       - name: Clear
         run: |
           rm -rf .github/workflows/make-template.yml src/doc
-          mkdir /temp/moderntiddlydev
-          cp -r * /temp/moderntiddlydev/
-          mkdir upload
-          cp -r /temp/moderntiddlydev/* upload/
-          mv upload/.git .git
+          mkdir /tmp/moderntiddlydev
+          cp -r * /tmp/moderntiddlydev/
+          mv /tmp/moderntiddlydev upload
+          rm -rf upload/.git
 
       - name: Deploy
         uses: s0/git-publish-subdir-action@develop
