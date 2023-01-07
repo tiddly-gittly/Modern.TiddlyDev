@@ -1,0 +1,46 @@
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials/zh/005-plugin.info
+caption: plugin.info文件介绍
+authors: Sttot(Gk0Wk)
+type: text/vnd.tiddlywiki
+
+`plugin.info`是JSON格式，可以包含如下字段：
+
+* `title`【必填】：插件的标题，请遵命名规范：`$:/plugins/你的名字/插件的名字`；
+
+* `type`【可选】：必须为`application/json`，就算写别的也会被改回来；
+
+* `version`【可选】：插件的版本号，建议是`数字.数字.数字`，主要用于更新检测：
+*: 如果你发布更新时不改变版本号，那么只能<button class="tc-reinstall tc-btn-invisible tc-install-plugin">{{$:/core/images/download-button}}重新安装</button>；如果把版本号变小，就会<button class="tc-reinstall-downgrade tc-btn-invisible tc-install-plugin">{{$:/core/images/download-button}}降级</button>；如果把版本号变大，就是<button class="tc-reinstall-upgrade tc-btn-invisible tc-install-plugin">{{$:/core/images/download-button}}升级</button>；
+*: 同时，如果版本号没有已经安装的版本大，直接将JSON拖动到浏览器是没法安装的，只能卸载然后重新装；
+*: 如果`version`不填，那么默认就和开发环境的TW版本号一致(当前版本号：<<version>>)；
+
+* `plugin-type`【可选】：插件的类型，可以是`plugin`、`language`、`theme`、`import`、`library`、`info`、`undefined`等，主要用的是`plugin`，别的怎么用我也不清楚，希望有谁能来补充一下。这个不填就默认为`plugin`；
+
+* `dependents`【可选】：前置插件的title，安装时会一并将前置插件也安装，如果没有前置插件则会报错。值可以是title的列表，也可以是用空格分隔的字符串；
+
+* `tiddlers`【可选】：`plugin.info`中也可以存储一些tiddler，一般用于存储一些很小的tiddler(比如设置、状态什么的)，是一个对象，key为tiddler的title，值则为对象，可以包含如下字段：
+** `text`
+** `fields`(但是`field`的值只能是字符串或者列表)
+**: (不知道我有没有漏掉什么，欢迎指正)
+*: <<alert danger "''注意：''这里的tiddler会被插件文件夹中重名的 tiddler 替代掉">>
+
+还有一些字段，与插件的解析执行机制无关，但是在TiddlyWiki中有一些特殊含义：
+
+* `name`【选填】：插件的名称，会显示在插件信息中，主要为了好称呼，一般要写，不一定和 title 中的插件名相同；
+* `description`【选填】：插件的介绍，会显示在插件信息中，简短介绍自己的插件让其更受欢迎，一般会写；
+* `author`【选填】：作者，不一定和 title 中的作者名相同；
+* `source`【选填】：源代码repo的url；
+* `parent-plugin`【选填】：父插件的标题，表示这个插件是一个子插件(比如官方插件中以`codemirror-`为前缀的插件都是`codemirror`的子插件)，在插件源中，会显示在父插件的展开项内。@@color:red;如果没有父插件就不会在插件源中显示@@；
+* `list`【选填】：点开某些插件的信息，可以看到除了`content`还有`readme`等标签，就是在这里定义的，可以是字符串数组，也可以是 filter 字符串。不过这里要注意，里面填写的不是要显示的tiddler的title，而是其“相对”title，要去掉`$:/plugins/xxx/xxx/`的前缀，例如想添加`$:/plugins/XiaoMing/abc/readme`只需要写`readme`；
+* `core-version`【选填】：要求的最低核心版本，例如`>=5.2.0`；
+* `plugin-priority`【选填】：整数，指插件被加载的顺序优先级，越小越优先；
+* `text-direction`【选填】：文字方向，适用于语言包；
+
+也可以添加其他的字段，最后将会变成插件 tiddler 的元数据。
+
+---
+
+本教程为原创，主要阅读了[[boot.js|https://github.com/Jermolene/TiddlyWiki5/blob/master/boot/boot.js]]内的以下函数：
+
+* `$tw.loadPluginFolder`
+* `$tw.Wiki.unpackPluginTiddlers`

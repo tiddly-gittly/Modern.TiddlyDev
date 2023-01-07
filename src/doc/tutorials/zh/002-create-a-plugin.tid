@@ -1,0 +1,42 @@
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials/zh/002-create-a-plugin
+caption: 创建一个插件
+authors: Sttot(Gk0Wk)
+type: text/vnd.tiddlywiki
+
+在创建一个插件之前，首先做一些科普：
+
+# 在 TiddlyWiki 中，插件是指将若干 tiddler 的内容进行打包所得到的一个 tiddler。即插件本质上是若干 tiddler 打包得到的的「压缩包」。
+
+# 插件本身是一个 tiddler，其包含的被打包的那些 tiddler 被称为 shadow tiddler。shadow tiddler 的特点是，并不会独立存在于一个 wiki 中，而是在 wiki 加载时从其所在的插件中加载；同时，如果 wiki 中存在与 shadow tiddler 重名的普通 tiddler，则普通 tiddler 会覆盖 shadow tiddler 的内容（但不会删除 shadow tiddler），直到普通 tiddler 被删除或改名，才会恢复 shadow tiddler 本来的内容。通过这个原理可以实现『配置的默认值』，即将某个配置的默认值存储在 tiddler 中，若用户设置了新的值则创建普通 tiddler 来覆盖，而删除这个普通 tiddler 相当于恢复默认配置。
+
+# 插件的所有 shadow tiddlers 存储在插件 tiddler 的 text 字段中，使用 JSON 序列化的字符串存储。插件还包含其他字段，用于描述插件的版本、名称、加载时机和用途等，详见下文。
+
+# 由于插件是一个 tiddler，因此也一定要有一个 title，并且需要满足规范命名：`$:/plugins/<作者名>/<插件名>`，且其中的 shadow tiddlers 的 title 也最好是以 `$:/plugins/<作者名>/<插件名>/` 为前缀，这样便于管理与辨认。
+
+# 主题与语言包是插件的两个变种，三者在本质上是一样的，但插件更多提供的是功能上的补充，例如为 wiki 提供了播放音乐的功能，而主题(以`$:/themes/`为前缀)则主要提供视觉效果的改变，例如实现一个二次元风格的 wiki；而语言包(以`$:/languages/`为前缀)则为了提供多语言支持。我们这里主要就插件展开，其他两种，欢迎补充！
+
+---
+
+! 创建一个插件
+
+首先确定插件的作者名，也就是你的名字，日后你的插件成名了，大家就会记住这个作者的名字 ：D
+
+其次确定插件的名称，不多解释。
+
+在确定以上两点后，你的插件的 title 就应当是 `$:/<作者名>/<插件名>`。
+
+接下来在 `src` 路径下，创建一个文件夹，命名为你的插件名（实际上这里起什么名字都不影响，只是为了方便你区分）。
+
+接下来，请在这个文件下创建一个名为 `plugin.info` 的文件，用你的代码编辑器打开它，指定格式为 JSON。在其中填写如下内容，并将括号的内容替换：
+
+```json
+{
+  "title": "$:/plugins/<作者名>/<插件名>",
+  "name": "<插件名 不一定与 title 中的插件名一致>",
+  "author": "<作者名 不一定与 title 中的作者名一致>",
+  "description": "<对你插件的描述>",
+  "plugin-type": "plugin",
+  "version": "<版本号 一般是 0.0.1 这样的格式>",
+  "list": "readme"
+}
+```
