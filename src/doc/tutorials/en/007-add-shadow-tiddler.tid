@@ -1,0 +1,166 @@
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials/en/007-add-shadow-tiddler.tid
+caption: Ways to add tiddlers
+authors: Sttot(Gk0Wk)
+type: text/vnd.tiddlywiki
+
+You've managed to create a plugin, congratulations! But... How do you add content to a plugin? Is it possible to create files directly in the folder? How do you exclude files that you don't want to include? Let's keep exploring.
+
+! The easiest way: add files directly in the folder
+
+Try adding a file called `readme.tid` under `src/your-plugin/` with the following content
+
+```tiddlywiki5
+title: $:/plugins/your-name/your-plugin/readme
+
+Hello!
+```
+
+You will find an extra `$:/plugins/your-name/your-plugin` shadow tiddler in the plugin `$:/plugins/your-name/your-plugin/readme`, which means it was added successfully! So the easiest way is to add the `.tid` file directly.
+
+Now try adding something else, like adding an `example.png` image, what happens?
+
+The image does get loaded, but the name of the corresponding shadow tiddler becomes the absolute path to the file... I don't think this is what you want to see at all. In fact, the same thing happens with `.js`, `.css` and other files. Also, these files can't come with metadata (such as title, tags, type and various fields), which is definitely not possible, so you have to add metadata to them in some other way.
+
+Note: In <$text text="Modern.TiddlyDev" />, files of the form above will not be included.
+
+The easiest way is to change it to a `.tid` suffix, then use the `.tid` format to define the metadata at the beginning and `type` at the same time, and finally use the original content as the text content of `.tid`.
+
+But the disadvantages of doing so are also great, first of all, it is not easy to edit; secondly, for binary also need to convert to base64 format, which is very troublesome and space-consuming practice.
+
+---
+
+! I want to keep the original suffix name, but I also want to add metadata to it...
+
+If you look in the `tiddlers` folder, you'll see a `.meta` format, and yes, they are the metadata files that support the non-`.tid` format files.
+
+If, for the `example.png` mentioned above, we want to be able to name it `$:/plugins/your-name/your-plugin/exmaple.png` with a tag called `12345`, we can create an `example.png.meta` in the same directory, which will be automatically bound to `esample.png`, and we write something in it:
+
+```
+title: $:/plugins/your-name/your-plugin/exmaple.png
+type: image/png
+tags: 12345
+```
+
+Good, much better this time!
+
+---
+
+! Directories inside of directories?
+
+What happens if you add another `1` directory under `src/your-plugin/`? If you try it by hand, you will find nothing; however, if you add another file to `1`, you will find that the file that was added appears in the plugin.
+
+So it is possible to continue to set directories within the plugin, except that the files are eventually read instead of directories, so if the directory is empty, then nothing will be there.
+
+! `tiddlywiki.files`: This is the directory where I do the talking!
+
+What should I do if I want to exclude some files and folders? You can create a `tiddlywiki.files` file at the level where you want to exclude files. When TiddlyWiki parses the plugin, if it sees `tiddlywiki.files` under the directory, it will not continue to search for other files and folders under that folder, and under that one folder, `tiddlywiki.files` is the only one that matters!
+
+The `tiddlywiki.files` file describes which files should be loaded under this folder, and which files under which subfolders, and you can add metadata information to the files, so let's see how it works next.
+
+Note that `tiddlywiki.files` is also a JSON file, and the following is an example:
+
+```json
+{
+  "tiddlers": [
+    {
+      "file": "example/example1.tid",
+      "isTiddlerFile": true,
+      "type": "text/vnd.tiddlywiki",
+      "fields": {
+        "title": "$:/plugins/your-name/your-plugin/example/example1",
+        "tags": ["MyExample"],
+        "type": "text/vnd.tiddlywiki",
+        "created": { "source": "created" },
+        "file": {
+          "source": "filename",
+          "prefix": "[Prefix]"
+        }
+      },
+      "prefix": "",
+      "suffix": ""
+    }
+  ],
+  "directories": [
+    "dir1",
+    {
+      "path": "dir2",
+      "filesRegExp": "\\.jpe?g$",
+      "isTiddlerFile": false,
+      "fields": {
+        "type": "image/jpg"
+      },
+      "isEditableFile": false
+    },
+    {
+      "path": "i18n/zh-Hans",
+      "filesRegExp": "\\.tid$",
+      "isTiddlerFile": true,
+      "fields": {
+        "title": {
+          "source": "basename",
+          "prefix": "$:/plugins/your-name/your-plugin/i18n/zh-Hans/"
+        }
+      }
+    }
+  ]
+}
+```
+
+It looks a bit complicated, but many of the fields are optional, so let's unpack them one by one, level by level.
+
+* `tiddlers` [optional]: the included tiddlers, those that do not appear in it are the ones that are excluded;
+** `file` [required]: the relative location of the included tiddlers, with the folder where `tiddlywiki.files` is located as the root directory;
+** `isTiddlerFile` [optional]: is not the native <$text text="TiddlyWiki" /> file type (such as `.tid`), if not or not filled in, it will automatically determine whether the file is plain text or binary based on the file suffix name, and thus choose to use `utf8` encoding to read in or `base64` to read in. This does not affect `type`;
+** `fields.type` [optional]: written in `fields`, refers to the type of tiddler, if not written it will be inferred from the file extension name, if it is not inferred it will be considered as `text/plain`;
+** `fields` [optional]: is the field. Fields accept three types: strings, arrays (equivalent to space-separated strings), and objects, and here are the objects, which are not commonly used, but may be useful:
+**: (the object type data description in fields, moved to the end of the text)
+**: @@color:red; Note: ''With or without `fields`, <$text text="TiddlyWiki" /> will try to find the file's corresponding `.meta` metadata file, and will finally merge the metadata within `fields` and `.meta` as tiddler's metadata; for fields with the same name, `.meta` will override `fields`.''@@
+** `prefix` [optional]: adds a prefix to the tiddler's content, equivalent to writing in `fields`:
+**: <div>
+
+```json
+"text": { "prefix": "xxx" }
+```
+</div>
+** `suffix` [optional]: adds a suffix to the tiddler's content, equivalent to writing in `fields`:
+**: <div>
+
+```json
+"text": { "suffix": "xxx" }
+```
+</div>
+
+* `directories` [optional]: contained subpaths, if a subfolder does not appear in it is excluded; `directories` array may have two types of data inside.
+** if it is of type string, then it is the folder containing the corresponding name.
+** If it is an object type, it means that it is specified to read the specified file under the subpath, which may have the following fields within it.
+*** `path` [required]: the subpath to be read (relative path).
+*** `filesRegExp` [optional]: the files to be included under the subpath, based on regular expression filtering, not written means all files included.
+*** `isTiddlerFile` [optional]: same as `tiddlers.isTiddlerFile`, will be applied to all matching files under the subpath.
+*** `fields` [optional]: same as `tiddlers.fields`, will apply to all matching files under the subpath, will also go for `.meta` files, same rules as above.
+*** `isEditableFile` [optional]: if `true`, then this tiddler is not a shadow tiddler, modifying it will change the file corresponding to the plugin, instead of creating a new tiddler to overwrite it.
+
+!! Object type data in fields
+
+If the type of a `field` is an object, then it means to generate some data in the specified way, in the format of
+
+```json
+{
+  "source": "string",
+  "prefix": "string",
+  "suffix": "string"
+}
+```
+
+`source` [required] refers to what kind of data should be generated, which can be as follows.
+
+* `filename`: data to get the filename of the tiddler file corresponding to `fields` as a field;
+* `filename-uri-decoded`: as above, with the filename URI encoded;
+* `basename`: same as `fieldname`, but with the file type suffix `.xxx` removed;
+* `basename-uri-decoded`: as above, with the URI encoding of the file name;
+* `extname`: gets the file's suffix name (with `.`);
+* `created`: gets the creation time of the file (in the file system), returned as a `Date` type;
+* `modified`: gets the modification time of the file (in the file system), returned as `Date` type;
+
+`prefix` [optional]: adds a prefix to the generated data.
+
+`suffix` [optional]: adds a suffix to the generated data.

@@ -15,11 +15,21 @@ type: text/vnd.tiddlywiki
 
 ! 从一个空的开发模板开始
 
-首先确保你已安装了 git 和 NodeJS ，随后请选择你希望创建项目的路径，并确定项目文件夹的名称，并在命令行输入如下指令：
+首先确保你已安装了 git 和 <$text text="NodeJS" /> ，随后请选择你希望创建项目的路径，并确定项目文件夹的名称，并在命令行输入如下指令：
 
 ```bash
 npx tiddlywiki-plugin-dev@latest init <项目文件夹名称>
 ```
+
+如果你是中国大陆的开发者，需要一些魔法并且知道我想表达的意思，init 还有两个额外的参数：
+
+* `--repo <模板repo url>` 对 <$text text="GitHub" /> 进行加速，例如[ghproxy.com]等;
+* `--npm <npm 镜像源>` 对 npm 进行加速，例如 `http://registry.npmmirror.com`；
+
+<details>
+<summary>魔法用法示例</summary>
+<pre>npx tiddlywiki-plugin-dev@latest init --repo https://ghproxy.com/https://github.com/tiddly-gittly/Modern.TiddlyDev.git --npm http://registry.npmmirror.com project</pre>
+</details>
 
 接下来会进行模板项目的下载和各种工具的安装，请稍作等待。如果需要手动下载模板项目，[[可以看这里|https://github.com/tiddly-gittly/Modern.TiddlyDev/tree/template]]。
 
@@ -54,11 +64,11 @@ npm run dev
 
 保存可看到 `This is a widget!` 的字样。
 
-不要关闭浏览器或者开发服务器，尝试修改一下 `src/plugin-name/index.ts` 中第 20 行的文字，保存后即可看到，插件被重新编译，网页上 Test 中的文字随之改变：
+不要关闭浏览器或者开发服务器，尝试修改一下 `src/plugin-name/index.ts` 中第 19 行的文字，保存后即可看到，插件被重新编译，网页上 Test 中的文字随之改变：
 
-[img[$:/plugins/Modern.TiddlyDev/doc/wyswtg-demo.gif]]
+[img[$:/plugins/Modern.TiddlyDev/doc/wysiwtg-demo.gif]]
 
-随后，在控制台按 ctrl + C 即可停止服务器。
+随后，在控制台按 <kbd>ctrl</kbd> + <kbd>C</kbd> 即可停止服务器。
 
 ! 编译插件
 
@@ -79,8 +89,22 @@ npm run build
 
 ! 发布
 
+首先，请使用 git remote 绑定自己的 git 项目（方法请百度）。
+
 在 git push 之后，<$text text="GitHub" /> 项目的自动化构建就开始了，你可以在项目首页的 Actions 中查看构建详情。
 
 一般情况下，自动化构建会生成 wiki 的线上版本，并同时生成包含 src 中所有插件的插件源，你可以将其发布给你的插件订阅者们，他们会在每次自动构建后获得最新的插件更新。
 
-如果你同时为你的提交添加了 tag，且 tag 的格式是 `v1.2.3` 这样的版本格式，那么项目还会将构建后的插件自动发布在你项目的 Release 中。
+如果你同时为你的提交添加了 tag，且 tag 的格式是 `v1.2.3` 这样的版本格式，那么项目还会将构建后的插件自动发布在你项目的 Release 中，[[就像这样|https://github.com/tiddly-gittly/Modern.TiddlyDev/releases]]。
+
+! 更新
+
+项目中的 `tiddlywiki-plugin-dev` 和 `tw5-typed` 等都会经常进行更新，以修复一些 bug 或者进一步强化功能。因此建议每隔一段时间或者遇到错误时就进行一下更新，方法如下：
+
+在联网状态下执行：
+
+```bash
+npm run update
+```
+
+在检查之后，按照其指示执行进一步的指令，例如`npm install`。

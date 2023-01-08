@@ -1,0 +1,39 @@
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials/en/006-plugin.info
+caption: about plugin.info
+authors: Sttot(Gk0Wk)
+type: text/vnd.tiddlywiki
+
+`plugin.info` is in JSON format and can contain the following fields.
+
+* `title` [required]: the title of the plugin, please follow the naming specification: `$:/plugins/<your-name>/<plugin-name>`;
+
+* `type` [optional]: must be `application/json`, even if you write something else, it will be changed back;
+
+* `version` [optional]: the version number of the plugin, recommended is `major.minor.patch`, mainly used for update detection;
+*: only <button class="tc-reinstall tc-btn-invisible tc-install-plugin">{{$:/core/images/download-button}}Reinstall</button> if you release the update without changing the version number, <button class="tc-reinstall-downgrade tc-btn-invisible tc-install-plugin">{{$:/core/images/download-button}}Downgrade</button> if you make the version number smaller, or <button class="tc-reinstall-upgrade tc-btn-invisible tc-install-plugin">{{$:/core/images/download-button}}Upgrade</button> if you make the version number larger;
+*: Also, if the version number is not as large as the installed version, dragging JSON directly to the browser will not install it, but will have to uninstall and reinstall it;
+*: If `version` is left blank, the default is the same as the <$text text="TiddlyWiki" /> version number of the development environment (current version number: <<version>>);
+
+* `plugin-type` [optional]: the type of plug-in, can be `plugin`, `language`, `theme`, `import`, `library`, `info`, `undefined`, etc., mainly with `plugin`, other types I have not studied, welcome to add. This defaults to `plugin` if not filled in;
+
+* `dependents` [optional]: the titles of the dependency plugins, which will be installed along with the current one, if there is no dependency plugins found, an error will be reported. The value can be a list of titles, or a string separated by spaces;
+
+* `tiddlers` [optional]: `plugin.info` can also store some tiddler, generally used to store some very small tiddler (such as settings, status or something), is an object, the key is the title of the tiddler, the value is the object, can contain the following fields;
+** `text`
+** `fields` (but the value of `field` can only be a string or a list)
+**: (I don't know if I've missed anything, feel free to correct me)
+*: @@color:red; Note: ''The tiddler here will be replaced by a renamed tiddler in the plugins folder'' @@
+
+There are also some fields that have nothing to do with the plugin's parsing execution mechanism, but have some special meaning in <$text text="TiddlyWiki" />.
+
+* `name` [optional]: the name of the plugin, which will be displayed in the plugin information, mainly for good address, generally to be written, not necessarily the same as the plugin name in the title.
+* `description` [optional]: the introduction of the plug-in, will be displayed in the plug-in information, a short introduction to their plug-in to make it more popular, generally will write.
+* `author` [optional]: the author, not necessarily the same as the author's name in the title.
+* `source` [optional]: the url of the source repo.
+* `parent-plugin` [optional]: the title of the parent plugin, indicating that the plugin is a child plugin (for example, the official plug-ins prefixed with `codemirror-` are all children of `codemirror`), in the plugin library, will be displayed within the expanded items of the parent plugin. @@color:red;If there is no parent plugin found in the library it will not be displayed in the plugin library@@;
+* `list` [optional]: click on the information of some plugins, you can see that in addition to `content` there are also `readme` and other tags, which are defined here, either as an array of strings or as a filter string. But here we should pay attention that what is filled in is not the title of the tiddler to be displayed, but its "relative" title, to remove the prefix `$:/plugins/xxx/xxx/`, for example, you want to add `$:/plugins/XiaoMing/abc/readme` just write `readme`;
+* `core-version` [optional]: the minimum core version required, e.g. `>=5.2.0`;
+* `plugin-priority` [optional]: an integer that refers to the priority of the order in which plugins are loaded, the smaller the priority;
+* `text-direction` [optional]: text direction, for language packs;
+
+You can also add other fields, which will end up as metadata for the plugin tiddler.

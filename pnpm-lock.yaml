@@ -9,7 +9,7 @@ specifiers:
   npm-check-updates: ^16.6.2
   rimraf: ^3.0.2
   tiddlywiki: ^5.2.5
-  tiddlywiki-plugin-dev: ^0.0.22
+  tiddlywiki-plugin-dev: ^0.0.23
   ts-node: ^10.9.1
   tw5-typed: ^0.2.16
   typescript: ^4.9.4
@@ -17,7 +17,7 @@ specifiers:
 dependencies:
   npm-check-updates: 16.6.2
   tiddlywiki: 5.2.5
-  tiddlywiki-plugin-dev: 0.0.22_kctv3yrjgfykfapqczydg5ywxm
+  tiddlywiki-plugin-dev: 0.0.23_kctv3yrjgfykfapqczydg5ywxm
 
 devDependencies:
   '@modern-js/eslint-config': 2.0.2
@@ -5575,8 +5575,8 @@ packages:
   /through/2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
 
-  /tiddlywiki-plugin-dev/0.0.22_kctv3yrjgfykfapqczydg5ywxm:
-    resolution: {integrity: sha512-CkamfKVwDQ6Reff4heSSsmT1PaN0BqGOmi6K2rnp9mdmndpyuTbsnKuYSK+jeNfd9VNzXhfLNlM7BufhUSWOXg==}
+  /tiddlywiki-plugin-dev/0.0.23_kctv3yrjgfykfapqczydg5ywxm:
+    resolution: {integrity: sha512-xwRrEFyHLCqLw67kHO7TdS3q9cRTKg0eqA5lKnxmbyh7AHbFSRYT0405jkvoBEvQOIz4lsRQJOZt7tfUIT4OTw==}
     engines: {node: '>=14.17.6'}
     hasBin: true
     peerDependencies:

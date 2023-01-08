@@ -1,0 +1,34 @@
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials/en/004-publish
+caption: Publish plugins
+authors: Sttot(Gk0Wk)
+type: text/vnd.tiddlywiki
+
+Plugins are user-facing, so you'll definitely need to write documentation, examples, etc. for your plugins, or generate an empty wiki template for your users to use directly.
+
+Further, you need to publish your plugin and post the documentation you've written to the Internet - and it would be great if you could synchronize it with a library of live updates for your users to subscribe to!
+
+All you need to do to achieve this is to add the tiddler, install the third-party plugin as normal, or decorate and configure the wiki page in dev mode on browser.
+
+Then close dev mode and use the `npm run publish` command to build plugins, plugin libraries and documentation pages in the dist folder with one click, and you can then publish the contents in the dist folder to your web server.
+
+If you use <$text text="GitHub" /> and use <$text text="GitHub" /> Page as your static page service, you don't need to run `npm run publish` manually, you just need to push and the next steps will be executed automatically. If you add a tag of the form `vX.Y.Z` to this commit, you will also publish the Release, and these automation scripts are located in `.github/workdlows`, which you can modify yourself.
+
+@@color:red;font-weight:900;
+Note: Don't forget to update the version of the corresponding plugin in plugin.info each time you update and release it!
+@@
+
+---
+
+! It is recommended to publish your plugins using a plugin library
+
+If you're not sure what a plugin library is: a plugin library is a mechanism provided by <$text text="TiddlyWiki" />, which is itself a tiddler containing a description of the plugin library and the url to the plugin library data that should be available when you open [[$:/ControlPanel]]'s [Plugins] and click [Get more plugins ], <$text text="TiddlyWiki" /> will load all the plugin library data, allowing the user to retrieve, install and update the plugins provided by these libraries.
+
+Therefore I suggest that you should publish your own plugins using the plugin library and ask your plugin users to install your plugin library. This way users will be able to update automatically when you publish new plugins and also use this to promote your other plugins as they will all be within the same plugin library.
+
+Further, you are welcome to publish your plugins on the CPL, which is <$text text="TiddlyWiki" /> currently the best public plugin library, similar to the App Store, and will be used in the future by <$text text="TiddlyWiki" /> author Jermolene [[incorporated inside TiddlyWiki feature|https://github.com/Jermolene/TiddlyWiki5/pull/7106]] (but it still takes time), the CPL is a collection of very cool plugins of all kinds, which will allow you to get more users! The way to join is to just create an [[Issue|https://github.com/tiddly-gittly/TiddlyWiki-CPL/issues]].
+
+How to create a plugin library tiddler: The plugin library tiddler needs to carry the `$:/tags/PluginLibrary` tag and specify the location of the plugin library html file in the url field, see [[$:/config/TiddlyWiki-CPL/GitHub]].
+
+! If you want to publish a wiki template
+
+<$text text="GitHub" /> Action script uses `npm run publish`, which publishes the wiki as an online version, which exports the <$text text="TiddlyWiki" /> core and other media files externally to optimize load times, so index.html cannot be used as a single-file wiki. If you wish to publish the Wiki template, please use `npm run publish:offline` instead.

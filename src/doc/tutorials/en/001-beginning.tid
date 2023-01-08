@@ -1,0 +1,110 @@
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials/en/001-beginning
+caption: Install & Basic Usage
+authors: Sttot(Gk0Wk)
+type: text/vnd.tiddlywiki
+
+Before you officially start.
+
+* You should be able to execute simple commands using the command line;
+* You should have a code editing software instead of using notepad the whole time to develop plugins, VSCode is recommended and install plugins like <$text text="TiddlyWiki5" /> Syntax, ESLint Prettier, etc.;
+* You should first have a brief knowledge of git (e.g. clone, pull, push, add, commit, etc.) and install the git command line software;
+* You should sign up for a <$text text="GitHub" /> account if you need automated build functionality and code management;
+* You should understand what npm is and have a good grasp of common npm commands (such as install, run, etc.) and install <$text text="NodeJS" /> software;
+* You'd better ideally have some experience using <$text text="TiddlyWiki" />;
+* You can go into technologies related to HTML, CSS, <$text text="JavaScript" /> and <$text text="TypeScript" />;
+
+! Start with an empty template
+
+First make sure you have git and <$text text="NodeJS" /> installed, then choose the path where you wish to create the project, determine the name of the project folder, and enter the following command at the command line:
+
+```bash
+npx tiddlywiki-plugin-dev@latest init <project-name>
+```
+
+You If you need a web proxy to speed things up, init has two additional parameters.
+
+* `--repo <repo-url>` Proxy address for the <$text text="GitHub" /> repo;
+* `--npm <npm-repo>` Speed up npm, e.g. `http://registry.npmmirror.com`;
+
+<details>
+<summary>Proxy example</summary>
+<pre>npx tiddlywiki-plugin-dev@latest init --repo https://ghproxy.com/https://github.com/tiddly-gittly/Modern.TiddlyDev.git --npm http://registry.npmmirror.com project</pre>
+</details>
+
+The download of the template project and the installation of various tools will follow, so please wait a little. If you need to download the template project manually, [[you can find it here|https://github.com/tiddly-gittly/Modern.TiddlyDev/tree/template]].
+
+Use your code editor to open this project folder, and you can officially enter the plugin development stage.
+
+Note: Here you need to choose your package manager, if you are not sure what to choose, please choose npm. If you choose something other than npm, please replace any npm command in the following tutorial with the package manager you are using to execute.
+
+! Experience the WYSIWYG development process
+
+You should notice that there are already a lot of folders and files in this project, so here are some introductions:
+
+* .git is a hidden folder that holds all kinds of information about this git project, so you won't be able to use git commands after deleting it;
+* .github is a hidden folder that holds the CI/CD automation scripts for <$text text="GitHub" />;
+* node_modules is the installation path for npm packages, which can be removed and reinstalled using npm install afterwards;
+* src is the main directory for plugin development, where each folder contains a plugin;
+* wiki is the wiki project presented in development mode and release mode, used for development testing, and documentation generation;
+* .eslintignore .eslintrc.js and other hidden files, as well as package.json and tsconfig.json are the relevant configuration files for the project, so please do not modify them if you don't known what you are doing;
+
+In src, there is already a `plugin-name` sample project for demo, you can start development by modifying this project or just delete it. Let's keep it and go directly into development mode to see the effect by typing this in the console:
+
+```bash
+npm run dev
+```
+
+If no errors are reported, the console will show a local URL (usually `http://127.0.0.1:8080`), and if you browse this URL with your browser, you will see a Wiki page, which will also show this tutorial first. Further inspection shows that this Wiki has the plugin `$:/plugins/your-name/plugin-name` installed.
+
+This sample plugin implements a widget called `test` that displays a fixed line of text. We create a tiddler called Test in which we use this widget.
+
+```
+<$test />
+```
+
+Save to see the words `This is a widget!`.
+
+Do not close your browser or development server, try to change the text in line 19 of `src/plugin-name/index.ts`, save it and you will see that the plugin is recompiled and the text in Test on the web page is changed:
+
+[img[$:/plugins/Modern.TiddlyDev/doc/wysiwtg-demo.gif]]
+
+Afterwards, press <kbd>ctrl</kbd> + <kbd>C</kbd> in the console to stop the server.
+
+! Compiling the plugin
+
+If you don't want to use <$text text="GitHub" /> for automated builds and releases, or just want to compile the plugin first, you can use the following command.
+
+```bash
+npm run build
+```
+
+After a short compilation process, the console will output something like this.
+
+```
+ Minimized plugins
+   1.97 KiB   $:/plugins/your-name/plugin-name
+```
+
+This means that this build compiles and packages a total of one plugin with a compressed size of 1.97KB, which can be found in the `dist` folder.
+
+! Publishing
+
+First, bind your git project using git remote (please Google for details).
+
+After git push, an automated build of the <$text text="GitHub" /> project starts, and you can see the build details in Actions on the project home page.
+
+Typically, the automated build will generate an online version of the wiki and a plugin repository with all the plugins in src, which you can publish to your plugin subscribers and they will get the latest plugin updates after each automated build.
+
+If you also add a tag to your commit, and the tag is in a version format like `v1.2.3`, then the project will also automatically release the built plugin in your project's Release, [[like this|https://github.com/tiddly-gittly/Modern.TiddlyDev/ releases]].
+
+! Update
+
+The `tiddlywiki-plugin-dev` and `tw5-typed` in your project are updated frequently to fix bugs or to further enhance functionality. It is therefore recommended to update them every once in a while or when you encounter a bug, as follows.
+
+Execute in networked state:
+
+```bash
+npm run update
+```
+
+After checking, follow its instructions to execute further commands, such as `npm install`.

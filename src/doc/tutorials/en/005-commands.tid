@@ -1,0 +1,82 @@
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials/en/005-commands
+caption: Commands
+authors: Sttot(Gk0Wk)
+type: text/vnd.tiddlywiki
+
+The project wraps some common commands, most of which are implemented using another tool [[tiddlywiki-plugin-dev|https://www.npmjs.com/package/tiddlywiki-plugin-dev]].
+
+! Built-in commands
+
+!! Clear build products
+
+```bash
+npm run clean
+```
+
+will delete the dist folder.
+
+!! Upgrade dependencies
+
+```bash
+npm run update && npm install
+```
+
+will automatically update packages such as tw5-typed, tiddlywiki-plugin-dev, etc. It is recommended to run this every once in a while.
+
+!! Create a plugin
+
+```bash
+npm run new
+```
+
+!! Enter live development mode
+
+```bash
+npm run dev
+```
+
+After a short compilation, a web server will open and a browser will open it to see the effect. The page will be automatically recompiled and refreshed as the content of the plugin is modified.
+
+!! Building plugins
+
+There are two forms.
+
+# Build several separate plugins directly, in JSON format.
+
+```bash
+npm run build
+```
+
+# Build as a plugin library.
+
+```bash
+npm run build:library
+```
+
+The result of the build is in dist.
+
+!! Publish
+
+Build the plugin library + build the wiki documentation to publish as a web page.
+
+The online form, where the core and media files are external, can speed up the page opening, but the page can only be used online, after downloading it cannot be used due to missing core and media files:
+
+```bash
+npm run publish
+```
+
+Offline form, i.e. packaged as a single file wiki that can be downloaded and used: 
+
+```bash
+npm run publish:offline
+```
+
+The results of the build are in dist.
+
+! Custom directives
+
+In fact, the above commands are further wrappers around tiddlywiki-plugin-dev. tiddlywiki-plugin-dev can support other custom parameters to customize your build. You can see the current version of tiddlywiki-plugin-dev in action with the following command.
+
+```bash
+npx tiddlywiki-plugin-dev help
+```

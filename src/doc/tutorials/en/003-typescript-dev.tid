@@ -1,0 +1,164 @@
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials/en/003-typescript-dev
+caption: TypeScript Development
+authors: Sttot(Gk0Wk)
+type: text/vnd.tiddlywiki
+
+If the previous steps just enhance the development experience, then the next is the core problem that this framework is trying to solve: <$text text="TiddlyWiki" /> + <$text text="TypeScript" />!
+
+Let's go straight to the usage with an example.
+
+! Creating a widget
+
+A widget is a rendering unit for <$text text="TiddlyWiki" />, which is what you see as something like `<$xxx />`. <$text text="TiddlyWiki" /> has several built-in widgets that provide various functions such as text, links, images, citations, etc., and all kinds of <$text text="WikiText" /> are parsed and turned into widgets, so the widget is the most important and fundamental concept in <$text text=" TiddlyWiki" />.
+
+Note: A tutorial on widget development will be done in the future, and anyone with knowledge is welcome for co-operation!
+
+We want to create a wdiget that displays a random number and re-randomizes it when clicked, and we name this widget <$text text="RandomNumber" />. To achieve this, we add a `RandomNumberWidget.ts` file and a `RandomNumberWidget.ts.meta` file to the plugin development directory.
+
+First write the following in `RandomNumberWidget.ts.meta`;
+
+```
+title: $:/plugins/<author-name>/<plugin-name>/RandomNumberWidget.ts
+type: application/javascript
+module-type: widget
+```
+
+Note: the `module-type` field indicates the module type of the script, which will be used when the <$text text="TiddlyWiki" /> loads the plugin.
+
+In the `RandomNumberWidget.ts` file:
+
+```typescript
+import type { Widget as IWidget, IChangedTiddlers } from 'tiddlywiki';
+
+// This require is not the cjs standard require, but a method for TiddlyWiki to import a tiddler script.
+const Widget = require('$:/core/modules/widgets/widget.js')
+  .widget as typeof IWidget;
+
+export class RandomNumber extends Widget {
+  refresh(_changedTiddlers: IChangedTiddlers) {
+    return false;
+  }
+
+  render(parent: Node, _nextSibling: Node) {
+    this.parentDomNode = parent;
+    this.execute();
+    const containerElement = document.createElement('p');
+    containerElement.innerHTML = `${Math.random()}`.replace('0.', '');
+    containerElement.onclick = () => (containerElement.innerHTML = `${Math.random()}`.replace('0.', ''));
+    this.domNodes.push(containerElement);
+    parent.appendChild(containerElement);
+  }
+}
+```
+
+Execute `pnpm run dev` to compile the source file, open a browser, create a tiddler and use `<$RandomNumber />` in it to see the effect.
+
+Note: The framework also supports compilation of cjs, mjs, jsx, tsx files.
+
+Note: The related <$text text="TypeScript" /> type support is done by [[tw5-typed|https://github.com/tiddly-gittly/TW5-Typed]], which is not very complete, so some manual type annotations are needed as above. I welcome your help to improve tw5-typed!
+
+! Importing other resources in <$text text="TypeScript" /> scripts
+
+First, if a script file (.ts, .tsx, .jsx, .cjs, .mjs) has a corresponding .meta file, then the script file is a compilation entry and will be compiled; conversely, if a script file does not have a .meta file, then it is not an entry file and will not be compiled directly and packaged into the plugin, but can be imported by other script files.
+
+You can use `import` in the script file to introduce other resources in the directory, such as other scripts, css files, json files, images and other resources. These resources will be automatically imported and packaged during compilation.
+
+Note: .js scripts can not be used as a compilation entry, but can be imported by other script files using import.
+
+However, it should be noted that if a resource file has already been imported by a script file, the resource file does not need to have a .meta file, that is, it does not need to manually add to the plug-in. Otherwise, there will be two copies of the resource file in the plugin, which will cause some other problems.
+
+Here are two examples:
+
+Add a script file foo.ts:
+
+```typescript
+export const foo = 'foo';
+```
+
+Instead of adding the corresponding .meta file, we can just import it in `RandomNumberWidget.ts`.
+
+Besides, we can create a `bar.css` in the same way and import it directly in `RandomNumberWidget.ts` without adding a .meta file.
+
+! Adjusting the compilation behavior
+
+The above specification makes it easy to implement <$text text="TypeScript" />, but it can also cause some problems. For example, I want to include a <$text text="TypeScript" /> script in the plugin, but don't want to compile it, or want to bring in the source file after compiling. Or, I want to specify the generation of <$text text="SourceMap" />, or enforce minimization and compatibility policies, etc. These can be achieved by modifying the fields.
+
+!! Include entry source files
+
+If a .meta is added to a script file it will be treated as an entry file, and the entry file will be compiled and the compiled result incorporated into the plugin and will not include the source file. If you wish to include the source file, you need to add this to the .meta file corresponding to the script file:
+
+```
+Modern.TiddlyDev#IncludeSource: true
+```
+
+!! Excluding compilation
+
+Further, if you do not want this script file to be compiled, you need to add this to the .meta:
+
+```
+Modern.TiddlyDev#NoCompile: true
+```
+
+Need to be used with `Modern.TiddlyDev#IncludeSource`.
+
+!! Plugin Minimization
+
+By default, scripts and css files are minimized when the plugin is built (not minimized in development mode). If you wish to disable this feature, you can add this to `plugin.info`:
+
+```json
+"Modern.TiddlyDev#Minify": false,
+```
+
+Since `plugin.info` is in JSON format, pay attention to the comma and other formatting.
+
+!! <$text text="SourceMap" /> Generating
+
+By default, in-line sourcemap is added to generated scripts in dev development mode for debugging purposes, but not in publish/build production releases. If you need to add it in production please add to `plugin.info`.
+
+```json
+"Modern.TiddlyDev#SourceMap": false,
+```
+
+!! Excluding packaging
+
+Since the `require` method in <$text text="TiddlyWiki" /> is not a standard CJS method for introducing modules, but is implemented by <$text text="TiddlyWiki" /> itself, the compilation will ignore the require introductions starting with `$:/` and leave <$text text = "TiddlyWiki" /> to perform the import operation. But if you need to use require to introduce a tiddler that doesn't start with `$:/`, it will be treated as a normal npm package and the bundle will be introduced at compile time, resulting in an error. Alternatively, your plugin runs in a node environment and does not require bundling. In both cases, you need to specify the object to exclude from bundling.
+
+If the plugin needs to use the fs package and does not require bundling, you can specify in `plugin.info` that:
+
+```json
+"Modern.TiddlyDev#ExternalModules": "fs",
+```
+
+If, at the same time, a tiddler named `foo bar` needs to be required at runtime:
+
+```json
+"Modern.TiddlyDev#ExternalModules": "fs [[foo bar]]",
+```
+
+Note: Only the use of `[[]]` for tiddler headers with spaces is supported, but no other filter syntax is supported. However, wildcard syntax, such as `abc/*`, is supported. The specific behavior is determined by [[ESBuild|https://esbuild.github.io/api/#external]].
+
+!! Compatibility policy
+
+Build time will automatically use [[browserslist|https://browsersl.ist/]] for code compatibility escaping work. The default policy is `>0.25%, not ie 11, not op_mini all`. If you want to specify it yourself, you can specify it in `plugin.info`.
+
+```json
+"Modern.TiddlyDev#BrowsersList": "last 2 versions",
+```
+
+! Additional generated fields
+
+The compile build generates some additional fields for plugin tiddlers.
+
+!! Source file path
+
+The entry script file, and files directly or indirectly introduced by the entry script file, are compiled to generate target tiddlers, which will contain an extra field `Modern.TiddlyDev#Origin` to indicate who their source file is.
+
+!! Hash checksum
+
+Plugins built via publish/build will generate a hash-check signature, and the hash algorithm will state that there is currently only one sha256, i.e., the final plugin will have `Modern.TiddlyDev#SHA256-Hashed` in its fields.
+
+The specific way of calibration: read the plug-in, exclude the `TiddlyDev#SHA256-Hashed` field, and then perform sha256 on the JSON serialized string of the whole object:
+
+```js
+sha256(JSON.stringify({ ...plugin, 'Modern.TiddlyDev#SHA256-Hashed': undefined }));
+```

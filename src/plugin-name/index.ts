@@ -1,9 +1,8 @@
 import type { Widget as IWidget, IChangedTiddlers } from 'tiddlywiki';
 import './index.css';
 
-const Widget = (
-  require('$:/core/modules/widgets/widget.js') as { widget: typeof IWidget }
-).widget;
+const Widget = require('$:/core/modules/widgets/widget.js')
+  .widget as typeof IWidget;
 
 class ExampleWidget extends Widget {
   refresh(_changedTiddlers: IChangedTiddlers) {

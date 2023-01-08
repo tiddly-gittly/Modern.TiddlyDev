@@ -5,15 +5,15 @@ type: text/vnd.tiddlywiki
 
 在创建一个插件之前，首先做一些科普：
 
-# 在 TiddlyWiki 中，插件是指将若干 tiddler 的内容进行打包所得到的一个 tiddler。即插件本质上是若干 tiddler 打包得到的的「压缩包」。
+# 在 <$text text="TiddlyWiki" /> 中，插件是指将若干 tiddler 的内容进行打包所得到的一个 tiddler。即插件本质上是若干 tiddler 打包得到的「压缩包」。
 
-# 插件本身是一个 tiddler，其包含的被打包的那些 tiddler 被称为 shadow tiddler。shadow tiddler 的特点是，并不会独立存在于一个 wiki 中，而是在 wiki 加载时从其所在的插件中加载；同时，如果 wiki 中存在与 shadow tiddler 重名的普通 tiddler，则普通 tiddler 会覆盖 shadow tiddler 的内容（但不会删除 shadow tiddler），直到普通 tiddler 被删除或改名，才会恢复 shadow tiddler 本来的内容。通过这个原理可以实现『配置的默认值』，即将某个配置的默认值存储在 tiddler 中，若用户设置了新的值则创建普通 tiddler 来覆盖，而删除这个普通 tiddler 相当于恢复默认配置。
+# 插件本身是一个 tiddler，其包含的被打包的那些 tiddler 被称为 shadow tiddler。shadow tiddler 的特点是，并不会独立存在于 wiki 中，而是在 wiki 加载时从其所在的插件中加载；同时，如果 wiki 中存在与 shadow tiddler 重名的普通 tiddler，则普通 tiddler 会覆盖 shadow tiddler 的内容（但不会删除 shadow tiddler），直到普通 tiddler 被删除或改名，才会恢复 shadow tiddler 本来的内容。通过这个原理可以实现『配置的默认值』，即将某个配置的默认值存储在 tiddler 中，若用户设置了新的值则创建普通 tiddler 来覆盖，而删除这个普通 tiddler 相当于恢复默认配置。
 
 # 插件的所有 shadow tiddlers 存储在插件 tiddler 的 text 字段中，使用 JSON 序列化的字符串存储。插件还包含其他字段，用于描述插件的版本、名称、加载时机和用途等，详见下文。
 
 # 由于插件是一个 tiddler，因此也一定要有一个 title，并且需要满足规范命名：`$:/plugins/<作者名>/<插件名>`，且其中的 shadow tiddlers 的 title 也最好是以 `$:/plugins/<作者名>/<插件名>/` 为前缀，这样便于管理与辨认。
 
-# 主题与语言包是插件的两个变种，三者在本质上是一样的，但插件更多提供的是功能上的补充，例如为 wiki 提供了播放音乐的功能，而主题(以`$:/themes/`为前缀)则主要提供视觉效果的改变，例如实现一个二次元风格的 wiki；而语言包(以`$:/languages/`为前缀)则为了提供多语言支持。我们这里主要就插件展开，其他两种，欢迎补充！
+# 主题与语言包是插件的两个变种，三者在本质上是一样的，但插件更多提供的是功能上的补充，例如为 wiki 提供了播放音乐的功能；而主题(以`$:/themes/`为前缀)则主要提供视觉效果的改变，例如实现一个二次元风格的 wiki；而语言包(以`$:/languages/`为前缀)则为了提供多语言支持。我们这里主要就插件展开，其他两种，欢迎补充！
 
 ---
 
@@ -43,20 +43,20 @@ npm run new
 
 ! 添加 Shadow Tiddler
 
-现在这个插件还是空的，只有一个 readme，我们需要添加其他 shadow tiddler。为插件添加其他内容的是通过直接在插件文件夹中新增文件来实现的。而在网页中直接修改插件内容或者新增 tiddler 则是不可以的，请牢记。
+现在这个插件还是空的，只有一个 readme，我们需要添加其他 shadow tiddler。为插件添加其他内容的是通过直接在插件文件夹中新增文件来实现的。而在网页中直接修改插件内容或者新增 tiddler 则是不能改变 shadow tiddler 的，请牢记。
 
 现在，我们在该文件夹下仿照 `readme.tid` 创建一个新的 tid 文件，其第一行改成你希望的 title (应当以`$:/xxx/xxx/xxx/`为前缀)，后面的每一行都是`字段: 内容`，直到遇到一个空行，在空行之后都是 text 字段的内容。这样我们就为插件新增了一个 shadow tiddler。
 
 我们同样可以用这样的方式为插件添加其他内容，例如 css 文件、js 代码、图片、视频等。但请注意，若文件并非是`.tid`或`.json`，或者其中不包含title字段，就不会被插件所包含。因此，对于这样的文件，我们需要一个额外的 meta 文件来为其进行说明：
 
-加入你希望添加一个图片 1.jpg，请在其同目录下创建一个 1.jpg.meta，使用文本编辑器打开 meta 文件进行编辑：
+假如你希望添加一个图片 1.jpg，请在其同目录下创建一个 1.jpg.meta，使用文本编辑器打开 meta 文件进行编辑：
 
 ```
 title: $:/plugin/my-name/my-plugin/1.jpg
 type: image/jpeg
 ```
 
-可以看出来，meta 文件的格式为逐行`字段名: 字段值`，title 是必要的，而 type 则是指文件是什么格式的。这是官网给出的常见文件对应的 ContentType：
+可以看出来，meta 文件的格式为逐行`字段名: 字段值`，title 是必要的，而 type 则是指文件是什么格式的。这是官网给出的常见文件对应的 <$text text="ContentType" />：
 
 |!Group |!Type |!Content of `type` field |
 |^''Developer'' |Data dictionary |application/x-tiddler-dictionary|
@@ -70,16 +70,16 @@ type: image/jpeg
 |~|PNG image |image/png|
 |~|Structured Vector Graphics image |image/svg+xml|
 |^''Text''|HTML markup |text/html|
-|~|[[CSS|Cascading Style Sheets]] stylesheet |text/css|
-|~|[[Comma-separated values|Comma-Separated Values]] |text/csv|
+|~|CSS stylesheet |text/css|
+|~|Comma-separated values |text/csv|
 |~|Plain text |text/plain|
 |~|~TiddlyWiki 5 |text/vnd.tiddlywiki|
 |~|~TiddlyWiki Classic |text/x-tiddlywiki|
 
-更多文件对应的 ContentType 请自行百度。
+更多文件对应的 <$text text="ContentType" /> 请自行百度。
 
 同理，如果希望给1.jpg添加更多字段，可以照猫画虎，例如添加 tags 等字段。
 
 以上，是为插件添加 shadow tiddler 的最简单最常用的方法，如果希望了解更多高级方法，请参考后文 [添加tiddler的多种方法] 篇。
 
-接下来，我们就该进入激动人心的 TypeScript 插件开发环节了，快进入下一页学习吧！
+接下来，我们就该进入激动人心的 <$text text="TypeScript" /> 插件开发环节了，快进入下一页学习吧！

@@ -1,4 +1,4 @@
-title: $:/plugins/Modern.TiddlyDev/doc/tutorials/zh/006-add-shadow-tiddler.tid
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials/zh/007-add-shadow-tiddler.tid
 caption: 添加tiddler的多种方法
 authors: Sttot(Gk0Wk)
 type: text/vnd.tiddlywiki
@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 ! 最简单的方法：直接在文件夹内添加文件
 
-尝试在`plugins/XiaoMing/abc/`下添加一个叫`readme.tid`的文件，文件的内容为：
+尝试在`src/abc/`下添加一个叫`readme.tid`的文件，文件的内容为：
 
 ```tiddlywiki5
 title: $:/plugins/XiaoMing/abc/readme
@@ -20,6 +20,8 @@ Hello!
 现在尝试添加一些别的，比如添加一张`example.png`的图片，会发生什么？
 
 图片确实被加载进来了，不过其对应的shadow tiddler的名字变成了文件的绝对路径...我认为这绝不是我们想看到的。事实上`.js`、`.css`等文件也会出现一样的状况。同时，这些文件没法附带元数据(例如标题、tags、类型和各种field)，这肯定是不行的，所以必须用别的办法为其添加元数据。
+
+注意：在 <$text text="Modern.TiddlyDev" /> 中，如上形式的文件将不会被包含。
 
 最简单的办法是，将其改为`.tid`后缀，然后用`.tid`的格式在开头定义元数据，同时定义`type`，最后把本来的内容作为`.tid`的文本内容。
 
@@ -45,7 +47,7 @@ tags: 12345
 
 ! 目录套目录？
 
-如果在`lugins/XiaoMing/abc/`下面再加一个`1`目录，会发生什么呢？动手试一下会发现，什么都没有；但是如果在`1`中再加一个文件，就会发现被添加的文件出现在了插件中。
+如果在`src/abc/`下面再加一个`1`目录，会发生什么呢？动手试一下会发现，什么都没有；但是如果在`1`中再加一个文件，就会发现被添加的文件出现在了插件中。
 
 因此插件内是可以继续套目录的，只不过最终读取的是文件而不是目录，所以如果目录为空，那么什么都不会有。
 
@@ -108,11 +110,11 @@ tags: 12345
 
 * `tiddlers`【可选】：包含的tiddler，没有出现在里面的，就是被排除的；
 ** `file`【必填】：以`tiddlywiki.files`所在文件夹为根目录，被包括的tiddler的相对位置。
-** `isTiddlerFile`【可选】：是不是原生的TiddyWiki文件类型(如`.tid`)，如果不是或者不填，则会自动根据文件后缀名来判断文件到底是纯文本还是二进制，从而选择使用`utf8`编码读入或者`base64`读入。不会影响到`type`。
+** `isTiddlerFile`【可选】：是不是原生的 <$text text="TiddlyWiki" /> 文件类型(如`.tid`)，如果不是或者不填，则会自动根据文件后缀名来判断文件到底是纯文本还是二进制，从而选择使用`utf8`编码读入或者`base64`读入。不会影响到`type`。
 ** `fields.type`【可选】：写在`fields`中，指tiddler的类型，如果不写就根据文件后缀名做推断，推断不出来就视为`text/plain`。
 ** `fields`【可选】：就是字段了。字段接受三种类型：字符串、数组(等同于为以空格分隔的字符串)以及对象，这里说一下对象，虽然不常用，但是或许用的上：
-**: [[fields中的对象类型数据|tiddlywiki.files/fields中的对象类型数据]]
-**: <<alert danger "''注意：''无论有无`fields`，TiddlyWiki都会尝试寻找文件对应的`.meta`元数据文件，最后会将`fields`和`.meta`内的元数据合并作为tiddler的元数据；对于同名的field，`.meta`会覆盖`fields`的。">>
+**: (fields中的对象类型数据说明，搬到了文末)
+**: @@color:red;注意：''无论有无`fields`，TiddlyWiki都会尝试寻找文件对应的`.meta`元数据文件，最后会将`fields`和`.meta`内的元数据合并作为tiddler的元数据；对于同名的field，`.meta`会覆盖`fields`的。''@@
 ** `prefix`【可选】：为tiddler的内容添加前缀，等价于在`fields`中写：
 **: <div>
 
@@ -136,3 +138,29 @@ tags: 12345
 *** `isTiddlerFile`【可选】：同`tiddlers.isTiddlerFile`，会应用到子路径下所有匹配的文件上；
 *** `fields`【可选】：同`tiddlers.fields`，会应用到子路径下所有匹配的文件上，也会去寻找`.meta`文件，规则同上；
 *** `isEditableFile`【可选】：如果为`true`，那么这个tiddler就不是shadow tiddler，修改它就会变更插件对应的文件，而不是创建一个新的tiddler来覆盖它。
+
+!! fields中的对象类型数据
+
+如果一个`field`的类型是对象，那么它的意思就是按指定的方式生成一些数据，其格式是这样的：
+
+```json
+{
+  "source": "string",
+  "prefix": "string",
+  "suffix": "string"
+}
+```
+
+`source`【必填】是指应当生成什么样的数据，可以有如下几种：
+
+* `filename`：获取`fields`对应的tiddler文件的文件名作为字段的数据；
+* `filename-uri-decoded`：同上，并对文件名进行了URI编码；
+* `basename`：同`fieldname`，但去掉了文件的类型后缀`.xxx`；
+* `basename-uri-decoded`：同上，并对其进行了URI编码；
+* `extname`：获取文件的后缀名(含`.`)；
+* `created`：获取文件(在文件系统中)的创建时间，返回的是`Date`类型；
+* `modified`：获取文件(在文件系统中)的修改时间，返回的是`Date`类型；
+
+`prefix`【可选】：为生成的数据添加前缀；
+
+`suffix`【可选】：为生成的数据添加后缀；

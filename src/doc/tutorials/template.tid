@@ -10,10 +10,14 @@ type: text/vnd.tiddlywiki
 
 作者: <$text text={{{ [<currentTab>get[authors]join[, ]] }}} />
 
+文档需要改进？希望分享经验？欢迎提 [[Issue|https://github.com/tiddly-gittly/Modern.TiddlyDev/issues]] 或者 QQ 群里联系我！
+
 </$list>
 <$list filter="[<lang>!search[zh]]">
 
-Authors: <$text text={{{ [<currentTab>get[authors]join[, ]] }}} />
+Author(s): <$text text={{{ [<currentTab>get[authors]join[, ]] }}} />
+
+Need to improve your documentation? Want to share your experience? Feel free for an [[Issue|https://github.com/tiddly-gittly/Modern.TiddlyDev/issues]]!
 
 </$list>
 </$list>

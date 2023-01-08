@@ -1,0 +1,82 @@
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials/zh/005-commands
+caption: 常用命令
+authors: Sttot(Gk0Wk)
+type: text/vnd.tiddlywiki
+
+项目封装了一些常用命令，这些命令大多是使用了另一个工具 [[tiddlywiki-plugin-dev|https://www.npmjs.com/package/tiddlywiki-plugin-dev]] 实现的。
+
+! 内置命令
+
+!! 清除构建产物
+
+```bash
+npm run clean
+```
+
+会删除 dist 文件夹。
+
+!! 升级依赖
+
+```bash
+npm run update && npm install
+```
+
+会自动升级 tw5-typed、tiddlywiki-plugin-dev 等包，建议每隔一段时间就执行一次。
+
+!! 创建一个插件
+
+```bash
+npm run new
+```
+
+!! 进入实时开发模式
+
+```bash
+npm run dev
+```
+
+经过短暂编译后，会打开一个网页服务器，浏览器打开之可以看到效果。页面会随着插件内容的修改自动重新编译、刷新。
+
+!! 构建插件
+
+有两种形式：
+
+# 直接构建若干独立的插件，JSON 格式：
+
+```bash
+npm run build
+```
+
+# 以插件库形式构建：
+
+```bash
+npm run build:library
+```
+
+构建结果在 dist 中。
+
+!! 发布
+
+构建插件库+对 wiki 文档构建发布为网页。
+
+在线形式，核心文件和媒体文件都是外置的，可以加快网页打开速度，但是网页只能在线使用，下载之后由于缺失核心和媒体文件无法使用：
+
+```bash
+npm run publish
+```
+
+离线形式，即打包为单文件 wiki，可以下载使用：
+
+```bash
+npm run publish:offline
+```
+
+构建结果在 dist 中。
+
+! 自定义指令
+
+实际上，上述指令都是对 tiddlywiki-plugin-dev 的进一步封装。tiddlywiki-plugin-dev 可以支持其他自定义参数来定制你的构建方式。可以使用如下命令查看当前版本的 tiddlywiki-plugin-dev 的使用方法：
+
+```bash
+npx tiddlywiki-plugin-dev help
+```

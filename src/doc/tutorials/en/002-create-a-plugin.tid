@@ -1,0 +1,85 @@
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials/en/002-create-a-plugin
+caption: Create a plugin
+authors: Sttot(Gk0Wk)
+type: text/vnd.tiddlywiki
+
+Before creating a plugin, a few words of advice.
+
+# In <$text text="TiddlyWiki" />, a plugin is a tiddler that packages the contents of several tiddlers. i.e. a plugin is essentially a "zip" of several tiddlers.
+
+# The plug-in itself is a tiddler, and the packaged tiddlers it contains are called shadow tiddlers. Shadow tiddlers do not exist independently in the wiki, but are loaded from the plug-in they are in when the wiki is loaded; also, if there is a common tiddler in the wiki with the same name as the shadow tiddler, the common tiddler will overwrite the shadow tiddler's content (but not delete the shadow tiddler) until the common tiddler is deleted or renamed, then the shadow tiddler's original content will be restored. By this principle, it is possible to implement "configuration defaults", i.e. the default value of a configuration is stored in the tiddler, and if the user sets a new value, a normal tiddler is created to overwrite it, and deleting this normal tiddler is equivalent to restoring the default configuration.
+
+# All shadow tiddlers of the plugin are stored in the text field of the plugin tiddler, using JSON serialized strings. The plugin also contains other fields that describe the plugin's version, name, load timing, usage, etc., as detailed below.
+
+# Since the plugin is a tiddler, it must also have a title, and needs to meet the canonical naming: `$:/plugins/<author-name>/<plugin-name>`, and the title of the shadow tiddlers should preferably be prefixed with `$:/plugins/<author-name>/<plugin-name>/`, so that for easy management and identification.
+
+# Theme and language packs are two variants of plugins, all three are essentially the same, but plugins provide more functional additions, such as the ability to play music for a wiki; themes (prefixed with `$:/themes/`) provide visual changes, such as a Cyberpunk style wiki; and language packs (prefixed with `$:/languages/`) are designed to provide multilingual support. We will mainly expand on plugins here, the other two, feel free to add!
+
+---
+
+! Creating a plugin
+
+First determine the name of the author of the plug-in, that is, your name, later your plug-in becomes famous, users will remember the author's name : D
+
+Next determine the name of the plug-in, not much explanation.
+
+After determining the above two points, the title of your plugin should be `$:/plugins/<author-name>/<plugin-name>`.
+
+Execute the command:
+
+```bash
+npm run new
+```
+
+Select the type of plugin you need to add, the author name and the plugin name, and add a description of the plugin to create a plugin folder, `src/<plugin-name>` (referred to as [this/that folder] below).
+
+In this folder, you can see a `plugin.info` file, which describes the various properties and information of the plugin in JSON format, which you can modify manually, and the meaning of each field of which can be found in the tutorial [about plugin.info].
+
+There is also a readme.tid file, the contents of which correspond to your plugin's presentation page.
+
+Run `npm run dev` to open the page and you can see that a plugin has been added:
+
+<a class="tc-tiddlylink tc-tiddlylink-resolves tc-plugin-info tc-popup-handle tc-popup-absolute"><div class="tc-plugin-info-chunk tc-plugin-info-toggle"><button class="tc-btn-invisible tc-btn-dropdown">{{$:/core/images/chevron-right}}</button></div><div class="tc-plugin-info-chunk tc-plugin-info-icon">{{$:/core/images/plugin-generic-plugin}}</div><div class="tc-plugin-info-chunk tc-plugin-info-description"><h1><strong>my-plugin</strong>:&nbsp;My first plugin</h1><h2>~$:/plugins/my-name/my-plugin</h2><h2><div><em>0.0.1</em></div></h2></div></a>
+
+! Adding Shadow Tiddlers
+
+Now the plugin is empty, only a readme, we need to add other shadow tiddlers. adding other content to the plugin is done by adding files directly to the plugin folder. Please keep in mind that you can't change the shadow tiddler if you modify the content of the plugin or add a tiddler directly in the web page.
+
+Now, let's create a new tid file in that folder, modeled after `readme.tid`, with the first line being the title you want (which should be prefixed with `$:/xxx/xxx/xxx/`), and each subsequent line being `field: content` until we encounter a blank line, followed by the content of the text field. This way we add a shadow tiddler to the plugin.
+
+We can also add other content to the plugin in this way, such as css files, js code, images, videos, and so on. But please note that if the file is not `.tid` or `.json` or does not contain a title field, it will not be included in the plugin. Therefore, for such a file, we need an additional meta file to describe it.
+
+If you wish to add an image 1.jpg, create a 1.jpg.meta in the same directory as it, and open the meta file with a text editor to edit it as follows:
+
+```
+title: $:/plugin/my-name/my-plugin/1.jpg
+type: image/jpeg
+```
+
+As you can see, the format of the meta file is line by line `<field-name>: <field-value>`, the title is necessary, and the `type` refers to what format the file is in. Here is the corresponding <$text text="ContentType" /> for a common file as given on the official website:
+
+|!Group |!Type |!Content of `type` field |
+|^''Developer'' |Data dictionary |application/x-tiddler-dictionary|
+|~|~JavaScript code |application/javascript|
+|~|JSON data |application/json|
+|~|Static stylesheet |text/css|
+|^''Image''|GIF image |image/gif|
+|~|ICO format icon file |image/x-icon|
+|~|JPEG image |image/jpeg|
+|~|PDF image |application/pdf|
+|~|PNG image |image/png|
+|~|Structured Vector Graphics image |image/svg+xml|
+|^''Text''|HTML markup |text/html|
+|~|CSS stylesheet |text/css|
+|~|Comma-separated values |text/csv|
+|~|Plain text |text/plain|
+|~|~TiddlyWiki 5 |text/vnd.tiddlywiki|
+|~|~TiddlyWiki Classic |text/x-tiddlywiki|
+
+For more files with <$text text="ContentType" />, please Google it yourself.
+
+Similarly, if you want to add more fields to 1.jpg, you can do the same, for example, add tags and other fields.
+
+The above is the simplest and most common way to add shadow tiddler to the plugin, if you want to know more advanced methods, please refer to the later article [Ways to add tiddlers].
+
+Next, it's time to get into the exciting part of <$text text="TypeScript" /> plugin development, so let's move on to the next page!

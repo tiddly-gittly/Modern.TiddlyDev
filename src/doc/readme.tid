@@ -65,13 +65,52 @@ type: text/vnd.tiddlywiki
 
 Change the language: {{$:/snippets/minilanguageswitcher}}
 
-! Welcome to Modern.~TiddlyDev! 🎉
+@@display:flex;align-items:center;justify-content:center;
+! Welcome to <$text text="Modern.TiddlyDev" />! 🎉
+@@
 
-[![](https://img.shields.io/badge/Join-TiddlyWiki_CN-blue)](https://github.com/tiddly-gittly) ![GitHub](https://img.shields.io/github/license/tiddly-gittly/Modern.TiddlyDev) ![GitHub issues](https://img.shields.io/github/issues/tiddly-gittly/Modern.TiddlyDev) [![Sttot](https://img.shields.io/github/followers/Gk0Wk)](https://github.com/Gk0Wk)
+@@display:flex;align-items:center;justify-content:center;
+<a href="https://github.com/tiddly-gittly/Modern.TiddlyDev">[img[https://img.shields.io/github/stars/tiddly-gittly/Modern.TiddlyDev?style=for-the-badge&color=red]]</a>&nbsp;&nbsp;
+<a href="https://github.com/tiddly-gittly/Modern.TiddlyDev">[img[https://img.shields.io/github/forks/tiddly-gittly/Modern.TiddlyDev?style=for-the-badge]]</a>&nbsp;&nbsp;
+<a href="https://github.com/tiddly-gittly/Modern.TiddlyDev">[img[https://img.shields.io/github/issues/tiddly-gittly/Modern.TiddlyDev?style=for-the-badge]]</a>&nbsp;&nbsp;
+<a href="https://github.com/tiddly-gittly/Modern.TiddlyDev">[img[https://img.shields.io/github/watchers/tiddly-gittly/Modern.TiddlyDev?style=for-the-badge&color=blueviolet]]</a>
+@@
+
+@@display:flex;align-items:center;justify-content:center;
+<a href="https://github.com/tiddly-gittly/Modern.TiddlyDev">[img[https://img.shields.io/github/license/tiddly-gittly/Modern.TiddlyDev?style=for-the-badge&label=LICENSE]]</a>&nbsp;&nbsp;
+<a href="https://github.com/Gk0Wk">[img[https://img.shields.io/github/followers/Gk0Wk?style=for-the-badge&label=Gk0Wk&color=critical]]</a>
+@@
+
+<$text text="Modern.TiddlyDev" /> is a one-click development environment for various <$text text="TiddlyWiki" /> plug-in developers built on a modern front-end technology stack, with the following features and functions:
+
+* Compile, test and publish plug-ins with one click:
+** Open the page server in development mode, which can be tested in the browser, automatically detect changes to the plug-in files and synchronize the plug-in content updates to the browser page, realizing the WYSIWYG of plug-in development;
+** One-click plugin building and support for generating plugin repositories for use by your subscribers.
+** Has a built-in <$text text="GitHub" /> Page publishing script that automatically publishes written plugin documentation pages and plugin repositories to the Internet;
+** Built-in <$text text="GitHub" /> Release script, which releases the plugin according to the version specified by the git tag;
+* Tailored for <$text text="TypeScript" /> plugin development, so it is now easy to use <$text text="TypeScript" /> development in <$text text="TiddlyWiki" />:
+** Multi-entry file compilation is supported, and various plugins can be easily written in <$text text="TiddlyWiki" />;
+** Support for `.ts`, `.tsx`, `.jsx`, `.mjs`, `.cjs` files compiled with the [[tw-react|https://github.com/tiddly-gittly/tw-react]] plugin for React development in <$text text="TiddlyWiki" />;
+** Use [[tw5-typed|https://github.com/tiddly-gittly/TW5-Typed]] to type annotate <$text text="TiddlyWiki API" /> to bring a native <$text text="TypeScript" /> experience to development;
+** Use the full amount of ESLint and Prettier rules provided by [[Modern.JS|https://modernjs.dev/]] to normalize the code;
+** Incremental project builds using the extremely fast [[esbuild|https://esbuild.github.io/]], which makes writing code a blast;
+** Support for setting browser compatibility ranges for plugins using [[browserslist|https://browsersl.ist/]];
+** Automatically generate sourcemap for source code (start by default when developing, specify to turn on when building), no need to worry about debugging!
+** The possibility of introducing CSS, JSON, etc. into the script;
+** Automatic volume compression of the plug-in (can be turned off);
+** Automatic generation of hash-check signatures for the generated plug-ins;
+
+Don't worry, even if you are not good at programming, it doesn't matter, <$text text="Modern.TiddlyDev" /> can be your development tool as well. No code plugin development can be an enjoyable development experience as well!
+
+There's a lot of work here, but it's just Out-of-the-Box for you. Use it and get started on your modern <$text text="TiddlyWiki" /> plugin development journey!
+
+> Taking advantage of the plugin builder, the framework's documentation is also packaged as a plugin and published in [[CPL Plugin Library|https://github.com/tiddly-gittly/TiddlyWiki-CPL]] so that you can download and install it in any project and keep the documentation up to date.
+
+Next, please click the [tutorials] tab above to enter the tutorial page. If you are seeing the plugin in the plugin library, please install it first or browse the [[official documentation|https://tiddly-gittly.github.io/Modern.TiddlyDev/]].
 
 </$list>
 </$list>
 
 @@display:flex;align-items:center;justify-content:center;background:#1c1c1c;border-radius:10px;overflow:hidden;box-shadow:#000a 0 0 8px;
-[img[$:/plugins/Modern.TiddlyDev/doc/wyswtg-demo.gif]]
+[img[$:/plugins/Modern.TiddlyDev/doc/wysiwtg-demo.gif]]
 @@
