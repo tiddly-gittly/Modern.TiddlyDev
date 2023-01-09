@@ -17,7 +17,7 @@ type: text/vnd.tiddlywiki
 选择语言: {{$:/snippets/minilanguageswitcher}}
 
 <div class="tc-more-sidebar">
-<$macrocall $name="tabs" tabsList="[all[tiddlers+shadows]prefix[$:/plugins/Modern.TiddlyDev/doc/tutorials/zh/]sort[title]]" default={{{ [all[tiddlers+shadows]prefix[$:/plugins/Modern.TiddlyDev/doc/tutorials/zh/]sort[title]first[]] }}} state="$:/state/Modern.TiddlyDev/tutorials-tab" explicitState="$:/state/Modern.TiddlyDev/tutorials-tab-zh" class="tc-vertical" template="$:/plugins/Modern.TiddlyDev/doc/tutorials/tenplate"/>
+<$macrocall $name="tabs" tabsList="[all[tiddlers+shadows]prefix[$:/plugins/Modern.TiddlyDev/doc/tutorials/zh/]sort[title]]" default={{{ [all[tiddlers+shadows]prefix[$:/plugins/Modern.TiddlyDev/doc/tutorials/zh/]sort[title]first[]] }}} state="$:/state/Modern.TiddlyDev/tutorials-tab" explicitState="$:/state/Modern.TiddlyDev/tutorials-tab-zh" class="tc-vertical" template="$:/plugins/Modern.TiddlyDev/doc/tutorials/template"/>
 </div>
 
 </$list>
@@ -26,7 +26,7 @@ type: text/vnd.tiddlywiki
 Change the language: {{$:/snippets/minilanguageswitcher}}
 
 <div class="tc-more-sidebar">
-<$macrocall $name="tabs" tabsList="[all[tiddlers+shadows]prefix[$:/plugins/Modern.TiddlyDev/doc/tutorials/en/]sort[title]]" default={{{ [all[tiddlers+shadows]prefix[$:/plugins/Modern.TiddlyDev/doc/tutorials/en/]sort[title]first[]] }}} state="$:/state/Modern.TiddlyDev/tutorials-tab" explicitState="$:/state/Modern.TiddlyDev/tutorials-tab-en" class="tc-vertical" template="$:/plugins/Modern.TiddlyDev/doc/tutorials/tenplate"/>
+<$macrocall $name="tabs" tabsList="[all[tiddlers+shadows]prefix[$:/plugins/Modern.TiddlyDev/doc/tutorials/en/]sort[title]]" default={{{ [all[tiddlers+shadows]prefix[$:/plugins/Modern.TiddlyDev/doc/tutorials/en/]sort[title]first[]] }}} state="$:/state/Modern.TiddlyDev/tutorials-tab" explicitState="$:/state/Modern.TiddlyDev/tutorials-tab-en" class="tc-vertical" template="$:/plugins/Modern.TiddlyDev/doc/tutorials/template"/>
 </div>
 
 </$list>

@@ -1,10 +1,6 @@
 title: $:/plugins/Modern.TiddlyDev/doc/readme
 type: text/vnd.tiddlywiki
 
-@@display:flex;align-items:center;justify-content:center;background:#222222;border-radius:10px;overflow:hidden;
-[img class="modern-tiddlydev-banner" [$:/plugins/Modern.TiddlyDev/doc/banner.png]]
-@@
-
 <style>
 .modern-tiddlydev-banner {
   max-height: 200px;
@@ -13,6 +9,12 @@ type: text/vnd.tiddlywiki
 
 <$list filter="[[$:/language]get[text]removeprefix[$:/languages/]else[en-GB]]" variable="lang">
 <$list filter="[<lang>search[zh]]">
+
+<div style="background: #03fffc; color: #353535; border-radius: 6px; padding: 6px 10px; font-weight: 600;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑↑↑<br/>这个页面只是用来介绍 Modern 的功能的，<br/>如需进一步阅读，看到上面的 [tutorials] 了吗？点击它阅读详细教程！</div>
+
+@@display:flex;align-items:center;justify-content:center;background:#222222;border-radius:10px;overflow:hidden;
+[img class="modern-tiddlydev-banner" [$:/plugins/Modern.TiddlyDev/doc/banner.png]]
+@@
 
 Switch language: {{$:/snippets/minilanguageswitcher}}
 
@@ -62,6 +64,12 @@ Switch language: {{$:/snippets/minilanguageswitcher}}
 
 </$list>
 <$list filter="[<lang>!search[zh]]">
+
+<div style="background: #03fffc; color: #353535; border-radius: 6px; padding: 6px 10px; font-weight: 600;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑↑↑<br/>This page is just to introduce the features of Modern,<br/>for further reading, see the [tutorials] above? Click on it to read the detailed tutorials!</div>
+
+@@display:flex;align-items:center;justify-content:center;background:#222222;border-radius:10px;overflow:hidden;
+[img class="modern-tiddlydev-banner" [$:/plugins/Modern.TiddlyDev/doc/banner.png]]
+@@
 
 切换语言: {{$:/snippets/minilanguageswitcher}}
 
