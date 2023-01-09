@@ -85,8 +85,8 @@ Switch language: {{$:/snippets/minilanguageswitcher}}
 
 * Compile, test and publish plug-ins with one click:
 ** Open the page server in development mode, which can be tested in the browser, automatically detect changes to the plug-in files and synchronize the plug-in content updates to the browser page, realizing the WYSIWYG of plug-in development;
-** One-click plugin building and support for generating plugin repositories for use by your subscribers.
-** Has a built-in <$text text="GitHub" /> Page publishing script that automatically publishes written plugin documentation pages and plugin repositories to the Internet;
+** One-click plugin building and support for generating plugin library for use by your subscribers.
+** Has a built-in <$text text="GitHub" /> Page publishing script that automatically publishes written plugin documentation pages and plugin library to the Internet;
 ** Built-in <$text text="GitHub" /> Release script, which releases the plugin according to the version specified by the git tag;
 * Tailored for <$text text="TypeScript" /> plugin development, so it is now easy to use <$text text="TypeScript" /> development in <$text text="TiddlyWiki" />:
 ** Multi-entry file compilation is supported, and various plugins can be easily written in <$text text="TiddlyWiki" />;

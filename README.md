@@ -16,8 +16,8 @@ Modern.TiddlyDev is a one-click development environment for various TiddlyWiki p
 
 * Compile, test and publish plug-ins with one click:
   * Open the page server in development mode, which can be tested in the browser, automatically detect changes to the plug-in files and synchronize the plug-in content updates to the browser page, realizing the WYSIWYG of plug-in development;
-  * One-click plugin building and support for generating plugin repositories for use by your subscribers.
-  * Has a built-in GitHub Page publishing script that automatically publishes written plugin documentation pages and plugin repositories to the Internet;
+  * One-click plugin building and support for generating plugin library for use by your subscribers.
+  * Has a built-in GitHub Page publishing script that automatically publishes written plugin documentation pages and plugin library to the Internet;
   * Built-in GitHub Release script, which releases the plugin according to the version specified by the git tag;
 * Tailored for TypeScript plugin development, so it is now easy to use TypeScript development in TiddlyWiki:
   * Multi-entry file compilation is supported, and various plugins can be easily written in TiddlyWiki;
@@ -34,3 +34,5 @@ Modern.TiddlyDev is a one-click development environment for various TiddlyWiki p
 Don't worry, even if you are not good at programming, it doesn't matter, Modern.TiddlyDev can be your development tool as well. No code plugin development can be an enjoyable development experience as well!
 
 There's a lot of work here, but it's just Out-of-the-Box for you. Use it and get started on your modern TiddlyWiki plugin development journey!
+
+![](src/doc/wysiwyg-demo.gif)

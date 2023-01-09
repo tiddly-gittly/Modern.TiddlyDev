@@ -21,7 +21,7 @@ First make sure you have git and <$text text="NodeJS" /> installed, then choose 
 npx tiddlywiki-plugin-dev@latest init <project-name>
 ```
 
-You If you need a web proxy to speed things up, init has two additional parameters.
+If you need a web proxy to speed things up, init has two additional parameters.
 
 * `--repo <repo-url>` Proxy address for the <$text text="GitHub" /> repo;
 * `--npm <npm-repo>` Speed up npm, e.g. `http://registry.npmmirror.com`;
@@ -93,7 +93,7 @@ First, bind your git project using git remote (please Google for details).
 
 After git push, an automated build of the <$text text="GitHub" /> project starts, and you can see the build details in Actions on the project home page.
 
-Typically, the automated build will generate an online version of the wiki and a plugin repository with all the plugins in src, which you can publish to your plugin subscribers and they will get the latest plugin updates after each automated build.
+Typically, the automated build will generate an online version of the wiki and a plugin library with all the plugins in src, which you can publish to your plugin subscribers and they will get the latest plugin updates after each automated build.
 
 If you also add a tag to your commit, and the tag is in a version format like `v1.2.3`, then the project will also automatically release the built plugin in your project's Release, [[like this|https://github.com/tiddly-gittly/Modern.TiddlyDev/ releases]].
 
