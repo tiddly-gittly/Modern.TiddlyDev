@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[[$:/language]get[text]removeprefix[$:/languages/]else[en-GB]]" variable="lang">
 <$list filter="[<lang>search[zh]]">
 
-<div style="background: #03fffc; color: #353535; border-radius: 6px; padding: 6px 10px; font-weight: 600;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑↑↑<br/>这个页面只是用来介绍 Modern 的功能的，<br/>如需进一步阅读，看到上面的 [tutorials] 了吗？点击它阅读详细教程！</div>
+<div style="background: #03fffc1f; color: #03fffc; border: 0.75px solid #03fffca8;border-radius: 10px; padding: 16px;">这个页面只是用来介绍 Modern 的功能的，<br/>如需进一步阅读，看到上面的 [tutorials] 了吗？点击它阅读详细教程！</div>
 
 @@display:flex;align-items:center;justify-content:center;background:#222222;border-radius:10px;overflow:hidden;
 [img class="modern-tiddlydev-banner" [$:/plugins/Modern.TiddlyDev/doc/banner.png]]
@@ -60,12 +60,18 @@ Switch language: {{$:/snippets/minilanguageswitcher}}
 
 > 运用插件构建工具的优势，本框架的文档也被封装为插件并发布于 [[CPL 插件源|https://github.com/tiddly-gittly/TiddlyWiki-CPL]]，以便你下载并安装与任意项目中并保持文档的最新；
 
-接下来请点击上方的 [tutorials] 标签进入教程页面，如果你是在插件库中看到该插件的话，请先安装或者浏览[[官方文档|https://tiddly-gittly.github.io/Modern.TiddlyDev/]]。
+接下来请点击下方的按钮进入教程页面，如果你是在插件库中看到该插件的话，请先安装或者浏览[[官方文档|https://tiddly-gittly.github.io/Modern.TiddlyDev/]]。
+
+<center>
+<$button setTitle=<<tabsState>> setField="text" setTo="tutorials" style="margin: 20px 0; padding: 14px 20px; border-radius: 4px; border: none; background: #03fffc; color: black; font-weight: 650; cursor: pointer;">
+→ 进入教程 ←
+</$button>
+</center>
 
 </$list>
 <$list filter="[<lang>!search[zh]]">
 
-<div style="background: #03fffc; color: #353535; border-radius: 6px; padding: 6px 10px; font-weight: 600;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑↑↑<br/>This page is just to introduce the features of Modern,<br/>for further reading, see the [tutorials] above? Click on it to read the detailed tutorials!</div>
+<div style="background: #03fffc1f; color: #03fffc; border: 0.75px solid #03fffca8;border-radius: 10px; padding: 16px;">This page is just to introduce the features of Modern,<br/>for further reading, see the [tutorials] above? Click on it to read the detailed tutorials!</div>
 
 @@display:flex;align-items:center;justify-content:center;background:#222222;border-radius:10px;overflow:hidden;
 [img class="modern-tiddlydev-banner" [$:/plugins/Modern.TiddlyDev/doc/banner.png]]
@@ -114,7 +120,13 @@ There's a lot of work here, but it's just Out-of-the-Box for you. Use it and get
 
 > Taking advantage of the plugin builder, the framework's documentation is also packaged as a plugin and published in [[CPL Plugin Library|https://github.com/tiddly-gittly/TiddlyWiki-CPL]] so that you can download and install it in any project and keep the documentation up to date.
 
-Next, please click the [tutorials] tab above to enter the tutorial page. If you are seeing the plugin in the plugin library, please install it first or browse the [[official documentation|https://tiddly-gittly.github.io/Modern.TiddlyDev/]].
+Next, please click the button below to enter the tutorial page. If you are seeing the plugin in the plugin library, please install it first or browse the [[official documentation|https://tiddly-gittly.github.io/Modern.TiddlyDev/]].
+
+<center>
+<$button setTitle=<<tabsState>> setField="text" setTo="tutorials" style="margin: 20px 0; padding: 14px 20px; border-radius: 4px; border: none; background: #03fffc; color: black; font-weight: 650; cursor: pointer;">
+→ Go to Tutorials ←
+</$button>
+</center>
 
 </$list>
 </$list>
