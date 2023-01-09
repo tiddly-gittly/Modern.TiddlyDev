@@ -43,7 +43,7 @@ jobs:
       - name: Build Plugins
         run: |
           pnpm run build
-          cp dist/\$__plugins_Modern.TiddlyDev_doc.json wiki/tiddlers/\$__plugins_Modern.TiddlyDev_doc.json
+          cp dist/*_doc.json wiki/tiddlers/
 
       - name: Deploy
         uses: s0/git-publish-subdir-action@develop
