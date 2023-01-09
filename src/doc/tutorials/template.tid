@@ -17,7 +17,7 @@ type: text/vnd.tiddlywiki
 
 Author(s): <$text text={{{ [<currentTab>get[authors]join[, ]] }}} />
 
-Need to improve your documentation? Want to share your experience? Feel free for an [[Issue|https://github.com/tiddly-gittly/Modern.TiddlyDev/issues]]!
+Need to improve the documentation? Want to share your experience? Feel free for an [[Issue|https://github.com/tiddly-gittly/Modern.TiddlyDev/issues]]!
 
 </$list>
 </$list>

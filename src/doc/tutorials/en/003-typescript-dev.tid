@@ -157,7 +157,7 @@ The entry script file, and files directly or indirectly introduced by the entry 
 
 Plugins built via publish/build will generate a hash-check signature, and the hash algorithm will state that there is currently only one sha256, i.e., the final plugin will have `Modern.TiddlyDev#SHA256-Hashed` in its fields.
 
-The specific way of calibration: read the plug-in, exclude the `TiddlyDev#SHA256-Hashed` field, and then perform sha256 on the JSON serialized string of the whole object:
+The specific way of calibration: read the plug-in, exclude the `Modern.TiddlyDev#SHA256-Hashed` field, and then perform sha256 on the JSON serialized string of the whole object:
 
 ```js
 sha256(JSON.stringify({ ...plugin, 'Modern.TiddlyDev#SHA256-Hashed': undefined }));

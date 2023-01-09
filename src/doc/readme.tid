@@ -14,7 +14,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[[$:/language]get[text]removeprefix[$:/languages/]else[en-GB]]" variable="lang">
 <$list filter="[<lang>search[zh]]">
 
-选择语言: {{$:/snippets/minilanguageswitcher}}
+Switch language: {{$:/snippets/minilanguageswitcher}}
 
 @@display:flex;align-items:center;justify-content:center;
 ! 欢迎使用 <$text text="Modern.TiddlyDev" />! 🎉
@@ -63,7 +63,7 @@ type: text/vnd.tiddlywiki
 </$list>
 <$list filter="[<lang>!search[zh]]">
 
-Change the language: {{$:/snippets/minilanguageswitcher}}
+切换语言: {{$:/snippets/minilanguageswitcher}}
 
 @@display:flex;align-items:center;justify-content:center;
 ! Welcome to <$text text="Modern.TiddlyDev" />! 🎉
