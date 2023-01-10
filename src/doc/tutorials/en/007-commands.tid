@@ -1,4 +1,4 @@
-title: $:/plugins/Modern.TiddlyDev/doc/tutorials/en/005-commands
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials/en/007-commands
 caption: Commands
 authors: Sttot(Gk0Wk)
 type: text/vnd.tiddlywiki
@@ -65,7 +65,7 @@ The online form, where the core and media files are external, can speed up the p
 npm run publish
 ```
 
-Offline form, i.e. packaged as a single file wiki that can be downloaded and used: 
+Offline form, i.e. packaged as a single file wiki that can be downloaded and used:
 
 ```bash
 npm run publish:offline

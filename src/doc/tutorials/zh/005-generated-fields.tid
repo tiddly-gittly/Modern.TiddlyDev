@@ -1,0 +1,21 @@
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials/zh/005-generated-fields
+caption: 额外生成的字段
+authors: Sttot(Gk0Wk)
+type: text/vnd.tiddlywiki
+
+编译构建后会生成一些额外的字段：
+
+! 源文件路径
+
+入口脚本文件，以及入口脚本文件直接或间接引入的文件，都会进行编译产生目标 tiddler，而这些 tiddler 会包含一个额外的字段 `Modern.TiddlyDev#Origin` 用来指明其源文件是谁。
+
+! 哈希校验
+
+通过 publish/build 构建的插件，会生成哈希校验签名，哈希算法会写明，目前只有 sha256 这一种，即，最终插件的字段中会有 `Modern.TiddlyDev#SHA256-Hashed` 这一项。
+
+校验的具体方式：读取插件，排除掉 `Modern.TiddlyDev#SHA256-Hashed` 这一项后，对整个对象的 JSON 序列化字符串进行 sha256
+计算：
+
+```js
+sha256(JSON.stringify({ ...plugin, 'Modern.TiddlyDev#SHA256-Hashed': undefined }));
+```

@@ -1,0 +1,20 @@
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials/zh/005-generated-fields
+caption: Generated Fields
+authors: Sttot(Gk0Wk)
+type: text/vnd.tiddlywiki
+
+The compile build generates some additional fields for plugin tiddlers.
+
+!! Source file path
+
+The entry script file, and files directly or indirectly introduced by the entry script file, are compiled to generate target tiddlers, which will contain an extra field `Modern.TiddlyDev#Origin` to indicate who their source file is.
+
+!! Hash checksum
+
+Plugins built via publish/build will generate a hash-check signature, and the hash algorithm will state that there is currently only one sha256, i.e., the final plugin will have `Modern.TiddlyDev#SHA256-Hashed` in its fields.
+
+The specific way of calibration: read the plug-in, exclude the `Modern.TiddlyDev#SHA256-Hashed` field, and then perform sha256 on the JSON serialized string of the whole object:
+
+```js
+sha256(JSON.stringify({ ...plugin, 'Modern.TiddlyDev#SHA256-Hashed': undefined }));
+```
