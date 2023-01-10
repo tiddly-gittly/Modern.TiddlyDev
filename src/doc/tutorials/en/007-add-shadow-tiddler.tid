@@ -53,7 +53,7 @@ So it is possible to continue to set directories within the plugin, except that 
 
 ! `tiddlywiki.files`: This is the directory where I do the talking!
 
-What should I do if I want to exclude some files and folders? You can create a `tiddlywiki.files` file at the level where you want to exclude files. When TiddlyWiki parses the plugin, if it sees `tiddlywiki.files` under the directory, it will not continue to search for other files and folders under that folder, and under that one folder, `tiddlywiki.files` is the only one that matters!
+What should I do if I want to exclude some files and folders? You can create a `tiddlywiki.files` file at the level where you want to exclude files. When <$text text="TiddlyWiki" /> parses the plugin, if it sees `tiddlywiki.files` under the directory, it will not continue to search for other files and folders under that folder, and under that one folder, `tiddlywiki.files` is the only one that matters!
 
 The `tiddlywiki.files` file describes which files should be loaded under this folder, and which files under which subfolders, and you can add metadata information to the files, so let's see how it works next.
 
