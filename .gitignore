@@ -130,7 +130,6 @@ public-dist
 # for TiddlyWiki
 dist/
 output/
-wiki/tiddlers/*.json.dist.json
 wiki/tiddlers/$__language.tid
 wiki/tiddlers/$__StoryList.tid
 wiki/tiddlers/$__StoryList_*.tid
@@ -139,9 +138,6 @@ wiki/tiddlers/$__Import.tid
 wiki/tiddlers/$__UpgradeLibrary
 wiki/tiddlers/$__UpgradeLibrary_List
 wiki/tiddlers/$__temp_*
-wiki/tiddlers/$__plugins_felixhayashi_tiddlymap_misc_defaultViewHolder.tid
 wiki/tiddlers/$__view.tid
-wiki/tiddlers/Have fun with.tid
-wiki/tiddlers/TiddlyMap!!.tid
 wiki/tiddlers/$__config_Navigation_openLinkFromInsideRiver.tid
 wiki/tiddlers/$__config_Navigation_openLinkFromOutsideRiver.tid
