@@ -38,7 +38,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install Dependencies
-        run: npm install -g pnpm && pnpm install & pnpm run update
+        run: npm install -g pnpm && pnpm install
 
       - name: Build Plugins
         run: |
