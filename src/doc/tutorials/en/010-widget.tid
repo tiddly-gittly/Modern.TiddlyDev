@@ -1,0 +1,71 @@
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials/en/010-widget
+caption: Ways to add tiddlers
+authors: Sttot(Gk0Wk)
+type: text/vnd.tiddlywiki
+
+You can start by looking at the official tutorial at https://tiddlywiki.com/dev/#Javascript%20Widget%20Tutorial
+
+According to the tutorial, we can write a script like the following, if we want our widget name to be `my-widget`, i.e. the user will use `<$my-widget />` to call.
+
+```ts
+import { IChangedTiddlers, IParseTreeNode, IWidgetInitialiseOptions } from 'tiddlywiki';
+import { widget as Widget } from '$:/core/modules/widgets/widget.js';
+
+class MyWidget extends widget {
+  // For demo
+  private title?: string;
+
+  // Do not define constructor
+
+  /** The initialization work is placed here and can be left undefined */
+  initialise(parentNode: IParseTreeNode, options?: IWidgetInitialiseOptions) {
+    // The initialization method of the base class needs to be called
+    super.initialise();
+    // If there are no attributes for the widget, this below is not needed, but it is generally needed
+    this.computeAttributes();
+  }
+
+  /** Optional, usually to do some parsing and so on before formal rendering */
+  execute() {
+    // This is required to support children widgets
+    this.makeChildWidgets();
+    // Do some other parsing work, here's an example
+    this.title = this.getAttribute('title', undefined);
+  }
+
+  /** It will only be called automatically when rendering for the first time, when re-rendering after destruction, or actively through methods such as this.refreshSelf */
+  render(parentNode: Node, nextSibling: Node) {
+    // Rendering pre-processing work
+    this.parentDomNode = parent;
+    this.execute();
+
+    // Please put all created domNodes (root nodes are fine) into domNodes, so that tw can do automatic recycling.
+    this.domNodes.push(xxx);
+
+    // The following content can be added when child widgets are supported. will update this.children
+    this.renderChildren(xxx, nextSibling);
+  }
+
+  /**
+   * Optional, refresh is performed, if not defined, no refresh is done, but an attempt is made to refresh the children widgets
+   * The returned value represents whether or not it is refreshed, and is used as a reference for the upper-level widget
+   */
+  refresh(changedTiddlers: IChangedTiddlers): boolean {
+    // Update the parameters and find out which ones have changed
+    const changedAttributes = this.computeAttributes();
+    // Determine whether to perform a refresh or not, the determination here is just an example
+    if (changedAttributes.title || changedTiddlers.includes(changedAttributes.title)) {
+      // The refreshSelf of the base class function is simply a brutal removal of dom&chidren + re-rendering
+      // For fine-grained refreshing, please implement your own
+      this.refreshSelf();
+      this.refreshChildren(changedTiddlers);
+      return true;
+    } else {
+      // If you don't need to refresh yourself, try to have the children widgets refresh
+      return this.refreshChildren(changedTiddlers);
+    }
+  }
+}
+
+exports['my-widget'] = MyWidget;
+```

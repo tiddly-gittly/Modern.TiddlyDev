@@ -1,0 +1,71 @@
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials/zh/010-widget
+caption: 编写微件(Widget)
+authors: Sttot(Gk0Wk)
+type: text/vnd.tiddlywiki
+
+可以先看看官方的教程：https://tiddlywiki.com/dev/#Javascript%20Widget%20Tutorial
+
+根据教程，我们可以编写一个类似如下的脚本，假如我们希望我们的微件名称为`my-widget`，即用户会使用`<$my-widget />`来调用：
+
+```ts
+import { IChangedTiddlers, IParseTreeNode, IWidgetInitialiseOptions } from 'tiddlywiki';
+import { widget as Widget } from '$:/core/modules/widgets/widget.js';
+
+class MyWidget extends widget {
+  // 演示用
+  private title?: string;
+
+  // 请不要定义 constructor
+
+  /** 初始化工作放在这里，可以不定义 */
+  initialise(parentNode: IParseTreeNode, options?: IWidgetInitialiseOptions) {
+    // 基类的初始化方法需要调用
+    super.initialise();
+    // 如果微件没有参数，就不需要了，但一般都需要
+    this.computeAttributes();
+  }
+
+  /** 可选，一般是在正式渲染之前做一些参数解析等工作 */
+  execute() {
+    // 支持子微件时需要这个
+    this.makeChildWidgets();
+    // 做一些其他的解析工作，这里举个例子
+    this.title = this.getAttribute('title', undefined);
+  }
+
+  /** 只会在首次渲染、销毁后重新渲染时自动调用，或者通过 refreshSelf 等方法主动调用 */
+  render(parentNode: Node, nextSibling: Node) {
+    // 渲染预处理工作
+    this.parentDomNode = parent;
+    this.execute();
+
+    // 请将所有创建的 domNode (根节点即可) 都放入 domNodes，便于 tw 做自动回收
+    this.domNodes.push(xxx);
+
+    // 如下内容当支持子微件时可以添加。会更新 this.children
+    this.renderChildren(xxx, nextSibling);
+  }
+
+  /**
+   * 可选，进行刷新，不定义则不会做刷新，但是会尝试刷新子组件
+   * 返回的值代表是否刷新了，用于为上层微件参考
+   */
+  refresh(changedTiddlers: IChangedTiddlers): boolean {
+    // 更新参数，找出哪些参数改变了
+    const changedAttributes = this.computeAttributes();
+    // 判断是否进行刷新，这里的判断只是个例子
+    if (changedAttributes.title || changedTiddlers.includes(changedAttributes.title)) {
+      // 基类函数的 refreshSelf 就是简单粗暴地删除 dom&chidren + 重新渲染
+      // 如需细粒度刷新，请自行实现
+      this.refreshSelf();
+      this.refreshChildren(changedTiddlers);
+      return true;
+    } else {
+      // 如果自己不需要刷新，尝试让子微件刷新
+      return this.refreshChildren(changedTiddlers);
+    }
+  }
+}
+
+exports['my-widget'] = MyWidget;
+```

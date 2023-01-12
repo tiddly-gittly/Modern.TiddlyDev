@@ -64,7 +64,7 @@ This sample plugin implements a widget called `test` that displays a fixed line 
 
 Save to see the words `This is a widget!`.
 
-Do not close your browser or development server, try to change the text in line 19 of `src/plugin-name/index.ts`, save it and you will see that the plugin is recompiled and the text in Test on the web page is changed:
+Do not close your browser or development server, try to change the text in line 14 of `src/plugin-name/index.ts`, save it and you will see that the plugin is recompiled and the text in Test on the web page is changed:
 
 [img[$:/plugins/Modern.TiddlyDev/doc/wysiwtg-demo.gif]]
 

@@ -1,33 +1,33 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@modern-js/eslint-config': ^2.0.2
-  '@modern-js/tsconfig': ^2.0.2
+  '@modern-js/eslint-config': ^2.1.0
+  '@modern-js/tsconfig': ^2.1.0
   '@types/node': ^18.11.18
   husky: ^8.0.3
   lint-staged: ^13.1.0
   npm-check-updates: ^16.6.2
   rimraf: ^3.0.2
   tiddlywiki: ^5.2.5
-  tiddlywiki-plugin-dev: ^0.0.29
+  tiddlywiki-plugin-dev: ^0.0.32
   ts-node: ^10.9.1
-  tw5-typed: ^0.2.16
+  tw5-typed: ^0.2.21
   typescript: ^4.9.4
 
 dependencies:
   npm-check-updates: 16.6.2
   tiddlywiki: 5.2.5
-  tiddlywiki-plugin-dev: 0.0.29_kctv3yrjgfykfapqczydg5ywxm
+  tiddlywiki-plugin-dev: 0.0.32_o2pwmbtznwrqt3kelul5di7deq
 
 devDependencies:
-  '@modern-js/eslint-config': 2.0.2
-  '@modern-js/tsconfig': 2.0.2
+  '@modern-js/eslint-config': 2.1.0
+  '@modern-js/tsconfig': 2.1.0
   '@types/node': 18.11.18
   husky: 8.0.3
   lint-staged: 13.1.0
   rimraf: 3.0.2
   ts-node: 10.9.1_awa2wsr5thmg3i7jqycphctjfq
-  tw5-typed: 0.2.16
+  tw5-typed: 0.2.21
   typescript: 4.9.4
 
 packages:
@@ -1448,13 +1448,13 @@ packages:
     resolution: {integrity: sha512-GaHYm+c0O9MjZRu0ongGBRbinu8gVAMd2UZjji6jVmqKtZluZnptXGWhz1E8j8D2HJ3f/yMxKAUC0b+57wncIw==}
     dev: false
 
-  /@modern-js-app/eslint-config/2.0.2:
-    resolution: {integrity: sha512-owuV2fQhPDzd3nqThM25E0NT6zimgOgOizFSl2Nza4CiOFxywCFA4jlpWbNppTbl2RF8jFdF7iLg16fvzrGL3g==}
+  /@modern-js-app/eslint-config/2.1.0:
+    resolution: {integrity: sha512-9fvnczqtc6gNIrl3xY6qLDJ7QB4+LofCLMM5JxyGCY/qloEnW7cICxTyHyc8sMD8tesgkn0iKQiAi1zByHZ/8w==}
     dependencies:
       '@babel/core': 7.20.12
       '@babel/eslint-parser': 7.19.1_ucmnolur3r335ullwiyt3zl3pi
       '@babel/eslint-plugin': 7.19.1_hmtvptkcahin2z7n6w4gscsx64
-      '@modern-js/babel-preset-app': 2.0.2
+      '@modern-js/babel-preset-app': 2.1.0
       '@typescript-eslint/eslint-plugin': 5.48.0_k73wpmdolxikpyqun3p36akaaq
       '@typescript-eslint/parser': 5.48.0_iukboom6ndih5an6iafl45j2fe
       eslint: 8.31.0
@@ -1476,21 +1476,21 @@ packages:
       - supports-color
     dev: true
 
-  /@modern-js/babel-preset-app/2.0.2:
-    resolution: {integrity: sha512-UA4HWn4mIKrzAtj6c/ULQG8RSXrmKvHqcFyArvFQVJQ1ZldUq6PGA4w63RxwnM9Huhe9YugYcjA+fWHWW6XM5g==}
+  /@modern-js/babel-preset-app/2.1.0:
+    resolution: {integrity: sha512-IWVEkX8n26UFT9iIr3O8OeFmnDJ0mLX8j4o4uk74FxN1uNsvg0rP8gFntdY27QQvb3X3VrSNFYgzu2vNey/X1Q==}
     dependencies:
       '@babel/core': 7.20.12
       '@babel/runtime': 7.20.7
       '@babel/types': 7.20.7
-      '@modern-js/babel-preset-base': 2.0.2
-      '@modern-js/utils': 2.0.2
+      '@modern-js/babel-preset-base': 2.1.0
+      '@modern-js/utils': 2.1.0
       core-js: 3.27.1
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /@modern-js/babel-preset-base/2.0.2:
-    resolution: {integrity: sha512-Ph9PZ4WW3be7KOk8k1itHFM8jLL9KC/JnNOyhwXskcYZQ9d+Ds9vzCm7FtxHodtF/BmE4VlGFrmN8hFAXsrk2A==}
+  /@modern-js/babel-preset-base/2.1.0:
+    resolution: {integrity: sha512-jYdEiJGtqpZoN1VBPABB459CvHdeZn3NUw0V9AKlOTsO4m1xRGym15jjeBVsZXtmfLTwYkfkl8SI2BLCNSDflA==}
     dependencies:
       '@babel/core': 7.20.12
       '@babel/plugin-transform-runtime': 7.19.6_@babel+core@7.20.12
@@ -1499,29 +1499,29 @@ packages:
       '@babel/preset-react': 7.18.6_@babel+core@7.20.12
       '@babel/preset-typescript': 7.18.6_@babel+core@7.20.12
       '@babel/runtime': 7.20.7
-      '@modern-js/utils': 2.0.2
+      '@modern-js/utils': 2.1.0
       '@types/babel__core': 7.1.20
       lodash: 4.17.21
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /@modern-js/eslint-config/2.0.2:
-    resolution: {integrity: sha512-d/3tQjZ7317no2inOqkhSMYeA+EwYDM7pO0OSKMAgNGheqbntIDR9zP0ainbNUfZ1WxnvtT+uNJ8YFco2+hQnw==}
+  /@modern-js/eslint-config/2.1.0:
+    resolution: {integrity: sha512-xaPwOSvFVjAK4ealq0vSzRYP940Uyy8jHOswDucp253+v0hN6vvrfuf1YDZCUFE+zJGJuiQLQsKigpaf7QvIMw==}
     dependencies:
-      '@modern-js-app/eslint-config': 2.0.2
+      '@modern-js-app/eslint-config': 2.1.0
     transitivePeerDependencies:
       - eslint-import-resolver-typescript
       - eslint-import-resolver-webpack
       - supports-color
     dev: true
 
-  /@modern-js/tsconfig/2.0.2:
-    resolution: {integrity: sha512-iqJgpXkbRM97hSZCUvatrMv+bSHZitpIYHkZDljG6ZC6XaeSXo1W4SaV79mkQ9E3hUuaKJjMPR73qwQtb0Q4nA==}
+  /@modern-js/tsconfig/2.1.0:
+    resolution: {integrity: sha512-Dfiz0z3LtQpPQfd8GRMvlm6rWOzu/06DTOGKBzaat/6gJIDdncO81FbZY/1S9Zibzz670iqFwWmKh11Oqn//+Q==}
     dev: true
 
-  /@modern-js/utils/2.0.2:
-    resolution: {integrity: sha512-43ZbRqmQHogO7Nmu6/rYP7LJTt34DFRSkUWOgFE1s/t9BXNePSezkIr/wDpsStWq71SnKnYp4SaJ1ycHcUo9IA==}
+  /@modern-js/utils/2.1.0:
+    resolution: {integrity: sha512-KwjpIiXMS7P45gZsRPX2zIRqTdF0LQZsJdvzGxNfPwCyI1SeC9xmgurCQ6UgKlXpndZJfyD8UZCT8vafhr7B2g==}
     dependencies:
       caniuse-lite: 1.0.30001442
       lodash: 4.17.21
@@ -1704,6 +1704,19 @@ packages:
       '@babel/types': 7.20.7
     dev: true
 
+  /@types/codemirror/5.60.6:
+    resolution: {integrity: sha512-JIDPSvkYRlcv/2F0erqD+de2ni/Mz6FJMEGb0vwF6ByQOcHIKfiEfwrO4d6dSRwYeHyNUMpGjev0PyjX2M0XWw==}
+    dependencies:
+      '@types/tern': 0.23.4
+
+  /@types/echarts/4.9.16:
+    resolution: {integrity: sha512-bfiagfPw3dWauAIJ9fgoJQoL4hLWlGcltqwbE6LGye0NIY5xnbZau+mDmadCzGojic3MWuFDCUiO25kl4sRGeA==}
+    dependencies:
+      '@types/zrender': 4.0.3
+
+  /@types/estree/1.0.0:
+    resolution: {integrity: sha512-WulqXMDUTYAXCjZnk6JtIHPigp55cVtDgDrO2gHRwhyJto21+1zbVCtOYB2L1F9w4qCQ0rOGWBnBe0FNTiEJIQ==}
+
   /@types/http-cache-semantics/4.0.1:
     resolution: {integrity: sha512-SZs7ekbP8CN0txVG2xVRH6EgKmEm31BOxA07vkFaETzZz1xh+cbt8BcI0slpymvwhx5dlFnQG2rTlPVQn+iRPQ==}
     dev: false
@@ -1724,15 +1737,22 @@ packages:
 
   /@types/node/18.11.18:
     resolution: {integrity: sha512-DHQpWGjyQKSHj3ebjFI/wRKcqQcdR+MoFBygntYOZytCqNfkd2ZC4ARDJ2DQqhjH5p85Nnd3jhUJIXrszFX/JA==}
-    dev: true
 
   /@types/semver/7.3.13:
     resolution: {integrity: sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==}
     dev: true
 
+  /@types/tern/0.23.4:
+    resolution: {integrity: sha512-JAUw1iXGO1qaWwEOzxTKJZ/5JxVeON9kvGZ/osgZaJImBnyjyn0cjovPsf6FNLmyGY8Vw9DoXZCMlfMkMwHRWg==}
+    dependencies:
+      '@types/estree': 1.0.0
+
   /@types/unist/2.0.6:
     resolution: {integrity: sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==}
     dev: true
+
+  /@types/zrender/4.0.3:
+    resolution: {integrity: sha512-EPI269lkHNsObwILJ1k1z7znLjKyePuWRy/XKK0shSGpBb9cIX307arcwJV4+2NeZj5wEjN06r4D8yFv7sI06g==}
 
   /@typescript-eslint/eslint-plugin/5.48.0_k73wpmdolxikpyqun3p36akaaq:
     resolution: {integrity: sha512-SVLafp0NXpoJY7ut6VFVUU9I+YeFsDzeQwtK0WZ+xbRN3mtxJ08je+6Oi2N89qDn087COdO0u3blKZNv9VetRQ==}
@@ -5575,8 +5595,8 @@ packages:
   /through/2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
 
-  /tiddlywiki-plugin-dev/0.0.29_kctv3yrjgfykfapqczydg5ywxm:
-    resolution: {integrity: sha512-JtZ4MzXkvPbvVuxuk14czP/ZjIbem8o0Ct6hLydWGllDn8RFs2SDMp9u1H5k1ULAVE28e0UCo1XSYz+mBfRxAg==}
+  /tiddlywiki-plugin-dev/0.0.32_o2pwmbtznwrqt3kelul5di7deq:
+    resolution: {integrity: sha512-y3xBBEu/+/Wh+bIZ7iG408KgLHAoOttsqIB34edZkA+iJV3xdUWI6LSrZsYpJ0kavNmPiD5gNRa5BdiF7ArA0A==}
     engines: {node: '>=14.17.6'}
     hasBin: true
     peerDependencies:
@@ -5598,7 +5618,7 @@ packages:
       sha256: 0.2.0
       simple-git: 3.15.1
       tiddlywiki: 5.2.5
-      tw5-typed: 0.2.16
+      tw5-typed: 0.2.21
       uglify-js: 3.17.4
       ws: 8.12.0
     transitivePeerDependencies:
@@ -5689,8 +5709,12 @@ packages:
       typescript: 4.9.4
     dev: true
 
-  /tw5-typed/0.2.16:
-    resolution: {integrity: sha512-i6BE8QkHpdkw+Dvc8HeENKMwCns9/TuCTGCaUDq7kkAnTpgsAn8GY3vvYoVI/BZF6G3Q7hGphwBuyt9XqjE3qw==}
+  /tw5-typed/0.2.21:
+    resolution: {integrity: sha512-0X002nfpYeNbQVNmLfk8nR6kUrmtCQvpBEGeAL8frhvA7CaLLukKNtAVxrHXXG9mHGUDbQPR73c6r8hpUI3Ddg==}
+    dependencies:
+      '@types/codemirror': 5.60.6
+      '@types/echarts': 4.9.16
+      '@types/node': 18.11.18
 
   /type-check/0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}

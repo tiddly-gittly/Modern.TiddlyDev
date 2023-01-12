@@ -64,7 +64,7 @@ npm run dev
 
 保存可看到 `This is a widget!` 的字样。
 
-不要关闭浏览器或者开发服务器，尝试修改一下 `src/plugin-name/index.ts` 中第 19 行的文字，保存后即可看到，插件被重新编译，网页上 Test 中的文字随之改变：
+不要关闭浏览器或者开发服务器，尝试修改一下 `src/plugin-name/index.ts` 中第 14 行的文字，保存后即可看到，插件被重新编译，网页上 Test 中的文字随之改变：
 
 [img[$:/plugins/Modern.TiddlyDev/doc/wysiwtg-demo.gif]]
 

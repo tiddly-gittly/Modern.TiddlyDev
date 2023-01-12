@@ -1,25 +1,20 @@
-import type { Widget as IWidget, IChangedTiddlers } from 'tiddlywiki';
+import { IChangedTiddlers } from 'tiddlywiki';
+import { widget as Widget } from '$:/core/modules/widgets/widget.js';
 import './index.css';
-
-const Widget = require('$:/core/modules/widgets/widget.js')
-  .widget as typeof IWidget;
 
 class ExampleWidget extends Widget {
   refresh(_changedTiddlers: IChangedTiddlers) {
     return false;
   }
 
-  /**
-   * Lifecycle method: Render this widget into the DOM
-   */
   render(parent: Node, _nextSibling: Node) {
     this.parentDomNode = parent;
     this.execute();
-    const containerElement = document.createElement('p');
-    containerElement.innerHTML = 'This is a widget!';
-    this.domNodes.push(containerElement);
-    parent.appendChild(containerElement);
+    const containerElement = $tw.utils.domMaker('p', {
+      text: 'This is a widget!',
+    });
+    this.domNodes.push(parent.appendChild(containerElement));
   }
 }
 
-export { ExampleWidget as test };
+exports.test = ExampleWidget;
