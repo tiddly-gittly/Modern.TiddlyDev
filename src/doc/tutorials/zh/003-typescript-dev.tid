@@ -28,27 +28,25 @@ module-type: widget
 在 `RandomNumberWidget.ts` 文件中：
 
 ```typescript
-import type { Widget as IWidget, IChangedTiddlers } from 'tiddlywiki';
+import { IChangedTiddlers } from 'tiddlywiki';
+import { widget as Widget } from '$:/core/modules/widgets/widget.js';
 
-// 此 require 并非 cjs 标准的 require ，而是 TiddlyWiki 导入某个 tiddler 脚本的方法；
-const Widget = require('$:/core/modules/widgets/widget.js')
-  .widget as typeof IWidget;
-
-export class RandomNumber extends Widget {
-  refresh(_changedTiddlers: IChangedTiddlers) {
+class ExampleWidget extends Widget {
+  refresh(changedTiddlers: IChangedTiddlers) {
     return false;
   }
 
-  render(parent: Node, _nextSibling: Node) {
+  render(parent: Node, nextSibling: Node) {
     this.parentDomNode = parent;
     this.execute();
-    const containerElement = document.createElement('p');
-    containerElement.innerHTML = `${Math.random()}`.replace('0.', '');
-    containerElement.onclick = () => (containerElement.innerHTML = `${Math.random()}`.replace('0.', ''));
-    this.domNodes.push(containerElement);
-    parent.appendChild(containerElement);
+    const containerElement = $tw.utils.domMaker('p', {
+      text: 'This is a widget!',
+    });
+    this.domNodes.push(parent.appendChild(containerElement));
   }
 }
+
+exports.test = ExampleWidget;
 ```
 
 执行 `pnpm run dev` 对源文件进行编译，打开浏览器，创建一个 tiddler ，在其中使用 `<$RandomNumber />`，可以看到效果。

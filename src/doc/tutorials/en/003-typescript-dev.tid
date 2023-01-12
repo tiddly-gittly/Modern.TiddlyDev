@@ -28,27 +28,25 @@ Note: the `module-type` field indicates the module type of the script, which wil
 In the `RandomNumberWidget.ts` file:
 
 ```typescript
-import type { Widget as IWidget, IChangedTiddlers } from 'tiddlywiki';
+import { IChangedTiddlers } from 'tiddlywiki';
+import { widget as Widget } from '$:/core/modules/widgets/widget.js';
 
-// This require is not the cjs standard require, but a method for TiddlyWiki to import a tiddler script.
-const Widget = require('$:/core/modules/widgets/widget.js')
-  .widget as typeof IWidget;
-
-export class RandomNumber extends Widget {
-  refresh(_changedTiddlers: IChangedTiddlers) {
+class ExampleWidget extends Widget {
+  refresh(changedTiddlers: IChangedTiddlers) {
     return false;
   }
 
-  render(parent: Node, _nextSibling: Node) {
+  render(parent: Node, nextSibling: Node) {
     this.parentDomNode = parent;
     this.execute();
-    const containerElement = document.createElement('p');
-    containerElement.innerHTML = `${Math.random()}`.replace('0.', '');
-    containerElement.onclick = () => (containerElement.innerHTML = `${Math.random()}`.replace('0.', ''));
-    this.domNodes.push(containerElement);
-    parent.appendChild(containerElement);
+    const containerElement = $tw.utils.domMaker('p', {
+      text: 'This is a widget!',
+    });
+    this.domNodes.push(parent.appendChild(containerElement));
   }
 }
+
+exports.test = ExampleWidget;
 ```
 
 Execute `pnpm run dev` to compile the source file, open a browser, create a tiddler and use `<$RandomNumber />` in it to see the effect.
