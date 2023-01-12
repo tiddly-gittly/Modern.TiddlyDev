@@ -13,6 +13,10 @@ type: text/vnd.tiddlywiki
 * 你最好有过一段时间的 <$text text="TiddlyWiki" /> 使用经验；
 * 你可以去了解 HTML、CSS、<$text text="JavaScript" /> 和 <$text text="TypeScript" /> 的相关技术；
 
+非常感谢 mabuqian(马不前) 同学分享的视频，非常的新手向，讲解了一些基本的用法，如果需要可以去看看：
+
+[[b站视频教程|https://www.bilibili.com/video/BV1zR4y12776/]]
+
 ! 从一个空的开发模板开始
 
 首先确保你已安装了 git 和 <$text text="NodeJS" /> ，随后请选择你希望创建项目的路径，并确定项目文件夹的名称，并在命令行输入如下指令：
@@ -26,10 +30,14 @@ npx tiddlywiki-plugin-dev@latest init <项目文件夹名称>
 * `--repo <模板repo url>` 对 <$text text="GitHub" /> 进行加速，例如[ghproxy.com]等;
 * `--npm <npm 镜像源>` 对 npm 进行加速，例如 `http://registry.npmmirror.com`；
 
-<details>
-<summary>魔法用法示例</summary>
-<pre>npx tiddlywiki-plugin-dev@latest init --repo https://ghproxy.com/https://github.com/tiddly-gittly/Modern.TiddlyDev.git --npm http://registry.npmmirror.com project</pre>
-</details>
+
+<<<
+魔法示例：
+
+```
+npx tiddlywiki-plugin-dev@latest init --repo https://ghproxy.com/https://github.com/tiddly-gittly/Modern.TiddlyDev.git --npm http://registry.npmmirror.com project
+```
+<<<
 
 接下来会进行模板项目的下载和各种工具的安装，请稍作等待。如果需要手动下载模板项目，[[可以看这里|https://github.com/tiddly-gittly/Modern.TiddlyDev/tree/template]]。
 

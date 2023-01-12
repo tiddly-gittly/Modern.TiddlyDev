@@ -26,10 +26,13 @@ If you need a web proxy to speed things up, init has two additional parameters.
 * `--repo <repo-url>` Proxy address for the <$text text="GitHub" /> repo;
 * `--npm <npm-repo>` Speed up npm, e.g. `http://registry.npmmirror.com`;
 
-<details>
-<summary>Proxy example</summary>
-<pre>npx tiddlywiki-plugin-dev@latest init --repo https://ghproxy.com/https://github.com/tiddly-gittly/Modern.TiddlyDev.git --npm http://registry.npmmirror.com project</pre>
-</details>
+<<<
+Proxy example:
+
+```
+npx tiddlywiki-plugin-dev@latest init --repo https://ghproxy.com/https://github.com/tiddly-gittly/Modern.TiddlyDev.git --npm http://registry.npmmirror.com project
+```
+<<<
 
 The download of the template project and the installation of various tools will follow, so please wait a little. If you need to download the template project manually, [[you can find it here|https://github.com/tiddly-gittly/Modern.TiddlyDev/tree/template]].
 

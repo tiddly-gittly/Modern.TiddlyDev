@@ -1,0 +1,102 @@
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials/zh/011-deployment-related information
+caption: [新手向]部署与下载
+authors: mabuqian(马不前)
+type: text/vnd.tiddlywiki
+
+以下这些都是新手向，主要是演示如何安装的过程及相关知识
+
+! git与github及其desktop
+
+首先我们使用git来管理我们的文件版本，所以我们需要去安装git软件。可去网上搜索安装教程。
+
+而为了和其他开发者一同''开发''//~~（白嫖）~~//，我们需要github账号。github账号QQ邮箱就可以注册，但github在国内特别慢，有时直接打不开，于是需要学习''科学上网''。
+
+有了github账号就需要学习一些基本操作，比如如何建立仓库，本地仓库如何与github上的仓库保持一致等等。这此网上都有大量的教程。文字版本的和视频的都有。
+
+那么我们实际操作起来，就需要了解一定的git命令行的知识。重点是要了解其中的概念。但如果不是编程人员，或者以后不从事编程相关行业的，那么我建议用github desktop。
+
+我们在太记里会经常用到github desktop来回滚，以免我们丢失文件。而github desktop又可以满足常用的git命令需求，所以我们直接用github desktop就行。
+
+---
+
+首先找一个适合的文件夹路径。在上面用写cmd回车打开当前路径终端。
+
+然后在后面输入命令`npx tiddlywiki-plugin-dev@latest init $---$`。
+
+`$$`之间的字符串是新建本地仓库名称，用英文和和数字组合即可。然后就是回车等待，可能会因为网络问题或者vpn而炸掉，多试几次就行了。
+
+中间会遇到选择安装npm包，点回车或者y就可以继续下去。下载过程需要一分钟左右。
+
+下载好了，就可以关掉当前路径的终端。
+
+然后直接用github desktop打开这个本地仓库，然后推送过去，就完成了在github上新建仓库。
+
+或者也可以采用git命令行的方式。转而打开新建本地仓库的终端。打开方法和上面一样，直接在路径栏写cmd并回车即可。
+
+在到github上新建一个纯空的仓库，除了标题和描述和公开与否有内容外，其他的都不要勾选。然后新建后会看到下面有不同的命令。在最上面选择http，然后分别复制中间部分的三条命令回车实现。
+
+整个过程没有出现红色报错就说明基本上成功了。
+
+回到github仓库上刷新一下，可以看到会有三个文件夹和一些文件。
+
+''说明：'' 为什么会和本地仓库文件夹不是一样的呢？
+
+因为这两个就是不应当加载进去的。node_modules和.husky是在npm install后自动生成，且在不同的电脑上不太一样。所以正确的做法就是忽略这两个文件夹，如果别人clone了你的项目，就需要npm install。如果包括了node_mudules，不仅会让你的项目变得很大（百兆起步），而且别人可能还运行不起来反而报错。
+
+<<<
+简言之，有两个文件夹没有加载过去，是因为不需要加载过去。
+<<<
+
+然后需要设置actions，把里面的general，最下面的读写状态修改为允许读写。然后就可以运行actions了。如果没有及时修改，会出现报错。出现报错后，需要实行上面的操作，然后重新re-runs all jobs。和太记部署网页的方式是一样的。
+
+最后可以用太记编辑，也可以用vs code编辑器编辑，也可以用浏览器的方式编辑。然后同步。可以使用命令，也可以用github desktop。
+
+[[b站视频教程|https://www.bilibili.com/video/BV1zR4y12776/]]
+
+<iframe src="https://player.bilibili.com/player.html?aid=350217418&bvid=BV1zR4y12776&page=1" width="100%" height="500" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"> </iframe>
+
+---
+
+远程仓库有很多种，常见的有github和gitee。后者是国内的，可能更稳定一些，但我没用过。
+
+''声明：这只是简单操作流程，我不会去解释具体命令的含义。（因为我也不是特别清楚，不敢误人子弟）写下来的目的是为了帮助成功安装，让本地仓库和远程仓库保持一致。''
+
+首先，用命令行在本地新建一个仓库。
+
+新建成功后，打开新建文件夹的终端，用vscode编辑器打开也是一样的效果。
+
+写下“git branch”可以查看当前分支为master。
+
+写下“git add -A”可以把当前文件夹的内容全部提交过去。
+
+写下“git commit -m "第一次提交" ”意味着把添加的内容第一次提交过去。
+
+写下“git push“发现需要远程仓库才能推送。
+
+在github上创建一个仓库，除了title、Description和public或者private外，其他的都不要勾选。因为我们需要一个纯空的仓库。勾选了下面的readme或者证书什么的，就不是纯空的仓库了，会自动添加一个仓库进去，就会报错。
+
+创建好了后，把上面的ssh切换成https，默认是ssh，但ssh很复杂需要密钥一类的。感兴趣的可自动探索。
+
+找到中间含有“…or push an existing repository from the command line”字样的，下面有三个命令。分别复制过来。
+
+先复制类似命令“git remote add origin https://github.com/dongrentianyu/gittest.git”，（因为这是我测试使用的，回头会删除），找到这个命令，复制在终端里。
+
+再复制命令“git branch -M main”，粘贴到终端里。
+
+再复制命令“git push -u origin main”，同样粘贴到终端里。
+
+然后去github上刷新页面，就会看到这个仓库里有了相应的文件。不过npm安装包的文件不会放过去。
+
+同样需要去settings里找到actions，找到general，划到最下面Workflow permissions，把下面的选项改为可读写状态。保存后，去actions里找到“第一次提交”，然后看旁边有一个按钮，可以“re-run all jobs”，重新再部署一下。
+
+稍等一会儿，没有报错就可以了。发布网址的方式就是去settings里找到pages，下面选择gh-pages，旁边先root，保存即可。稍等几分钟或者十几分钟就可以看到网址了。不过这些会把内容全部公开。需注意。
+
+接下来，可以选择github desktop来控制版本管理。也可以继续用git命令行操作。不懂编程的还是建议用github desktop，更简单。
+
+[[b站视频演示|https://www.bilibili.com/video/BV1Bx4y1g7aq/]]
+
+下面是两个链接，可用来简单了解git命令行。
+
+[[Git 常用基本命令使用详细大全|https://blog.csdn.net/qtiao/article/details/97783243#:~:text=Git]]
+
+[[常用 Git 命令总结|https://zhuanlan.zhihu.com/p/384819351]]
