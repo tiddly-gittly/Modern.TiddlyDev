@@ -20,7 +20,7 @@ class MyWidget extends widget {
   /** The initialization work is placed here and can be left undefined */
   initialise(parentNode: IParseTreeNode, options?: IWidgetInitialiseOptions) {
     // The initialization method of the base class needs to be called
-    super.initialise();
+    super.initialise(parentNode, options);
     // If there are no attributes for the widget, this below is not needed, but it is generally needed
     this.computeAttributes();
   }

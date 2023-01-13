@@ -20,7 +20,7 @@ class MyWidget extends widget {
   /** 初始化工作放在这里，可以不定义 */
   initialise(parentNode: IParseTreeNode, options?: IWidgetInitialiseOptions) {
     // 基类的初始化方法需要调用
-    super.initialise();
+    super.initialise(parentNode, options);
     // 如果微件没有参数，就不需要了，但一般都需要
     this.computeAttributes();
   }
