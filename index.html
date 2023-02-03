@@ -52,7 +52,8 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE." />
 <link id="faviconLink" rel="shortcut icon" href="favicon.ico">
 <title>Modern.TiddlyDev
- — Modern TiddlyWiki  plugin developing framework</title>
+ — Modern TiddlyWiki  plugin developing framework
+</title>
 <!--~~ This is a Tiddlywiki file. The points of interest in the file are marked with this pattern ~~-->
 
 <!--~~ Raw markup ~~-->
@@ -219,7 +220,7 @@ Error message and password prompt
 
 {"title":"$:/plugins/your-name/plugin-name","author":"Your Name","description":"Description of this plugin","core-version":">=5.1.22","plugin-type":"plugin","version":"0.0.1","list":"readme","dependents":"","type":"application/json","text":"{\"tiddlers\":{\"$:/plugins/your-name/plugin-name/readme\":{\"title\":\"$:/plugins/your-name/plugin-name/readme\",\"type\":\"text/vnd.tiddlywiki\",\"text\":\"!! Read Me\\n\\nThe quick brown fox jumps over a lazy dog.\\n\"},\"$:/plugins/your-name/plugin-name/test-widget.js\":{\"title\":\"$:/plugins/your-name/plugin-name/test-widget.js\",\"type\":\"application/javascript\",\"module-type\":\"widget\",\"Modern.TiddlyDev#Origin\":\"index.ts\",\"text\":\"\\\"use strict\\\";var import_widget=require(\\\"$:/core/modules/widgets/widget.js\\\"),ExampleWidget=class extends import_widget.widget{refresh(e){return!1}render(e,t){this.parentDomNode=e,this.execute();var i=$tw.utils.domMaker(\\\"p\\\",{text:\\\"This is a widget!\\\"});this.domNodes.push(e.appendChild(i))}};exports.test=ExampleWidget;\"},\"$:/plugins/your-name/plugin-name/index.css\":{\"title\":\"$:/plugins/your-name/plugin-name/index.css\",\"tags\":[\"$:/tags/Stylesheet\"],\"type\":\"text/css\",\"Modern.TiddlyDev#Origin\":\"index.css\",\"text\":\"body{background:#0ff}\"}}}","Modern.TiddlyDev#SHA256-Hashed":"fe9b22dce7774495cd554ca01cb36b9bdd30b24cc9c853f1946239f5d51884c5","revision":"0","bag":"default"},
 
-{"title":"$:/SiteSubtitle","created":"20220426154059698","modified":"20221205070308575","type":"text/vnd.tiddlywiki","text":"\u003C$list filter=\"[[$:/language]get[text]removeprefix[$:/languages/]else[en-GB]]\" variable=\"lang\">\u003C$list filter=\"[\u003Clang>search[zh]]\">现代太微插件开发框架\u003C/$list>\u003C$list filter=\"[\u003Clang>!search[zh]]\">Modern ~TiddlyWiki  plugin developing framework\u003C/$list>\u003C/$list>","revision":"0","bag":"default"},
+{"title":"$:/SiteSubtitle","type":"text/vnd.tiddlywiki","text":"\u003C$list filter=\"[[$:/language]get[text]removeprefix[$:/languages/]else[en-GB]]\" variable=\"lang\">\u003C$list filter=\"[\u003Clang>search[zh]]\">现代太微插件开发框架\u003C/$list>\u003C$list filter=\"[\u003Clang>!search[zh]]\">Modern ~TiddlyWiki  plugin developing framework\u003C/$list>\u003C/$list>\n","revision":"0","bag":"default"},
 
 {"title":"$:/SiteTitle","type":"text/vnd.tiddlywiki","text":"\u003C$text text=\"Modern.TiddlyDev\" />\n","revision":"0","bag":"default"},
 
