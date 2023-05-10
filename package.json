@@ -31,19 +31,19 @@
     ]
   },
   "devDependencies": {
-    "@modern-js/eslint-config": "^2.1.0",
-    "@modern-js/tsconfig": "^2.1.0",
-    "@types/node": "^18.11.18",
+    "@modern-js/eslint-config": "^2.18.0",
+    "@modern-js/tsconfig": "^2.18.0",
+    "@types/node": "^20.1.2",
     "husky": "^8.0.3",
-    "lint-staged": "^13.1.0",
-    "rimraf": "^4.0.7",
+    "lint-staged": "^13.2.2",
+    "rimraf": "^5.0.0",
     "ts-node": "^10.9.1",
-    "tw5-typed": "^0.2.25",
-    "typescript": "^4.9.4"
+    "tw5-typed": "^0.2.27",
+    "typescript": "^5.0.4"
   },
   "dependencies": {
-    "npm-check-updates": "^16.6.2",
-    "tiddlywiki": "^5.2.5",
-    "tiddlywiki-plugin-dev": "^0.0.34"
+    "npm-check-updates": "^16.10.12",
+    "tiddlywiki": "^5.2.7",
+    "tiddlywiki-plugin-dev": "^0.0.36"
   }
 }
