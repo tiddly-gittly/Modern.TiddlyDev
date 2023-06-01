@@ -1,0 +1,28 @@
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials/zh/012-route-访问本地文件内容
+caption: 访问本地文件：route
+authors: whitefall
+type: text/vnd.tiddlywiki
+
+
+
+微件，需要配合 nodejs 那边的 route ，它们才能操作 nodejs 端的文件系统能力。
+
+在 route 里用 fs，服务端才能用fs，所以要在route里用。参考routes/get-file.js。
+
+routes/get-file.js赋予的能力：可以直接写绝对路径访问本地文件：`http://192.168.66.21:5213/files/D:/Dropbox/21-Sandox/10-Picture/wine.png`
+
+[[$:/core/modules/server/server.js|https://bramchen.github.io/tw5-docs/zh-Hans/#%24%3A%2Fcore%2Fmodules%2Fserver%2Fserver.js]]
+
+[[$:/core/modules/server/routes/get-file.js|https://bramchen.github.io/tw5-docs/zh-Hans/#%24%3A%2Fcore%2Fmodules%2Fserver%2Froutes%2Fget-file.js]]
+
+
+
+!!! 参考官方链接
+
+https://tiddlywiki.com/#WebServer
+
+https://tiddlywiki.com/#WebServer%20API%3A%20Get%20File
+
+https://tiddlywiki.com/#Using%20the%20integrated%20static%20file%20server
+
+https://tiddlywiki.com/#WebServer%20API
