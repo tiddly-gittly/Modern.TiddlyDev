@@ -55,7 +55,7 @@ Switch language: {{$:/snippets/minilanguageswitcher}}
 ** 自动对生成的插件生成哈希校验签名；
 
 
-快速开始：使用命令快速创建一个新插件项目。
+快速开始：使用命令创建一个插件项目。
 
 * 你已安装必要工具：git、nodejs。
 * 使用命令创建新的项目并对npm进行加速：`npx tiddlywiki-plugin-dev@latest init --npm http://registry.npmmirror.com <项目文件夹名称>`

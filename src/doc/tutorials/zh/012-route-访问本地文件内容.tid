@@ -3,6 +3,15 @@ caption: 访问本地文件：route
 authors: whitefall
 type: text/vnd.tiddlywiki
 
+备忘录。
+
+慢慢修改：
+
+route模块，使用正则匹配URL路径，然后这个路径可以专用于任意用途，比如用正则匹配/files路径，全拼https://xxx.xxx.xx:port/files/<绝对路径>
+可以获取到本地的任意文件。然后你可以使用 XMLHttpRequest().open()发送请求，其中参数填具体URL路径，比如专用的/files路径。也就是route的真正含义。
+这个路径你可以使用route模块自己定义，你可以定义为/md路径，并为他分配访问该路径时相应的动作或方法。然后使用XMLHttpRequest().open()发送请求，执行方法。
+
+这个东西就像端口一样，分配和访问不同的程序。一个端口一个程序，route则是一个路径定义分配一个相应响应处理方式。
 
 
 微件，需要配合 nodejs 那边的 route ，它们才能操作 nodejs 端的文件系统能力。
@@ -15,6 +24,43 @@ routes/get-file.js赋予的能力：可以直接写绝对路径访问本地文�
 
 [[$:/core/modules/server/routes/get-file.js|https://bramchen.github.io/tw5-docs/zh-Hans/#%24%3A%2Fcore%2Fmodules%2Fserver%2Froutes%2Fget-file.js]]
 
+
+如何使用Widget访问route模块？
+
+可以使用 Ajax 请求访问该路由。
+
+https://github.com/Jermolene/TiddlyWiki5/blob/master/core/modules/utils/dom/http.js
+
+https://github.com/Jermolene/TiddlyWiki5/blob/68a7655396d295d5070c46822d9022e264a37d09/plugins/tiddlywiki/tahoelafs/saver.js#L24
+
+https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/open
+
+ChatGPT的回答：
+
+要在 TiddlyWiki 的 Widget 中使用 `$:/core/modules/server/routes/get-file.js`，您可以使用 Ajax 请求访问该路由。下面是一个例子：
+
+```js
+// 创建一个新的 XMLHttpRequest 对象
+var xhr = new XMLHttpRequest();
+
+// 指定请求类型和 URL
+xhr.open('GET', '/routes/get-file.js?file=yourfilename', true);
+
+// 当请求完成时执行以下回调函数
+xhr.onreadystatechange = function() {
+    if (this.readyState === 4 && this.status === 200) {
+        // 响应内容已准备好，可以使用 xhr.responseText 访问它
+        console.log(xhr.responseText);
+    }
+};
+
+// 发送请求
+xhr.send();
+```
+
+请注意，上述代码中的 `'/routes/get-file.js?file=yourfilename'` 需要替换为您实际想要访问的文件名。
+
+此外，如果您要访问的文件需要登录才能访问，您可能需要在请求中包含您的身份验证信息，例如 HTTP Cookie 或授权令牌。具体方法取决于您的身份验证系统。
 
 
 !!! 参考官方链接
