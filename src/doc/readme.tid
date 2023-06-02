@@ -54,6 +54,15 @@ Switch language: {{$:/snippets/minilanguageswitcher}}
 ** 自动对插件进行体积压缩（可关闭）；
 ** 自动对生成的插件生成哈希校验签名；
 
+
+快速开始：使用命令创建一个插件项目。
+
+* 你已安装必要工具：git、nodejs。
+* 使用命令创建新的项目并对npm进行加速：`npx tiddlywiki-plugin-dev@latest init --npm http://registry.npmmirror.com <项目文件夹名称>`
+* 使用命令创建插件：`npm run new`，然后根据导引填写信息。
+* 阅读教程开始探险与开发之旅。
+
+
 别担心，即便你并不擅长编程开发，也没有关系，<$text text="Modern.TiddlyDev" /> 同样可以成为你的开发利器。无代码插件开发同样可以获得愉快的开发体验！
 
 虽然这里有很多工作，但是对你来讲，它就是开箱即用的。快来使用它，步入现代化的 <$text text="TiddlyWiki" /> 插件开发之旅吧！
@@ -113,6 +122,15 @@ Switch language: {{$:/snippets/minilanguageswitcher}}
 ** The possibility of introducing CSS, JSON, etc. into the script;
 ** Automatic volume compression of the plug-in (can be turned off);
 ** Automatic generation of hash-check signatures for the generated plug-ins;
+
+
+Quick start: Create a plugin project using the command.
+
+* You have the necessary tools installed: git, nodejs.
+* Use the command to create a new project and speed up npm: `npx tiddlywiki-plugin-dev@latest init --npm http://registry.npmmirror.com <project folder name>`
+* Use the command to create the plugin: `npm run new`, then fill in the information according to the guide.
+* Read the tutorial to start the adventure and development journey.
+
 
 Don't worry, even if you are not good at programming, it doesn't matter, <$text text="Modern.TiddlyDev" /> can be your development tool as well. No code plugin development can be an enjoyable development experience as well!
 
