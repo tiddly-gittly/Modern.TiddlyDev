@@ -123,6 +123,15 @@ Switch language: {{$:/snippets/minilanguageswitcher}}
 ** Automatic volume compression of the plug-in (can be turned off);
 ** Automatic generation of hash-check signatures for the generated plug-ins;
 
+
+Quick start: Create a plugin project using the command.
+
+* You have the necessary tools installed: git, nodejs.
+* Use the command to create a new project and speed up npm: `npx tiddlywiki-plugin-dev@latest init --npm http://registry.npmmirror.com <project folder name>`
+* Use the command to create the plugin: `npm run new`, then fill in the information according to the guide.
+* Read the tutorial to start the adventure and development journey.
+
+
 Don't worry, even if you are not good at programming, it doesn't matter, <$text text="Modern.TiddlyDev" /> can be your development tool as well. No code plugin development can be an enjoyable development experience as well!
 
 There's a lot of work here, but it's just Out-of-the-Box for you. Use it and get started on your modern <$text text="TiddlyWiki" /> plugin development journey!

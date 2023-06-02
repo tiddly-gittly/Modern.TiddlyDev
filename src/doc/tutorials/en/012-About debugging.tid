@@ -1,0 +1,15 @@
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials/en/012-关于调试
+caption: About debugging
+authors: whitefall
+type: text/vnd.tiddlywiki
+
+Q: How friendly is debugging? I generally prefer to play with the idea of finding the value, depending on the result, see what he is, in the next step, and then implement it step by step.
+
+
+A: Use the console more often:
+* Press F12 or select "More Tools" > "Developer Tools" in the browser menu to use the browser's Developer Tools.
+* Developer Tools will have a console tab, open it and there will be a chat box like interface. At the bottom you can enter js code to execute. If you type in $tw, you'll get everything you need.
+* But it should be noted that the environment you usually write widgets in is a sandbox not a browser environment (you can understand that some global variables you can't get, or some variables are only available inside), this should be noted.
+
+
+A: Use debugger debugging statements.
