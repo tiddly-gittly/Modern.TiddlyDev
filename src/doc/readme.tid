@@ -51,6 +51,7 @@ Switch language: {{$:/snippets/minilanguageswitcher}}
 ** 支持使用 [[browserslist|https://browsersl.ist/]] 为插件设定浏览器兼容范围；
 ** 自动为源码生成 sourcemap （开发时默认启动，构建时可指定开启），调试不用愁！
 ** 可在代码中处理 CSS、JSON 等内容的引入；
+** 支持 Less、Sass、Stylus和 tailwind CSS；
 ** 自动对插件进行体积压缩（可关闭）；
 ** 自动对生成的插件生成哈希校验签名；
 
@@ -111,6 +112,7 @@ Switch language: {{$:/snippets/minilanguageswitcher}}
 ** Support for setting browser compatibility ranges for plugins using [[browserslist|https://browsersl.ist/]];
 ** Automatically generate sourcemap for source code (start by default when developing, specify to turn on when building), no need to worry about debugging!
 ** The possibility of introducing CSS, JSON, etc. into the script;
+** Supporting Less、Sass、Stylus and tailwind CSS;
 ** Automatic volume compression of the plug-in (can be turned off);
 ** Automatic generation of hash-check signatures for the generated plug-ins;
 
