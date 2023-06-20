@@ -46,14 +46,14 @@ class ExampleWidget extends Widget {
   }
 }
 
-// The module variable name RandomNumber exported here will be used as the name of the widget. Use <$RandomNumber/> to call this widget.
+// The module variable name random exported here will be used as the name of the widget. Use <$random/> to call this widget.
 // The widget's entry name in tiddlywiki, the source file, and the source.meta file name and the widget name can be different.
-// For example, the widget entry name can be My-Widget, the source file and source.meta file names can be index.ts and index.ts.meta. The final widget name is RandomNumber and the widget is called with <$RandomNumber/>.
+// For example, the widget entry name can be My-Widget, the source file and source.meta file names can be index.ts and index.ts.meta. The final widget name is random and the widget is called with <$random/>.
 // If .meta is added to a script file it will be treated as an entry file.
-exports.RandomNumber = ExampleWidget;
+exports.random = ExampleWidget;
 ```
 
-Execute `pnpm run dev` to compile the source file, open a browser, create a tiddler and use `<$RandomNumber />` in it to see the effect.
+Execute `pnpm run dev` to compile the source file, open a browser, create a tiddler and use `<$random />` in it to see the effect.
 
 Note: The framework also supports compilation of cjs, mjs, jsx, tsx files.
 

@@ -39,12 +39,12 @@
     "postcss": "^8.4.24",
     "rimraf": "^5.0.1",
     "ts-node": "^10.9.1",
-    "tw5-typed": "^0.3.4",
+    "tw5-typed": "^0.3.5",
     "typescript": "^5.1.3"
   },
   "dependencies": {
     "npm-check-updates": "^16.10.12",
     "tiddlywiki": "^5.2.7",
-    "tiddlywiki-plugin-dev": "^0.0.38"
+    "tiddlywiki-plugin-dev": "^0.0.39"
   }
 }
