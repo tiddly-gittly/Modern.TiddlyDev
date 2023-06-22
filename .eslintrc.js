@@ -1,4 +1,11 @@
+const tsEslintConfig = require('./tsconfig.eslint.json');
+
 module.exports = {
   root: true,
-  extends: ['@modern-js/eslint-config'],
+  ignorePatterns: tsEslintConfig.exclude,
+  parserOptions: {
+    project: './tsconfig.eslint.json',
+    tsconfigRootDir: __dirname,
+  },
+  extends: ['eslint-config-tidgi'],
 };
