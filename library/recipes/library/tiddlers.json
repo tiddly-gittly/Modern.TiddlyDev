@@ -24,7 +24,7 @@
         "title": "$:/plugins/your-name/plugin-name",
         "type": "application/json",
         "version": "0.0.1",
-        "Modern.TiddlyDev#SHA256-Hashed": "58f8f113aad54425a58a49fa5252a10af12dd17488b48a37be07e10001f677cc",
+        "Modern.TiddlyDev#SHA256-Hashed": "1881e610ecfc69efc24ed512f73f1530b6221046c26ef43e80fab074354c7623",
         "readme": "!! Read Me\n\nThe quick brown fox jumps over a lazy dog.\n",
         "requires-reload": "yes"
     }
