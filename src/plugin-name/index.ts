@@ -7,13 +7,13 @@ class ExampleWidget extends Widget {
     return false;
   }
 
-  render(parent: Element, _nextSibling: Element) {
+  render(parent: Element, nextSibling: Element) {
     this.parentDomNode = parent;
     this.execute();
     const containerElement = $tw.utils.domMaker('p', {
       text: 'This is a widget!',
     });
-    parent.append(containerElement);
+    nextSibling === null ? parent.append(containerElement) : nextSibling.before(containerElement);
     this.domNodes.push(containerElement);
   }
 }
