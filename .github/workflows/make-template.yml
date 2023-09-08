@@ -21,7 +21,7 @@ jobs:
           rm -rf upload/.git upload/README.md upload/pnpm-lock.yaml upload/src/doc upload/.github/workflows/make-template.yml
 
       - name: Setup NodeJS
-        uses: actions/setup-node@v2-beta
+        uses: actions/setup-node@v3.7.0
         with:
           node-version: '18'
 
