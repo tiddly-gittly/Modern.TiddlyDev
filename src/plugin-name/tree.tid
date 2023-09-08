@@ -1,0 +1,4 @@
+title: $:/plugins/your-name/plugin-name/tree
+type: text/vnd.tiddlywiki
+
+<<tree prefix:"$:/plugins/your-name/plugin-name/">>
