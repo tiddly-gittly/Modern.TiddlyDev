@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Clear
         run: |
@@ -20,10 +20,16 @@ jobs:
           mv /tmp/moderntiddlydev upload
           rm -rf upload/.git upload/README.md upload/pnpm-lock.yaml upload/src/doc upload/.github/workflows/make-template.yml
 
-      - name: Setup NodeJS
-        uses: actions/setup-node@v2-beta
+      - name: Install Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: 18
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 'latest'
+          run_install: false
 
       - name: Cache dependencies
         uses: actions/cache@v3
@@ -38,7 +44,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install Dependencies
-        run: npm install -g pnpm && pnpm install
+        run: pnpm install
 
       - name: Build Plugins
         run: |
