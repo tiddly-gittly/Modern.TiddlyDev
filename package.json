@@ -3,15 +3,15 @@
   "license": "MIT",
   "version": "0.0.2",
   "scripts": {
+    "dev": "tiddlywiki-plugin-dev dev",
+    "build": "npm run clean && tiddlywiki-plugin-dev build",
+    "publish": "npm run clean && tiddlywiki-plugin-dev publish",
     "reset": "rimraf ./**/node_modules",
     "clean": "rimraf dist",
     "prepare": "husky install",
     "update": "npm-check-updates -u",
     "new": "tiddlywiki-plugin-dev new",
-    "dev": "tiddlywiki-plugin-dev dev",
-    "build": "npm run clean && tiddlywiki-plugin-dev build",
     "build:library": "npm run clean && tiddlywiki-plugin-dev build --library --output dist/library",
-    "publish": "npm run clean && tiddlywiki-plugin-dev publish",
     "publish:offline": "npm run clean && tiddlywiki-plugin-dev publish --offline"
   },
   "engines": {
