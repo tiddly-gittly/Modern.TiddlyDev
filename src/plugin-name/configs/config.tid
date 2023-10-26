@@ -1,0 +1,26 @@
+title: $:/plugins/your-name/plugin-name/config
+tags: $:/tags/ControlPanel/SettingsTab
+caption: Plugin Setting
+
+These settings let you customise the behaviour of your plugin.
+
+---
+
+!! Title
+
+Description
+
+;Config name1
+:<$checkbox tiddler="$:/plugins/your-name/plugin-name/config/xxx" field="text" checked="yes" unchecked=""> Description</$checkbox>
+;Config name2
+:<$select tiddler='$:/plugins/your-name/plugin-name/config/yyy'>
+	<option value='0'>Sunday</option>
+	<option value='1'>Monday</option>
+	<option value='2'>Tuesday</option>
+	<option value='3'>Wednesday</option>
+	<option value='4'>Thursday</option>
+	<option value='5'>Friday</option>
+	<option value='6'>Saturday</option>
+</$select>
+;Config name3
+:<$edit-text tiddler="$:/plugins/your-name/plugin-name/config/zzz" tabindex=-1 focus=false cancelPopups="yes" fileDrop=no tag="input" />
