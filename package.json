@@ -34,6 +34,7 @@
     "@modern-js/eslint-config": "^2.37.1",
     "@modern-js/tsconfig": "^2.37.1",
     "@types/node": "^20.8.7",
+    "eslint-config-tidgi": "^1.1.5",
     "husky": "^8.0.3",
     "lint-staged": "^15.0.2",
     "postcss": "^8.4.31",
