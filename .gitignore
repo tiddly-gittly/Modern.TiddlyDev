@@ -134,6 +134,7 @@ wiki/tiddlers/$__language.tid
 wiki/tiddlers/$__StoryList.tid
 wiki/tiddlers/$__StoryList_*.tid
 wiki/tiddlers/$__palette.tid
+wiki/tiddlers/$__layout.tid
 wiki/tiddlers/$__keepstate_*
 wiki/tiddlers/$__Import.tid
 wiki/tiddlers/$__UpgradeLibrary
