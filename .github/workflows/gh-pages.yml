@@ -5,6 +5,9 @@ on:
     branches:
       - master
       - main
+    paths-ignore:
+      # Readme.md should not trigger wiki deploy
+      - '*.md'
 
 jobs:
   deploy:
