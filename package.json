@@ -31,7 +31,6 @@
     ]
   },
   "devDependencies": {
-    "@modern-js/eslint-config": "^2.37.1",
     "@modern-js/tsconfig": "^2.37.1",
     "@types/node": "^20.8.7",
     "dprint": "^0.43.2",
