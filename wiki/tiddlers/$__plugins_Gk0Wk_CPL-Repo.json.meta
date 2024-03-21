@@ -1,7 +1,8 @@
 author: Gk0Wk
-description: Repos for CPL
+description: Essential and powerful plugin manager and library
+list: readme tree
 name: CPL Repo
 plugin-type: plugin
 title: $:/plugins/Gk0Wk/CPL-Repo
 type: application/json
-version: 2022.12.28
+version: 2023.12.9
