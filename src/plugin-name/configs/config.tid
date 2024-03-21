@@ -1,18 +1,18 @@
 title: $:/plugins/your-name/plugin-name/config
 tags: $:/tags/ControlPanel/SettingsTab
-caption: Plugin Setting
+caption: <<lingo "Name" "$:/plugins/your-name/plugin-name/language/">>
 
-These settings let you customise the behaviour of your plugin.
+\define lingo-base() $:/plugins/your-name/plugin-name/language/
+
+<<lingo ConfigDescription>>
 
 ---
 
-!! Title
+!! <<lingo Configs/PluginConfigs/Caption>>
 
-Description
-
-;Config name1
-:<$checkbox tiddler="$:/plugins/your-name/plugin-name/configs/xxx" field="text" checked="yes" unchecked=""> Description</$checkbox>
-;Config name2
+;<<lingo Configs/XXX/Caption>>
+:<$checkbox tiddler="$:/plugins/your-name/plugin-name/configs/xxx" field="text" checked="yes" unchecked=""> <<lingo Configs/XXX/Description>></$checkbox>
+;<<lingo Configs/YYY/Caption>>
 :<$select tiddler='$:/plugins/your-name/plugin-name/configs/yyy'>
 	<option value='0'>Sunday</option>
 	<option value='1'>Monday</option>
@@ -22,5 +22,5 @@ Description
 	<option value='5'>Friday</option>
 	<option value='6'>Saturday</option>
 </$select>
-;Config name3
+;<<lingo Configs/ZZZ/Caption>>
 :<$edit-text tiddler="$:/plugins/your-name/plugin-name/configs/zzz" tabindex=-1 focus=false cancelPopups="yes" fileDrop=no tag="input" />

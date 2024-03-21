@@ -1,6 +1,6 @@
 title: $:/plugins/your-name/plugin-name/readme
 type: text/vnd.tiddlywiki
 
-!! Read Me
+\define lingo-base() $:/plugins/your-name/plugin-name/language/
 
-The quick brown fox jumps over a lazy dog.
+<<lingo "Readme">>

@@ -1,4 +1,4 @@
 title: $:/SiteTitle
 type: text/vnd.tiddlywiki
 
-<$text text="Modern.TiddlyDev" />
+<<lingo "Name" "$:/plugins/your-name/plugin-name/language/">>

@@ -3,4 +3,4 @@ modified: 20221228055915176
 title: $:/DefaultTiddlers
 type: text/vnd.tiddlywiki
 
-[list[$:/StoryList]] $:/plugins/Modern.TiddlyDev/doc
+$:/plugins/your-name/plugin-name $:/plugins/Modern.TiddlyDev/doc
