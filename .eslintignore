@@ -3,7 +3,7 @@ settings-dev/
 out/
 logs/
 dist/
-wiki/
+!wiki/tiddlers/tests/
 template/
 .webpack/
 node_modules/

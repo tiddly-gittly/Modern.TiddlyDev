@@ -5,6 +5,7 @@
   },
   "include": [
     "src/**/*.ts",
+    "src/**/*.d.ts",
     "src/**/*.js",
     "src/**/*.tsx",
     "src/**/*.jsx",
@@ -15,9 +16,10 @@
     "scripts/**/*.mjs",
     "src/**/*.d.ts",
     "public/**/*.d.ts",
+    "wiki/tiddlers/tests",
     "./*.json",
     "./*.js",
     "./*.*.js"
   ],
-  "exclude": ["wiki"]
+  "exclude": ["wiki/**/*.json"]
 }

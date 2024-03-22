@@ -7,6 +7,5 @@
     "typeRoots" : ["node_modules/@types", "node_modules/tw5-typed"],
     "lib": ["DOM", "ESNext"]
   },
-  "include": ["src"],
-  "exclude": ["./**/*.js"]
+  "include": ["src"]
 }
