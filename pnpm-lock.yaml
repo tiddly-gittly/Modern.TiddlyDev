@@ -12,8 +12,8 @@ dependencies:
     specifier: ^5.3.3
     version: 5.3.3
   tiddlywiki-plugin-dev:
-    specifier: ^0.0.41
-    version: 0.0.41(postcss@8.4.38)(ts-node@10.9.2)
+    specifier: ^0.1.1
+    version: 0.1.1(postcss@8.4.38)(ts-node@10.9.2)
 
 devDependencies:
   '@modern-js/tsconfig':
@@ -1256,8 +1256,8 @@ packages:
     peerDependencies:
       postcss: ^8.1.0
     dependencies:
-      browserslist: 4.22.1
-      caniuse-lite: 1.0.30001554
+      browserslist: 4.23.0
+      caniuse-lite: 1.0.30001599
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -1328,17 +1328,6 @@ packages:
     dependencies:
       fill-range: 7.0.1
 
-  /browserslist@4.22.1:
-    resolution: {integrity: sha512-FEVc202+2iuClEhZhrWy6ZiAcRLvNMyYcxZ8raemul1DYVOVdFsbqckWLdsixQZCpJlwe77Z3UTalE7jsjnKfQ==}
-    engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
-    hasBin: true
-    dependencies:
-      caniuse-lite: 1.0.30001554
-      electron-to-chromium: 1.4.567
-      node-releases: 2.0.13
-      update-browserslist-db: 1.0.13(browserslist@4.22.1)
-    dev: false
-
   /browserslist@4.23.0:
     resolution: {integrity: sha512-QW8HiM1shhT2GuzkvklfjcKDiWFXHOeFCIA/huJPwHsslwcydgk7X+z2zXpEijP98UCY7HbubZt5J2Zgvf0CaQ==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
@@ -1348,7 +1337,6 @@ packages:
       electron-to-chromium: 1.4.713
       node-releases: 2.0.14
       update-browserslist-db: 1.0.13(browserslist@4.23.0)
-    dev: true
 
   /buffer-from@1.1.2:
     resolution: {integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==}
@@ -1448,13 +1436,8 @@ packages:
     engines: {node: '>=14.16'}
     dev: false
 
-  /caniuse-lite@1.0.30001554:
-    resolution: {integrity: sha512-A2E3U//MBwbJVzebddm1YfNp7Nud5Ip+IPn4BozBmn4KqVX7AvluoIDFWjsv5OkGnKUXQVmMSoMKLa3ScCblcQ==}
-    dev: false
-
   /caniuse-lite@1.0.30001599:
     resolution: {integrity: sha512-LRAQHZ4yT1+f9LemSMeqdMpMxZcc4RMWdj4tiFe3G8tNkWK+E58g+/tzotb5cU6TbcVJLr4fySiAW7XmxQvZQA==}
-    dev: true
 
   /chalk@2.4.2:
     resolution: {integrity: sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==}
@@ -1908,13 +1891,8 @@ packages:
   /eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
-  /electron-to-chromium@1.4.567:
-    resolution: {integrity: sha512-8KR114CAYQ4/r5EIEsOmOMqQ9j0MRbJZR3aXD/KFA8RuKzyoUB4XrUCg+l8RUGqTVQgKNIgTpjaG8YHRPAbX2w==}
-    dev: false
-
   /electron-to-chromium@1.4.713:
     resolution: {integrity: sha512-vDarADhwntXiULEdmWd77g2dV6FrNGa8ecAC29MZ4TwPut2fvosD0/5sJd1qWNNe8HcJFAC+F5Lf9jW1NPtWmw==}
-    dev: true
 
   /emoji-regex@10.3.0:
     resolution: {integrity: sha512-QpLs9D9v9kArv4lfDEgg1X/gN5XLnf/A6l9cs8SPZLRZR3ZkY9+kwIQTxm+fsSej5UMYGE8fdoaZVIBlqG0XTw==}
@@ -1988,7 +1966,7 @@ packages:
       has-property-descriptors: 1.0.1
       has-proto: 1.0.1
       has-symbols: 1.0.3
-      hasown: 2.0.0
+      hasown: 2.0.2
       internal-slot: 1.0.6
       is-array-buffer: 3.0.2
       is-callable: 1.2.7
@@ -2112,7 +2090,7 @@ packages:
     dependencies:
       get-intrinsic: 1.2.2
       has-tostringtag: 1.0.0
-      hasown: 2.0.0
+      hasown: 2.0.2
     dev: true
 
   /es-set-tostringtag@2.0.3:
@@ -2127,7 +2105,7 @@ packages:
   /es-shim-unscopables@1.0.2:
     resolution: {integrity: sha512-J3yBRXCzDu4ULnQwxyToo/OjdMx6akgVC7K6few0a7F/0wLtmKKN7I73AH5T2836UuXRqN7Qg+IIUw/+YJksRw==}
     dependencies:
-      hasown: 2.0.0
+      hasown: 2.0.2
     dev: true
 
   /es-to-primitive@1.2.1:
@@ -2139,14 +2117,14 @@ packages:
       is-symbol: 1.0.4
     dev: true
 
-  /esbuild-plugin-browserslist@0.11.1(browserslist@4.22.1)(esbuild@0.20.2):
+  /esbuild-plugin-browserslist@0.11.1(browserslist@4.23.0)(esbuild@0.20.2):
     resolution: {integrity: sha512-yNdZRdDBEbm0PT4q2bJBhXvnwakXG5mG8ipiwGe5SRDPnKa7L7kQm2tHuBMowBtcFz6kRtZTv5njK7PJwU+tCQ==}
     engines: {node: '>=18'}
     peerDependencies:
       browserslist: ^4.21.8
       esbuild: ~0.20.0
     dependencies:
-      browserslist: 4.22.1
+      browserslist: 4.23.0
       debug: 4.3.4
       esbuild: 0.20.2
       zod: 3.22.4
@@ -2937,7 +2915,7 @@ packages:
       function-bind: 1.1.2
       has-proto: 1.0.1
       has-symbols: 1.0.3
-      hasown: 2.0.0
+      hasown: 2.0.2
     dev: true
 
   /get-intrinsic@1.2.4:
@@ -2948,7 +2926,7 @@ packages:
       function-bind: 1.1.2
       has-proto: 1.0.3
       has-symbols: 1.0.3
-      hasown: 2.0.0
+      hasown: 2.0.2
     dev: true
 
   /get-port-please@2.6.1:
@@ -3175,18 +3153,11 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: false
 
-  /hasown@2.0.0:
-    resolution: {integrity: sha512-vUptKVTpIJhcczKBbgnS+RtcuYMB8+oNzPK2/Hp3hanz8JmpATdmmgLgSaadVREkDm+e2giHwY3ZRkyjSIDDFA==}
-    engines: {node: '>= 0.4'}
-    dependencies:
-      function-bind: 1.1.2
-
   /hasown@2.0.2:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
     dependencies:
       function-bind: 1.1.2
-    dev: true
 
   /hosted-git-info@2.8.9:
     resolution: {integrity: sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==}
@@ -3401,7 +3372,7 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       get-intrinsic: 1.2.2
-      hasown: 2.0.0
+      hasown: 2.0.2
       side-channel: 1.0.4
     dev: true
 
@@ -3410,7 +3381,7 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       es-errors: 1.3.0
-      hasown: 2.0.0
+      hasown: 2.0.2
       side-channel: 1.0.4
     dev: true
 
@@ -3488,7 +3459,7 @@ packages:
   /is-core-module@2.13.1:
     resolution: {integrity: sha512-hHrIjvZsftOsvKSn2TRYl63zvxsgE0K+0mYMoH6gD4omR5IWB2KynivBQczo3+wF1cCkjzvptnI9Q0sPU66ilw==}
     dependencies:
-      hasown: 2.0.0
+      hasown: 2.0.2
 
   /is-data-view@1.0.1:
     resolution: {integrity: sha512-AHkaJrsUVW6wq6JS8y3JnM/GJF/9cf+k20+iDzlSaJrinEo5+7vRiteOSwBhHRiAyQATN1AmY4hwzxJKPmYf+w==}
@@ -4227,13 +4198,8 @@ packages:
       - supports-color
     dev: false
 
-  /node-releases@2.0.13:
-    resolution: {integrity: sha512-uYr7J37ae/ORWdZeQ1xxMJe3NtdmqMC/JZK+geofDrkLUApKRHPd18/TxtBOJ4A0/+uUIliorNrfYV6s1b02eQ==}
-    dev: false
-
   /node-releases@2.0.14:
     resolution: {integrity: sha512-y10wOWt8yZpqXmOgRo77WaHEmhYQYGNA6y421PKsKYWEK8aW+cqAphborZDhqfyKrbZEN92CN1X2KbafY2s7Yw==}
-    dev: true
 
   /nopt@6.0.0:
     resolution: {integrity: sha512-ZwLpbTgdhuZUnZzjd7nb1ZV+4DoiC6/sfiVKok72ym/4Tlf+DFdlHYmT2JPmcNNWV6Pi3SDf1kT+A4r9RTuT9g==}
@@ -4750,7 +4716,7 @@ packages:
       lilconfig: 2.1.0
       postcss: 8.4.38
       ts-node: 10.9.2(@types/node@20.11.30)(typescript@5.4.3)
-      yaml: 2.3.3
+      yaml: 2.3.4
     dev: false
 
   /postcss-modules-extract-imports@3.0.0(postcss@8.4.38):
@@ -5240,7 +5206,7 @@ packages:
     dependencies:
       chokidar: 3.5.3
       immutable: 4.3.4
-      source-map-js: 1.0.2
+      source-map-js: 1.2.0
     dev: false
 
   /sax@1.2.4:
@@ -5418,11 +5384,6 @@ packages:
     dependencies:
       ip: 2.0.0
       smart-buffer: 4.2.0
-    dev: false
-
-  /source-map-js@1.0.2:
-    resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
-    engines: {node: '>=0.10.0'}
     dev: false
 
   /source-map-js@1.2.0:
@@ -5743,20 +5704,20 @@ packages:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
     dev: false
 
-  /tiddlywiki-plugin-dev@0.0.41(postcss@8.4.38)(ts-node@10.9.2):
-    resolution: {integrity: sha512-TLFCj9eJ+rgf3sKquLxxhNSnhIA8M2+MygM/PoCnJ/9WVBE7An4v17Xpw+mff41YE3geORqAed0Q/2WgnRnXLA==}
+  /tiddlywiki-plugin-dev@0.1.1(postcss@8.4.38)(ts-node@10.9.2):
+    resolution: {integrity: sha512-uTCMpYEVX4uk6n3/F7WnT520+iTJ2U2obzzSl9Y/ER2FAdstmMtKeHWMUMfRQeSkpFFrG5AcSnQCgrfpOEl2eA==}
     engines: {node: '>=14.17.6'}
     hasBin: true
     dependencies:
       autoprefixer: 10.4.16(postcss@8.4.38)
-      browserslist: 4.22.1
+      browserslist: 4.23.0
       chalk: 4.1.2
       chokidar: 3.5.3
       clean-css: 5.3.2
       cli-progress: 3.12.0
       commander: 9.5.0
       esbuild: 0.20.2
-      esbuild-plugin-browserslist: 0.11.1(browserslist@4.22.1)(esbuild@0.20.2)
+      esbuild-plugin-browserslist: 0.11.1(browserslist@4.23.0)(esbuild@0.20.2)
       esbuild-style-plugin: 1.6.3
       get-port-please: 2.6.1
       html-minifier-terser: 7.2.0
@@ -5785,6 +5746,7 @@ packages:
     engines: {node: '>=0.8.2'}
     hasBin: true
     dev: false
+    bundledDependencies: []
 
   /tmp@0.0.33:
     resolution: {integrity: sha512-jRCJlojKnZ3addtTOjdIqoRuPEKBvNXcGYqzO6zWZX8KfKEpnGY5jfggJQ3EjKuu8D4bJRr0y+cYJFmYbImXGw==}
@@ -6058,17 +6020,6 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
-  /update-browserslist-db@1.0.13(browserslist@4.22.1):
-    resolution: {integrity: sha512-xebP81SNcPuNpPP3uzeW1NYXxI3rxyJzF3pD6sH4jE7o/IX+WtSpwnVU+qIsDPyk0d3hmFQ7mjqc6AtV604hbg==}
-    hasBin: true
-    peerDependencies:
-      browserslist: '>= 4.21.0'
-    dependencies:
-      browserslist: 4.22.1
-      escalade: 3.1.1
-      picocolors: 1.0.0
-    dev: false
-
   /update-browserslist-db@1.0.13(browserslist@4.23.0):
     resolution: {integrity: sha512-xebP81SNcPuNpPP3uzeW1NYXxI3rxyJzF3pD6sH4jE7o/IX+WtSpwnVU+qIsDPyk0d3hmFQ7mjqc6AtV604hbg==}
     hasBin: true
@@ -6078,7 +6029,6 @@ packages:
       browserslist: 4.23.0
       escalade: 3.1.1
       picocolors: 1.0.0
-    dev: true
 
   /update-notifier@6.0.2:
     resolution: {integrity: sha512-EDxhTEVPZZRLWYcJ4ZXjGFN0oP7qYvbXWzEgRm/Yql4dHX5wDbvh89YHP6PK1lzZJYrMtXUuZZz8XGK+U6U1og==}
@@ -6287,15 +6237,9 @@ packages:
   /yallist@4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
 
-  /yaml@2.3.3:
-    resolution: {integrity: sha512-zw0VAJxgeZ6+++/su5AFoqBbZbrEakwu+X0M5HmcwUiBL7AzcuPKjj5we4xfQLp78LkEMpD0cOnUhmgOVy3KdQ==}
-    engines: {node: '>= 14'}
-    dev: false
-
   /yaml@2.3.4:
     resolution: {integrity: sha512-8aAvwVUSHpfEqTQ4w/KMlf3HcRdt50E5ODIQJBw1fQ5RL34xabzxtUlzTXVqc4rkZsPbvrXKWnABCD7kWSmocA==}
     engines: {node: '>= 14'}
-    dev: true
 
   /yn@3.1.1:
     resolution: {integrity: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==}

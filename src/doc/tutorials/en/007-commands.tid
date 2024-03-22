@@ -37,6 +37,24 @@ npm run dev
 
 After a short compilation, a web server will open and a browser will open it to see the effect. The page will be automatically recompiled and refreshed as the content of the plugin is modified.
 
+This page is read-only, changes to it are not written back to the wiki folder, so feel free to modify it to debug.
+
+!! Entering documentation writing mode
+
+```bash
+npm run dev:wiki
+```
+
+The page started is an editable page that allows you to edit the contents of the wiki folder directly.
+
+!! Running tests
+
+```bash
+npm run test
+```
+
+See [[012-About debugging|$:/plugins/Modern.TiddlyDev/doc/tutorials/en/012-关于调试]] for details.
+
 !! Building plugins
 
 There are two forms.

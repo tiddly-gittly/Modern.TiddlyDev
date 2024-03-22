@@ -3,7 +3,7 @@ caption: 关于调试
 authors: whitefall
 type: text/vnd.tiddlywiki
 
-Q：如何友好的调试呢？我一般比较喜欢用求值的思维玩，根据求得的结果，看看他是什么，在进行下一步，然后一步步实现它。
+!! Q：如何友好的调试呢？我一般比较喜欢用求值的思维玩，根据求得的结果，看看他是什么，在进行下一步，然后一步步实现它。
 
 
 A：多用控制台：
@@ -13,3 +13,16 @@ A：多用控制台：
 
 
 A：使用debugger调试语句。
+
+!! Q：如何写测试呢？
+
+你可以在 `wiki/tiddlers/tests` 文件夹里写测试，也可以在插件里写，只要 meta 文件里包含这些即可：
+
+```tid
+type: application/javascript
+tags: $:/tags/test-spec
+```
+
+`$:/tags/test-spec` 标签会将这个条目标记为测试，并在你执行 `pnpm run test` 的时候被执行。
+
+注意在 `wiki/tiddlers/tests` 文件夹里写测试只能用 JS；在插件里写测试可以用 TS 但是测试会被打包进插件，增大插件体积。

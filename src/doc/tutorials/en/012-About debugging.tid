@@ -3,7 +3,7 @@ caption: About debugging
 authors: whitefall
 type: text/vnd.tiddlywiki
 
-Q: How friendly is debugging? I generally prefer to play with the idea of finding the value, depending on the result, see what he is, in the next step, and then implement it step by step.
+!! Q: How friendly is debugging? I generally prefer to play with the idea of finding the value, depending on the result, see what he is, in the next step, and then implement it step by step.
 
 
 A: Use the console more often:
@@ -13,3 +13,16 @@ A: Use the console more often:
 
 
 A: Use debugger debugging statements.
+
+!! Q: How do I write tests?
+
+You can write tests in the `wiki/tiddlers/tests` folder, or you can write them in your plugin folder, as long as the meta file contains them:
+
+```tid
+type: application/javascript
+tags: $:/tags/test-spec
+```
+
+The `$:/tags/test-spec` tag will mark this tiddler as a test and will be executed when you run `pnpm run test`.
+
+Note that writing tests in the `wiki/tiddlers/tests` folder can only be done with JS; writing tests in plugins can be done with TS, but the tests will be packaged into the plugin, increasing its size.

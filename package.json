@@ -4,6 +4,8 @@
   "version": "0.0.2",
   "scripts": {
     "dev": "tiddlywiki-plugin-dev dev",
+    "dev:wiki": "tiddlywiki-plugin-dev dev --write-wiki",
+    "test": "tiddlywiki-plugin-dev test",
     "build": "npm run clean && tiddlywiki-plugin-dev build",
     "publish": "npm run clean && tiddlywiki-plugin-dev publish",
     "reset": "rimraf ./**/node_modules",
@@ -46,6 +48,6 @@
   "dependencies": {
     "npm-check-updates": "^16.14.17",
     "tiddlywiki": "^5.3.3",
-    "tiddlywiki-plugin-dev": "^0.0.41"
+    "tiddlywiki-plugin-dev": "^0.1.1"
   }
 }
