@@ -9,7 +9,7 @@ Following the development specifications in the previous section allows us to ea
 
 If a .meta is added to a script file it will be treated as an entry file, and the entry file will be compiled and the compiled result incorporated into the plugin and will not include the source file. If you wish to include the source file, you need to add this to the .meta file corresponding to the script file:
 
-```
+```yaml
 Modern.TiddlyDev#IncludeSource: true
 ```
 
@@ -17,7 +17,7 @@ Modern.TiddlyDev#IncludeSource: true
 
 Further, if you do not want this script file to be compiled, you need to add this to the .meta:
 
-```
+```yaml
 Modern.TiddlyDev#NoCompile: true
 ```
 

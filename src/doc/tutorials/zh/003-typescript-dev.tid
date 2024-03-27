@@ -11,13 +11,13 @@ type: text/vnd.tiddlywiki
 
 widget 是 <$text text="TiddlyWiki" /> 的渲染单位，也就是你看到的诸如 `<$xxx />` 的东西。<$text text="TiddlyWiki" /> 内置了若干 widget，提供了各种功能如文字、链接、图片、引用等，而所有的 <$text text="WikiText" /> 都会在解析后变成 widget。因此 widget 是 <$text text="TiddlyWiki" /> 中最重要和基础的概念。
 
-因此我们尝试直接创建一个属于自己的 widget。注意：widget 开发的具体教程未来会做，欢迎有相关知识的大佬帮忙编写！
+因此我们尝试直接创建一个属于自己的 widget。
 
 我们希望创建这样一个 wdiget：其显示一个随机数字，并在点击其时重新随机，我们把这个 widget 其名为 <$text text="RandomNumber" />。为了达到这样的目的，我们在插件开发目录下添加一个 `RandomNumberWidget.ts` 文件和 `RandomNumberWidget.ts.meta` 文件。
 
 首先在 `RandomNumberWidget.ts.meta` 中写如下内容;
 
-```
+```yaml
 title: $:/plugins/<作者名>/<插件名>/RandomNumberWidget.ts
 type: application/javascript
 module-type: widget

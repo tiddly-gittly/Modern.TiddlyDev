@@ -10,8 +10,8 @@ type: text/vnd.tiddlywiki
 * 你应当首先简要了解 git 的相关知识(如 clone、pull、push、add、commit 等)，并安装 git 命令行软件；
 * 你应当注册一个 <$text text="GitHub" /> 账号，如果你需要相关自动化构建功能和代码管理的话；
 * 你应当了解什么是 npm，并掌握 npm 的常用指令(如 install、run 等)，并安装 <$text text="NodeJS" /> 软件；
-* 你最好有过一段时间的 <$text text="TiddlyWiki" /> 使用经验；
-* 你可以去了解 HTML、CSS、<$text text="JavaScript" /> 和 <$text text="TypeScript" /> 的相关技术；
+* 你最好有过一段时间的 <$text text="TiddlyWiki" /> 使用经验；''注意：widget 开发的具体教程在[[太微中文教程 插件开发|https://tw-cn.netlify.app/#%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91]]里，如果你尚未了解彻底太微，请前往那里学习！''
+* 你可以去了解 HTML、CSS、<$text text="JavaScript" /> 和 <$text text="TypeScript" /> 的相关技术；你应该前往[[MDN - JavaScript|https://developer.mozilla.org/zh-CN/docs/Web/JavaScript]]或视频网站先学习一下基础，并到[[TypeScript 教程|https://wangdoc.com/typescript/]]学习基本的 TS 语法。
 
 非常感谢 mabuqian(马不前) 同学分享的视频，非常的新手向，讲解了一些基本的用法，如果需要可以去看看：
 

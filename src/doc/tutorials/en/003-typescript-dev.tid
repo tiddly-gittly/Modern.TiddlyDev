@@ -11,13 +11,11 @@ Let's go straight to the usage with an example.
 
 A widget is a rendering unit for <$text text="TiddlyWiki" />, which is what you see as something like `<$xxx />`. <$text text="TiddlyWiki" /> has several built-in widgets that provide various functions such as text, links, images, citations, etc., and all kinds of <$text text="WikiText" /> are parsed and turned into widgets, so the widget is the most important and fundamental concept in <$text text=" TiddlyWiki" />.
 
-Note: A tutorial on widget development will be done in the future, and anyone with knowledge is welcome for co-operation!
-
 We want to create a wdiget that displays a random number and re-randomizes it when clicked, and we name this widget <$text text="RandomNumber" />. To achieve this, we add a `RandomNumberWidget.ts` file and a `RandomNumberWidget.ts.meta` file to the plugin development directory.
 
 First write the following in `RandomNumberWidget.ts.meta`;
 
-```
+```yaml
 title: $:/plugins/<author-name>/<plugin-name>/RandomNumberWidget.ts
 type: application/javascript
 module-type: widget

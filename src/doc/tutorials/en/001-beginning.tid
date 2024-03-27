@@ -10,8 +10,8 @@ Before you officially start.
 * You should first have a brief knowledge of git (e.g. clone, pull, push, add, commit, etc.) and install the git command line software;
 * You should sign up for a <$text text="GitHub" /> account if you need automated build functionality and code management;
 * You should understand what npm is and have a good grasp of common npm commands (such as install, run, etc.) and install <$text text="NodeJS" /> software;
-* You'd better ideally have some experience using <$text text="TiddlyWiki" />;
-* You can go into technologies related to HTML, CSS, <$text text="JavaScript" /> and <$text text="TypeScript" />;
+* You'd better ideally have some experience using <$text text="TiddlyWiki" />; Note: A tutorial on detailed widget development is not included here, please read [[tiddlywiki.com/dev|https://tiddlywiki.com/dev/]] (or [[tw5-com|https://tiddlywiki.com/]] for beginners) to learn about it!
+* You can go into technologies related to HTML, CSS, <$text text="JavaScript" /> and <$text text="TypeScript" />; You should head over to [[MDN - JavaScript|https://developer.mozilla.org/en-US/docs/Web/JavaScript]] or a video site to learn the basics first, and go to [[TypeScript Tutorial|https://www.typescripttutorial.net/]] to learn basic TS syntax.
 
 ! Start with an empty template
 

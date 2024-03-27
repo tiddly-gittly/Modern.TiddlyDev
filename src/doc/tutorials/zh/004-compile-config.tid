@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 
 如果为一个脚本文件添加了 .meta 将会被视为入口文件，而入口文件将会被编译，并将编译后的结果纳入插件中，并不包括源文件。如果希望包含源文件，则需要在脚本文件对应的 .meta 文件中添加：
 
-```
+```yaml
 Modern.TiddlyDev#IncludeSource: true
 ```
 
@@ -17,7 +17,7 @@ Modern.TiddlyDev#IncludeSource: true
 
 进一步的，如果不希望编译这个脚本文件，就需要在 .meta 中添加：
 
-```
+```yaml
 Modern.TiddlyDev#NoCompile: true
 ```
 
