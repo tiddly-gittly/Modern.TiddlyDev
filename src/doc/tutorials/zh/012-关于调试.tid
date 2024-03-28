@@ -26,3 +26,14 @@ tags: $:/tags/test-spec
 `$:/tags/test-spec` 标签会将这个条目标记为测试，并在你执行 `pnpm run test` 的时候被执行。
 
 注意在 `wiki/tiddlers/tests` 文件夹里写测试只能用 JS；在插件里写测试可以用 TS 但是测试会被打包进插件，增大插件体积。
+
+!! 常见问题
+
+!!! 启动时报错 `ReferenceError: Element is not defined`
+
+这是因为你使用的某个库只支持浏览器端渲染，你需要确保使用它的逻辑只在浏览器端运行。
+
+可以参考白板插件的做法：
+
+# 将微件的类型改成 `module-type: library` [[源码|https://github.com/tiddly-gittly/tiddlywiki-whiteboard/blob/master/src/tw-whiteboard/widget.ts.meta]]
+# 写一个加载器，类型是微件 `module-type: widget`，在判断是浏览器环境时再加载插件 [[源码|https://github.com/tiddly-gittly/tiddlywiki-whiteboard/blob/master/src/tw-whiteboard/widget-loader.js]]

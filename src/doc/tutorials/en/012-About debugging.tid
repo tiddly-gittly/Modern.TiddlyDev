@@ -26,3 +26,14 @@ tags: $:/tags/test-spec
 The `$:/tags/test-spec` tag will mark this tiddler as a test and will be executed when you run `pnpm run test`.
 
 Note that writing tests in the `wiki/tiddlers/tests` folder can only be done with JS; writing tests in plugins can be done with TS, but the tests will be packaged into the plugin, increasing its size.
+
+!! Frequently Asked Questions
+
+!!! Error at startup `ReferenceError: Element is not defined`
+
+This is because one of the libraries you are using only supports browser-side rendering, and you need to make sure that the logic that uses it only runs on the browser side.
+
+You can refer to the whiteboard plugin for this:
+
+# Change the type of the Widget to `module-type: library` [[source|https://github.com/tiddly-gittly/tiddlywiki-whiteboard/blob/master/src/tw-whiteboard/widget.ts.meta]]
+# Write a loader of type Widget `module-type: widget` that loads the plugin when it determines that it's a browser environment [[source|https://github.com/tiddly-gittly/tiddlywiki-whiteboard/blob/master/src/tw-whiteboard/widget-loader.js]]
