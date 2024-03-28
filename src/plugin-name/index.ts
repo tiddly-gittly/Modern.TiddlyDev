@@ -13,7 +13,7 @@ class ExampleWidget extends Widget {
     const containerElement = $tw.utils.domMaker('p', {
       text: 'This is a widget!',
     });
-    nextSibling === null ? parent.append(containerElement) : nextSibling.before(containerElement);
+    parent.insertBefore(containerElement, nextSibling);
     this.domNodes.push(containerElement);
   }
 }
