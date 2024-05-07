@@ -33,9 +33,9 @@
     ]
   },
   "devDependencies": {
-    "@modern-js/tsconfig": "^2.48.4",
+    "@modern-js/tsconfig": "^2.49.2",
     "@types/jasmine": "^5.1.4",
-    "@types/node": "^20.12.7",
+    "@types/node": "^20.12.10",
     "dprint": "^0.45.1",
     "eslint-config-tidgi": "^1.2.3",
     "husky": "^9.0.11",
@@ -43,11 +43,11 @@
     "postcss": "^8.4.38",
     "rimraf": "^5.0.5",
     "ts-node": "^10.9.2",
-    "tw5-typed": "^0.5.9",
+    "tw5-typed": "^0.5.10",
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "npm-check-updates": "^16.14.18",
+    "npm-check-updates": "^16.14.20",
     "tiddlywiki": "^5.3.3",
     "tiddlywiki-plugin-dev": "^0.2.0"
   }
