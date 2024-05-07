@@ -9,6 +9,7 @@ class ExampleWidget extends Widget {
 
   render(parent: Element, nextSibling: Element) {
     this.parentDomNode = parent;
+    this.computeAttributes();
     this.execute();
     const containerElement = $tw.utils.domMaker('p', {
       text: 'This is a widget!',
