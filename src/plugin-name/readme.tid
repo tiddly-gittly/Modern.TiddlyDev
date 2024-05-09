@@ -1,5 +1,4 @@
 title: $:/plugins/your-name/plugin-name/readme
-type: text/vnd.tiddlywiki
 
 \define lingo-base() $:/plugins/your-name/plugin-name/language/
 
