@@ -5,6 +5,8 @@ type: text/vnd.tiddlywiki
 
 <$text text="Modern.TiddlyDev" /> 教程目前正在逐步完善中！我一个人的精力有限，只能工作闲暇时间写写，因此如果有感兴趣的朋友愿意帮忙写教程、提建议或者修改错误，欢迎直接 PR、Issue，或者联系我加入该项目的协作者，非常感谢！
 
-添加/修改教程的方式，请参考 [[这个目录|https://github.com/tiddly-gittly/Modern.TiddlyDev/tree/master/src/doc/tutorials/zh]] 下其他教程的写法。
+添加/修改本教程的方式，请参考 [[这个目录|https://github.com/tiddly-gittly/Modern.TiddlyDev/tree/master/src/doc/tutorials/zh]] 下其他教程的写法。
+
+也可以阅读和修改[[太微中文教程 - 插件开发|https://tw-cn.netlify.app/#%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91]]。
 
 欢迎加入 <$text text="TiddlyWiki" /> 中文社区，QQ 群：946052860 共同学习！
