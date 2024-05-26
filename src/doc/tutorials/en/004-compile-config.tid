@@ -61,6 +61,22 @@ If, at the same time, a tiddler named `foo bar` needs to be required at runtime:
 
 Note: Only the use of `[[]]` for tiddler headers with spaces is supported, but no other filter syntax is supported. However, wildcard syntax, such as `abc/*`, is supported. The specific behavior is determined by [[ESBuild|https://esbuild.github.io/api/#external]].
 
+!!! Modules excluded by default
+
+In the example above we mentioned that you can exclude the `fs` module, but in fact all modules that are available in nodejs but not in the browser are excluded by default, including but not limited to `url` `util` and so on.
+
+If you see that your plugin fails to load and reports an error:
+
+> Error executing boot module $:/plugins/linonetwo/tidgal/widget/index.js: Cannot find module named 'url' required by module '$:/plugins/linonetwo/tidgal/widget/index.js', resolved to url , boot.js:214
+
+This is because some packages like `pixijs` use the `url` module, which is excluded by default. You can specify which modules to bring in and not exclude by using the `Modern.TiddlyDev#NodeModulesNotExternal` field.
+
+For example,
+
+```json
+"Modern.TiddlyDev#NodeModulesNotExternal": ["url", "util", "punycode"],
+```
+
 !! Compatibility policy
 
 Build time will automatically use [[browserslist|https://browsersl.ist/]] for code compatibility escaping work. The default policy is `>0.25%, not ie 11, not op_mini all`. If you want to specify it yourself, you can specify it in `plugin.info`.

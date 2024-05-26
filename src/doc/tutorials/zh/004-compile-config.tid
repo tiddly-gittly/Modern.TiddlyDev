@@ -61,6 +61,22 @@ Modern.TiddlyDev#NoCompile: true
 
 注意：仅支持使用 `[[]]` 表示带有空格的 tiddler 标题，但不支持其他 filter 语法。但是可以支持通配符语法，例如`abc/*`。具体行为是由[[ESBuild|https://esbuild.github.io/api/#external]]决定的。
 
+!!! 默认排除的模块
+
+上面的例子里我们提到可以排除 `fs` 模块，不过事实上所有 nodejs 有但浏览器没有的模块都是默认排除的，包括但不限于 `url` `util` 等模块。
+
+如果你看到你的插件加载失败并报错：
+
+> Error executing boot module $:/plugins/linonetwo/tidgal/widget/index.js: Cannot find module named 'url' required by module '$:/plugins/linonetwo/tidgal/widget/index.js', resolved to url , boot.js:214
+
+这是因为有的包例如 `pixijs` 会使用到 `url` 模块，而这个模块是默认排除的。你可以通过 `Modern.TiddlyDev#NodeModulesNotExternal` 字段来指定需要引入，不要排除掉的模块。
+
+例如
+
+```json
+"Modern.TiddlyDev#NodeModulesNotExternal": ["url", "util", "punycode"],
+```
+
 !! 兼容性策略
 
 构建时，会自动使用 [[browserslist|https://browsersl.ist/]] 进行代码兼容性转义工作。默认的策略是 `>0.25%, not ie 11, not op_mini all`。如需自行指定，可在 `plugin.info` 中指定：
