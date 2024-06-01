@@ -1,6 +1,6 @@
 title: $:/plugins/your-name/plugin-name/language/zh-Hans/Readme
 
-\define lingo-base() $:/plugins/your-name/plugin-name/language/
+\procedure lingo-base() $:/plugins/your-name/plugin-name/language/
 
 ! <<lingo Name>>
 
