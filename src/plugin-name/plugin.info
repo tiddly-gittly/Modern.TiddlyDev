@@ -5,5 +5,6 @@
   "core-version": ">=5.1.22",
   "plugin-type": "plugin",
   "version": "0.0.1",
+  "stability": "STABILITY_1_EXPERIMENTAL",
   "list": "readme config tree"
 }
