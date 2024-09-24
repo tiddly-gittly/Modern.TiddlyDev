@@ -10,6 +10,7 @@ $:/language/
 \procedure lingo(title,override-lingo-base)
 <!-- Lingo procedure -->
 <!-- Get the parse mode used to invoke this procedure -->
+\whitespace trim
 <$parameters $parseMode="parseMode">
 	<!-- Compute the lingo-base-->
 	<$let active-lingo-base={{{ [<override-lingo-base>!match[]else<lingo-base>] }}}>
