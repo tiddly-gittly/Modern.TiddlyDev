@@ -49,6 +49,6 @@
   "dependencies": {
     "npm-check-updates": "^17.1.1",
     "tiddlywiki": "^5.3.5",
-    "tiddlywiki-plugin-dev": "^0.2.1"
+    "tiddlywiki-plugin-dev": "^0.3.1"
   }
 }
