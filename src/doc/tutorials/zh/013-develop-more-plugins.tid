@@ -1,0 +1,17 @@
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials/zh/develop-more-plugins
+caption: 开发更多插件
+authors: mabuqian(马不前)
+type: text/vnd.tiddlywiki
+
+同一个仓库里可以同时开发多个插件。这些插件可以归属于子插件，也可以是相关插件。这样就可以避免增加插件仓库，增加过多后期会维护比较难。
+
+开发新的插件跟原来的插件使用到的命令是一样的。
+
+`npm run new`或者`pnpm run new`，接下来只要填写相应的插件信息即可。同时会在`src`文件夹下生成一个新的插件文件夹。
+
+插件开发完成后，可以提交到CPL上。提交流程则是打开[[CPL仓库|https://github.com/tiddly-gittly/TiddlyWiki-CPL]]，fork一份到自己的仓库中。然后下载下来用[[太记|https://github.com/tiddly-gittly/TidGi-Desktop]]打开。并添加一个新的插件条目。注意在URL字段中添加插件下载的仓库地址，一般形式为`https://github.com/tiddly-gittly/tiddlywiki-plugins/releases/latest/download/$plugin-name$.json`，这样CPL才会搜索到并下载这个插件。
+
+之后提交PR到CPL仓库，等待管理员审核。审核通过后，就可以在自己的TiddlyWiki中搜索并下载这个插件了。
+
+插件仓库需要发布release，这样CPL才能搜索到最新版本，并且需要按照`v.x.x.x`的格式命名。可以像本仓库一样使用类似`v2024.3.23-1`的版本号。也可以使用类似`0.1.0`的版本号。只要提交了，就会在action中触发`Release Plugins`并自动生成json文件。
+
