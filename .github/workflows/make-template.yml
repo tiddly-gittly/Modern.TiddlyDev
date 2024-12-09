@@ -21,9 +21,9 @@ jobs:
           rm -rf upload/.git upload/README.md upload/pnpm-lock.yaml upload/src/doc upload/.github/workflows/make-template.yml
 
       - name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: lts/*
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
