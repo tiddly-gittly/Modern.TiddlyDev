@@ -4,6 +4,7 @@
   "version": "0.0.2",
   "scripts": {
     "dev": "tiddlywiki-plugin-dev dev",
+    "dev:lan": "tiddlywiki-plugin-dev dev --lan",
     "dev:wiki": "tiddlywiki-plugin-dev dev --write-wiki",
     "test": "tiddlywiki-plugin-dev test",
     "build": "npm run clean && tiddlywiki-plugin-dev build",
