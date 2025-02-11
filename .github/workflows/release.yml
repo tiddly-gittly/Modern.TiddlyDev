@@ -1,0 +1,80 @@
+name: Release Plugins
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+    paths-ignore:
+      - 'README.md'
+      - 'wiki/**'
+      - 'public/**'
+      - 'scripts/**'
+      - '.vscode'
+      - '.idea'
+  pull_request:
+    branches:
+      - master
+      - main
+    paths-ignore:
+      - 'README.md'
+      - 'wiki/**'
+      - 'public/**'
+      - '.scripts/**'
+      - '.vscode'
+      - '.idea'
+
+concurrency:
+  group: release-ci-group
+  cancel-in-progress: true
+
+jobs:
+  Plugins:
+    permissions:
+        contents: write
+        pages: write
+        id-token: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 'latest'
+          run_install: false
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            **/node_modules
+            ~/.pnpm-store
+            ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+            ${{ runner.os }}-node-
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Run tests
+        run: pnpm run test
+
+      - name: Build Plugins
+        run: pnpm run build
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            dist/*.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
