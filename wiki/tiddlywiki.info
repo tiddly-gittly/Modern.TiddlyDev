@@ -1,11 +1,11 @@
 {
-    "description": "Basic client-server edition",
-    "plugins": [],
-    "themes": [
-        "tiddlywiki/vanilla"
-    ],
-    "languages": [
-        "zh-Hans"
-    ],
-    "build": {}
+  "description": "Basic client-server edition",
+  "plugins": [],
+  "themes": [
+    "tiddlywiki/vanilla"
+  ],
+  "languages": [
+    "zh-Hans"
+  ],
+  "build": {}
 }
