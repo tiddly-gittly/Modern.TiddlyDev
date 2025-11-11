@@ -1,0 +1,26 @@
+title: $:/plugins/your-name/plugin-name/config
+tags: $:/tags/ControlPanel/SettingsTab
+caption: <<lingo Name $:/plugins/your-name/plugin-name/language/>>
+
+\procedure lingo-base() $:/plugins/your-name/plugin-name/language/
+
+<<lingo ConfigDescription>>
+
+---
+
+!! <<lingo Configs/PluginConfigs/Caption>>
+
+;<<lingo Configs/XXX/Caption>>
+:<$checkbox tiddler="$:/plugins/your-name/plugin-name/configs/xxx" field="text" checked="yes" unchecked=""> <<lingo Configs/XXX/Description>></$checkbox>
+;<<lingo Configs/YYY/Caption>>
+:<$select tiddler='$:/plugins/your-name/plugin-name/configs/yyy'>
+	<option value='0'>Sunday</option>
+	<option value='1'>Monday</option>
+	<option value='2'>Tuesday</option>
+	<option value='3'>Wednesday</option>
+	<option value='4'>Thursday</option>
+	<option value='5'>Friday</option>
+	<option value='6'>Saturday</option>
+</$select>
+;<<lingo Configs/ZZZ/Caption>>
+:<$edit-text tiddler="$:/plugins/your-name/plugin-name/configs/zzz" tabindex=-1 focus=false cancelPopups="yes" fileDrop=no tag="input" />
