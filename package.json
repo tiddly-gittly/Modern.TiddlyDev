@@ -1,0 +1,58 @@
+{
+  "url": "https://tiddly-gittly.github.io/Modern.TiddlyDev/",
+  "license": "MIT",
+  "version": "0.0.2",
+  "scripts": {
+    "dev": "tiddlywiki-plugin-dev dev",
+    "dev:lan": "tiddlywiki-plugin-dev dev --lan",
+    "dev:wiki": "tiddlywiki-plugin-dev dev --write-wiki",
+    "test": "tiddlywiki-plugin-dev test",
+    "build": "npm run clean && tiddlywiki-plugin-dev build",
+    "lint": "eslint ./src --ext js,ts,tsx,json",
+    "lint:fix": "eslint ./src --ext ts,tsx,json --fix",
+    "check": "tsc --noEmit --skipLibCheck",
+    "publish": "npm run clean && tiddlywiki-plugin-dev publish",
+    "reset": "rimraf ./**/node_modules",
+    "clean": "rimraf dist",
+    "prepare": "husky install",
+    "update": "npm-check-updates -u && dprint config update",
+    "new": "tiddlywiki-plugin-dev new",
+    "build:library": "npm run clean && tiddlywiki-plugin-dev build --library --output dist/library",
+    "publish:offline": "npm run clean && tiddlywiki-plugin-dev publish --offline"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "node --max_old_space_size=8192 ./node_modules/eslint/bin/eslint.js --fix --color --cache --quiet"
+    ],
+    "*.{js,jsx,mjs,mjsx,cjs,cjsx}": [
+      "node --max_old_space_size=8192 ./node_modules/eslint/bin/eslint.js --fix --color --cache --quiet"
+    ]
+  },
+  "devDependencies": {
+    "@modern-js/tsconfig": "^2.68.19",
+    "@types/jasmine": "^5.1.12",
+    "@types/node": "^24.10.0",
+    "dprint": "^0.50.2",
+    "eslint-config-tidgi": "^2.2.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.6",
+    "postcss": "^8.5.6",
+    "rimraf": "^6.1.0",
+    "ts-node": "^10.9.2",
+    "tw5-typed": "^0.6.8",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "npm-check-updates": "^19.1.2",
+    "tiddlywiki": "^5.3.8",
+    "tiddlywiki-plugin-dev": "^0.3.2"
+  }
+}
