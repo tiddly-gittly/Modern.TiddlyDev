@@ -10,6 +10,7 @@
     "build": "npm run clean && tiddlywiki-plugin-dev build",
     "lint": "eslint ./src --ext js,ts,tsx,json",
     "lint:fix": "eslint ./src --ext ts,tsx,json --fix",
+    "check": "tsc --noEmit --skipLibCheck",
     "publish": "npm run clean && tiddlywiki-plugin-dev publish",
     "reset": "rimraf ./**/node_modules",
     "clean": "rimraf dist",
