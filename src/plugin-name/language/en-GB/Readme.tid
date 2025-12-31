@@ -1,0 +1,9 @@
+title: $:/plugins/your-name/plugin-name/language/en-GB/Readme
+
+\procedure lingo-base() $:/plugins/your-name/plugin-name/language/
+
+! <<lingo Name>>
+
+<<lingo Description>>
+
+Write readme here.

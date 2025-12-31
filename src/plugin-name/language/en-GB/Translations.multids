@@ -1,0 +1,10 @@
+title: $:/plugins/your-name/plugin-name/language/en-GB/
+
+Name: Unnamed Plugin
+Description: Unfilled Description
+Configs/Description: These settings let you customise the behaviour of "Unnamed Plugin" plugin.
+Configs/PluginConfigs/Caption: Plugin Configs
+Configs/XXX/Caption: XXX
+Configs/XXX/Description: XXX is XXX
+Configs/YYY/Caption: YYY
+Configs/ZZZ/Caption: ZZZ
