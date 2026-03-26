@@ -13,6 +13,24 @@ A widget is a rendering unit for <$text text="TiddlyWiki" />, which is what you 
 
 We want to create a wdiget that displays a random number and re-randomizes it when clicked, and we name this widget <$text text="RandomNumber" />. To achieve this, we add a `RandomNumberWidget.ts` file and a `RandomNumberWidget.ts.meta` file to the plugin development directory.
 
+Before writing widget code, make sure the project loads [[tw5-typed|https://github.com/tiddly-gittly/TW5-Typed]] in the supported way. In `tsconfig.json`, use:
+
+```json
+{
+  "compilerOptions": {
+    "types": ["node", "tw5-typed"]
+  }
+}
+```
+
+And in `src/global.d.ts`, keep an ambient entry like:
+
+```typescript
+/// <reference types="tw5-typed" />
+```
+
+This gives you both `import type { ... } from 'tiddlywiki'` and the global `$tw` in VS Code. Do not use `typeRoots` for `tw5-typed`; that can cause the editor to lose the `tiddlywiki` module declaration.
+
 First write the following in `RandomNumberWidget.ts.meta`;
 
 ```yaml
@@ -55,7 +73,7 @@ Execute `pnpm run dev` to compile the source file, open a browser, create a tidd
 
 Note: The framework also supports compilation of cjs, mjs, jsx, tsx files.
 
-Note: The related <$text text="TypeScript" /> type support is done by [[tw5-typed|https://github.com/tiddly-gittly/TW5-Typed]], which is not very complete, so some manual type annotations are needed as above. I welcome your help to improve tw5-typed!
+Note: The related <$text text="TypeScript" /> type support is done by [[tw5-typed|https://github.com/tiddly-gittly/TW5-Typed]]. It already provides the `tiddlywiki` module and global `$tw`, but TiddlyWiki's API surface is huge, so you will still occasionally need explicit annotations in your own code. Improvements to tw5-typed are always welcome.
 
 ! Importing other resources in <$text text="TypeScript" /> scripts
 

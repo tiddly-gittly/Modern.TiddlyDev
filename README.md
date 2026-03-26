@@ -35,4 +35,24 @@ Don't worry, even if you are not good at programming, it doesn't matter, Modern.
 
 There's a lot of work here, but it's just Out-of-the-Box for you. Use it and get started on your modern TiddlyWiki plugin development journey!
 
+## TypeScript Setup
+
+Modern.TiddlyDev now loads [tw5-typed](https://github.com/tiddly-gittly/TW5-Typed) in the supported way:
+
+```json
+{
+  "compilerOptions": {
+    "types": ["node", "tw5-typed"]
+  }
+}
+```
+
+And the template keeps a project ambient entry in `src/global.d.ts`:
+
+```typescript
+/// <reference types="tw5-typed" />
+```
+
+This makes both `import type { ... } from 'tiddlywiki'` and the global `$tw` available to TypeScript and VS Code. Do not put `tw5-typed` into `typeRoots`; it is a normal package with its own `types` entry, and using `typeRoots` there can stop the editor from resolving the declarations correctly.
+
 ![](src/doc/wysiwyg-demo.gif)

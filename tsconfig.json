@@ -5,7 +5,7 @@
     "jsx": "react-jsx",
     "baseUrl": "./",
     "noEmit": true,
-    "typeRoots": ["node_modules/@types", "node_modules/tw5-typed"],
+    "types": ["node", "tw5-typed"],
     "lib": ["DOM", "ESNext"]
   },
   "include": ["src", "*.json", "wiki/*.info", "*.mjs", "*.js", "src/**/*.d.ts"]

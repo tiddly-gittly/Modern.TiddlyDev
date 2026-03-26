@@ -47,7 +47,7 @@
     "postcss": "^8.5.6",
     "rimraf": "^6.1.0",
     "ts-node": "^10.9.2",
-    "tw5-typed": "^0.6.8",
+    "tw5-typed": "^1.1.4",
     "typescript": "^5.9.3"
   },
   "dependencies": {
