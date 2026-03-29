@@ -56,22 +56,49 @@ In src, there is already a `plugin-name` sample project for demo, you can start 
 ```bash
 npm run dev
 ```
+There will be a warning like `Plugin(s) required for client-server operation are missing. "$:/plugins/tiddlywiki/filesystem", "$:/plugins/tiddlywiki/tiddlyweb"`. This is normal for the `dev` command. Removing these plugins puts the wiki into a "read-only" mode so you can expermient in the wiki and modifications will not be saved to your project.
 
-If no errors are reported, the console will show a local URL (usually `http://127.0.0.1:8080`), and if you browse this URL with your browser, you will see a Wiki page, which will also show this tutorial first. Further inspection shows that this Wiki has the plugin `$:/plugins/your-name/plugin-name` installed.
+If no errors are reported, the console will show a local URL (usually `http://127.0.0.1:8080`), and if you browse this URL with your browser, you will see a Wiki page, which will also show the Modern.TiddlyDev plugin and README page. Further inspection shows that this Wiki also has the plugin `$:/plugins/your-name/plugin-name` installed.
 
-This sample plugin implements a widget called `test` that displays a fixed line of text. We create a tiddler called Test in which we use this widget.
+This sample plugin implements a widget called `test` that displays a fixed line of text. 
+
+Now, create a new tiddler called Test so we can test the widget.
+
+In your code editor, navigate to `src/plugin-name/index.ts` and view the name of the test widget at the bottom: `exports.RandomNumber = ExampleWidget;`
+
+Input the widget into your test tidder:
 
 ```
-<$test />
+<$RandomNumber />
 ```
 
-Save to see the words `This is a widget!`.
+Save to see the words `This is a widget!` with a cyan background.
 
-Do not close your browser or development server, try to change the text in line 14 of `src/plugin-name/index.ts`, save it and you will see that the plugin is recompiled and the text in Test on the web page is changed:
-
+Do not close your browser or development server. Change the text in line 16 of `src/plugin-name/index.ts`. Save index.ts and you will see that the plugin is recompiled. Refresh your browser, recreate the Test tiddler, and see that and the rendered text has changed:
 [img[$:/plugins/Modern.TiddlyDev/doc/wysiwtg-demo.gif]]
 
 Afterwards, press <kbd>ctrl</kbd> + <kbd>C</kbd> in the console to stop the server.
+
+! Sync Editor and Wiki
+To enable automatic changes between your editor and the wiki, run the `dev` command with the `:wiki` modifier.
+
+```bash
+npm run dev:wiki
+```
+
+Refresh the browser if you previously had it open in standard `dev` mode.
+
+Now when you make browser-side changes to tiddlers, they will automatically save to your local folder or repository. If you want to experiment in your wiki and have it to revert back to its previous state when you are done, do not to enable this mode and use standard `dev` mode instead.
+
+While in `:wiki` mode, saved changes to tiddlers, including widgets, from your editor will be pushed to your browser upon compiling. This will trigger a page refresh. You may want to edit the `wiki\tiddlers\$__DefaultTiddlers.tid` file to open to a test tiddler so your changes are reflected quickly:
+
+```
+title: $:/DefaultTiddlers
+
+Test $:/plugins/Modern.TiddlyDev/doc
+```
+
+Replace "Test" with the title of an existing tiddler.
 
 ! Compiling the plugin
 
