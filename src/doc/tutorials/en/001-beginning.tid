@@ -59,10 +59,10 @@ npm run dev
 
 If no errors are reported, the console will show a local URL (usually `http://127.0.0.1:8080`), and if you browse this URL with your browser, you will see a Wiki page, which will also show this tutorial first. Further inspection shows that this Wiki has the plugin `$:/plugins/your-name/plugin-name` installed.
 
-This sample plugin implements a widget called `test` that displays a fixed line of text. We create a tiddler called Test in which we use this widget.
+This sample plugin implements a widget called `RandomNumber` that displays a fixed line of text. We create a tiddler called Test in which we use this widget.
 
 ```
-<$test />
+<$RandomNumber />
 ```
 
 Save to see the words `This is a widget!`.

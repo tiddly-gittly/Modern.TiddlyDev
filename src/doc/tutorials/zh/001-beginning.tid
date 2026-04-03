@@ -64,10 +64,10 @@ npm run dev
 
 如果没有报错，则控制台会显示出一个本地网址(一般是 `http://127.0.0.1:8080`)，使用浏览器浏览此网址，可以看到一个 Wiki 页面，页面首先也会显示本教程。进一步查看可发现，这个 Wiki 安装了插件 `$:/plugins/your-name/plugin-name`。
 
-这个示例插件实现了一个叫 test 的微件，作用是显示一行固定的文字。我们创建一个称为 Test 的 tiddler，在其中使用这个微件：
+这个示例插件实现了一个叫 RandomNumber 的微件，作用是显示一行固定的文字。我们创建一个称为 Test 的 tiddler，在其中使用这个微件：
 
 ```
-<$test />
+<$RandomNumber />
 ```
 
 保存可看到 `This is a widget!` 的字样。
