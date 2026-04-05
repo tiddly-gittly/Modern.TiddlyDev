@@ -78,7 +78,7 @@ jobs:
           retention-days: 5
 
       - name: Comment PR with Results
-        if: failure()
+        if: failure() && github.event_name == 'pull_request'
         uses: actions/github-script@v7
         with:
           script: |
@@ -90,7 +90,7 @@ jobs:
             })
 
       - name: Comment PR with Success
-        if: success()
+        if: success() && github.event_name == 'pull_request'
         uses: actions/github-script@v7
         with:
           script: |
