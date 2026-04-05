@@ -27,6 +27,27 @@ The `$:/tags/test-spec` tag will mark this tiddler as a test and will be execute
 
 Note that writing tests in the `wiki/tiddlers/tests` folder can only be done with JS; writing tests in plugins can be done with TS, but the tests will be packaged into the plugin, increasing its size.
 
+!! Q: How do I write Playwright E2E tests?
+
+Put Playwright test files in `wiki/tiddlers/tests/playwright`. Example files:
+
+* `example-widget.spec.ts`: verifies initial widget rendering
+* `example-widget-click.spec.ts`: verifies click interaction behavior
+
+Also add a tiddler used as the navigation target, for example `PlaywrightExampleWidget.tid`, and open it in tests with `/#PlaywrightExampleWidget`.
+
+Common commands:
+
+```bash
+pnpm test:playwright
+pnpm test:playwright:headed
+```
+
+Difference:
+
+* `pnpm test:playwright` runs in headless mode (no visible browser), good for CI and quick checks
+* `pnpm test:playwright:headed` runs in headed mode (visible browser window), good for local interaction debugging
+
 !! Frequently Asked Questions
 
 !!! Error at startup `ReferenceError: Element is not defined`

@@ -56,3 +56,28 @@ And the template keeps a project ambient entry in `src/global.d.ts`:
 This makes both `import type { ... } from 'tiddlywiki'` and the global `$tw` available to TypeScript and VS Code. Do not put `tw5-typed` into `typeRoots`; it is a normal package with its own `types` entry, and using `typeRoots` there can stop the editor from resolving the declarations correctly.
 
 ![](src/doc/wysiwyg-demo.gif)
+
+## Playwright E2E Test
+
+This project now supports browser E2E tests with Playwright and `pnpm`.
+
+- Test files are placed in `wiki/tiddlers/tests/playwright`
+- Example render test: `wiki/tiddlers/tests/playwright/example-widget.spec.ts`
+- Example click behavior test: `wiki/tiddlers/tests/playwright/example-widget-click.spec.ts`
+- The sample tiddler used by the test is `wiki/tiddlers/tests/playwright/PlaywrightExampleWidget.tid`
+
+Run tests:
+
+```bash
+pnpm test:playwright
+```
+
+`pnpm test:playwright` runs in headless mode (no visible browser), which is suitable for CI and quick local checks.
+
+Run tests in headed mode:
+
+```bash
+pnpm test:playwright:headed
+```
+
+`pnpm test:playwright:headed` opens a visible browser window, which is useful for debugging interaction steps.
