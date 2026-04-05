@@ -9,6 +9,7 @@ on:
       - '*.md'
       - '.vscode/**'
       - '.idea/**'
+  workflow_dispatch:
 
 concurrency:
   group: pr-validation-${{ github.ref }}
