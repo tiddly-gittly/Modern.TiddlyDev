@@ -1,0 +1,17 @@
+title: $:/plugins/Modern.TiddlyDev/doc/tutorials/en/develop-more-plugins
+caption: Develop More Plugins
+authors: mabuqian(马不前)
+type: text/vnd.tiddlywiki
+
+ 
+Multiple plugins can be developed at the same time in the same repository. These plugins can be attributed to sub-plugins or related plugins. This can be avoided to increase the plug-in repository, adding too much later will be more difficult to maintain.
+
+Developing a new plugin uses the same commands as the original plugin.
+
+`npm run new` or `pnpm run new`, then just fill in the appropriate plugin information. A new plugin folder will be created in the `src` folder.
+
+Once the plugin is developed,you can be submitted to the CPL. The submission process is to open [[CPL repository|https://github.com/tiddly-gittly/TiddlyWiki-CPL]] and fork a copy to your own repository. Then download it and open it with [[TidGi|https://github.com/tiddly-gittly/TidGi-Desktop]]. And add a new plugin entry. Be careful to add the address of the repository where the plugin was downloaded in the URL field, usually in the form of `https://github.com/tiddly-gittly/tiddlywiki-plugins/releases/latest/download/$plugin-name$.json`, so that CPL will search for and download the plugin.
+
+After that, submit the PR to the CPL repository and wait for the administrator to review it. After approval, you can search and download the plugin in your own TiddlyWiki by CPL.
+
+The plugin repository needs to be released so that CPL can search for the latest version, and it needs to be named in `v.x.x.x` format. It is possible to use a version number like `v2024.3.23-1` as in this repository. It is also possible to use a version number like `0.1.0`. As soon as the commit is made, `Release Plugins` will be triggered in the action and the json file will be generated automatically.
