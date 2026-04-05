@@ -3,6 +3,12 @@ import { IChangedTiddlers } from 'tiddlywiki';
 import './index.css';
 
 class ExampleWidget extends Widget {
+  private clickCount = 0;
+
+  private getDisplayText() {
+    return `This is a widget! Clicks: ${this.clickCount}`;
+  }
+
   refresh(_changedTiddlers: IChangedTiddlers) {
     return false;
   }
@@ -13,7 +19,11 @@ class ExampleWidget extends Widget {
     this.execute();
     const containerElement = $tw.utils.domMaker('p', {
       class: 'tc-example-widget',
-      text: 'This is a widget!',
+      text: this.getDisplayText(),
+    });
+    containerElement.addEventListener('click', () => {
+      this.clickCount += 1;
+      containerElement.textContent = this.getDisplayText();
     });
     parent.insertBefore(containerElement, nextSibling);
     this.domNodes.push(containerElement);

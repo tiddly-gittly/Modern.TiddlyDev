@@ -49,12 +49,18 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
+      - name: Install Playwright Browser
+        run: pnpm exec playwright install --with-deps chromium
+
       - name: Lint Code
         run: pnpm exec eslint ./src --max-warnings 0
         continue-on-error: true
 
       - name: Run Tests
         run: pnpm run test
+
+      - name: Run Playwright E2E Tests
+        run: pnpm run test:playwright
 
       - name: Build Plugins
         run: pnpm run build
