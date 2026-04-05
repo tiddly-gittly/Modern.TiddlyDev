@@ -62,21 +62,51 @@ npx tiddlywiki-plugin-dev@latest init --repo https://ghproxy.com/https://github.
 npm run dev
 ```
 
-如果没有报错，则控制台会显示出一个本地网址(一般是 `http://127.0.0.1:8080`)，使用浏览器浏览此网址，可以看到一个 Wiki 页面，页面首先也会显示本教程。进一步查看可发现，这个 Wiki 安装了插件 `$:/plugins/your-name/plugin-name`。
+你会看到一个类似 `Plugin(s) required for client-server operation are missing. "$:/plugins/tiddlywiki/filesystem", "$:/plugins/tiddlywiki/tiddlyweb"` 的警告。对于 `dev` 命令来说这是正常现象。去掉这两个插件会让 wiki 进入“只读”模式，你可以在页面里放心实验，修改不会保存回项目文件。
 
-这个示例插件实现了一个叫 test 的微件，作用是显示一行固定的文字。我们创建一个称为 Test 的 tiddler，在其中使用这个微件：
+如果没有报错，则控制台会显示出一个本地网址(一般是 `http://127.0.0.1:8080`)，使用浏览器浏览此网址，可以看到一个 Wiki 页面。页面会先显示 Modern.TiddlyDev 插件和 README 页面。进一步查看可发现，这个 Wiki 也安装了插件 `$:/plugins/your-name/plugin-name`。
+
+这个示例插件实现了一个叫 test 的微件，作用是显示一行固定的文字。
+
+现在我们创建一个名为 Test 的 tiddler 来测试这个微件。
+
+在你的代码编辑器中打开 `src/plugin-name/index.ts`，查看文件底部导出的微件名：`exports.RandomNumber = ExampleWidget;`
+
+在测试 tiddler 中输入：
 
 ```
-<$test />
+<$RandomNumber />
 ```
 
-保存可看到 `This is a widget!` 的字样。
+保存后可以看到带青色背景的 `This is a widget!`。
 
-不要关闭浏览器或者开发服务器，尝试修改一下 `src/plugin-name/index.ts` 中第 14 行的文字，保存后即可看到，插件被重新编译，网页上 Test 中的文字随之改变：
+不要关闭浏览器或者开发服务器。尝试修改 `src/plugin-name/index.ts` 中第 16 行的文字。保存 `index.ts` 后你会看到插件被重新编译。刷新浏览器后，重新创建 Test tiddler，就能看到渲染文本发生变化：
 
 [img[$:/plugins/Modern.TiddlyDev/doc/wysiwtg-demo.gif]]
 
 随后，在控制台按 <kbd>ctrl</kbd> + <kbd>C</kbd> 即可停止服务器。
+
+! 同步编辑器与 Wiki
+
+如果你希望编辑器和 wiki 之间自动同步修改，可以使用带 `:wiki` 后缀的 `dev` 命令：
+
+```bash
+npm run dev:wiki
+```
+
+如果你之前在普通 `dev` 模式打开了浏览器，请刷新页面。
+
+在这个模式下，你在浏览器中对 tiddler 的改动会自动保存到本地文件夹或仓库中。如果你只是想在 wiki 里做临时实验，并希望结束后恢复原状，请不要开启这个模式，继续使用普通 `dev` 模式。
+
+在 `:wiki` 模式下，编辑器里保存的 tiddler（包括 widget）在编译后会推送到浏览器并触发页面刷新。你可以考虑修改 `wiki\\tiddlers\\$__DefaultTiddlers.tid`，让其默认打开测试 tiddler，以便更快看到改动：
+
+```
+title: $:/DefaultTiddlers
+
+Test $:/plugins/Modern.TiddlyDev/doc
+```
+
+把其中的 `Test` 替换为你已有的 tiddler 标题即可。
 
 ! 编译插件
 
