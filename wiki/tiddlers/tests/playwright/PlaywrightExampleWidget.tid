@@ -1,0 +1,7 @@
+title: PlaywrightExampleWidget
+type: text/vnd.tiddlywiki
+tags: 
+
+This tiddler is used by Playwright E2E tests.
+
+<$RandomNumber/>
