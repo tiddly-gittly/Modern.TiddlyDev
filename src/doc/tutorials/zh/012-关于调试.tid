@@ -27,6 +27,27 @@ tags: $:/tags/test-spec
 
 注意在 `wiki/tiddlers/tests` 文件夹里写测试只能用 JS；在插件里写测试可以用 TS 但是测试会被打包进插件，增大插件体积。
 
+!! Q：如何写 Playwright 端到端测试？
+
+可以把 Playwright 测试文件放在 `wiki/tiddlers/tests/playwright` 目录中。示例：
+
+* `example-widget.spec.ts`：验证 Widget 初始渲染
+* `example-widget-click.spec.ts`：验证点击交互行为
+
+另外配一个用于被访问的测试条目，例如 `PlaywrightExampleWidget.tid`，然后在测试里通过 `/#PlaywrightExampleWidget` 打开页面。
+
+常用命令：
+
+```bash
+pnpm test:playwright
+pnpm test:playwright:headed
+```
+
+两者区别：
+
+* `pnpm test:playwright` 是无头模式（不弹浏览器窗口），更适合 CI 或快速回归
+* `pnpm test:playwright:headed` 是有头模式（可见浏览器窗口），更适合本地排查交互问题
+
 !! 常见问题
 
 !!! 启动时报错 `ReferenceError: Element is not defined`

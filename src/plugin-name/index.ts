@@ -17,8 +17,12 @@ class ExampleWidget extends Widget {
     this.parentDomNode = parent;
     this.computeAttributes();
     this.execute();
-    const containerElement = $tw.utils.domMaker('p', {
+    const containerElement = $tw.utils.domMaker('button', {
       class: 'tc-example-widget',
+      attributes: {
+        type: 'button',
+        'aria-label': 'Example widget click counter',
+      },
       text: this.getDisplayText(),
     });
     containerElement.addEventListener('click', () => {

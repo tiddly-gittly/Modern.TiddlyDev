@@ -72,8 +72,12 @@ Run tests:
 pnpm test:playwright
 ```
 
+`pnpm test:playwright` runs in headless mode (no visible browser), which is suitable for CI and quick local checks.
+
 Run tests in headed mode:
 
 ```bash
 pnpm test:playwright:headed
 ```
+
+`pnpm test:playwright:headed` opens a visible browser window, which is useful for debugging interaction steps.

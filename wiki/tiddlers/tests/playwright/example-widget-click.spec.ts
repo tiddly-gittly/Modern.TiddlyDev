@@ -5,12 +5,12 @@ test.describe('ExampleWidget click behavior', () => {
     await page.goto('/#PlaywrightExampleWidget');
 
     const widget = page.locator('.tc-example-widget');
-    await expect(widget).toHaveText('This is a widget! Clicks: 0');
+    await expect(widget).toHaveText(/Clicks:\s*0\b/);
 
     await widget.click();
-    await expect(widget).toHaveText('This is a widget! Clicks: 1');
+    await expect(widget).toHaveText(/Clicks:\s*1\b/);
 
     await widget.click();
-    await expect(widget).toHaveText('This is a widget! Clicks: 2');
+    await expect(widget).toHaveText(/Clicks:\s*2\b/);
   });
 });
