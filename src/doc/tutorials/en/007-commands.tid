@@ -10,7 +10,7 @@ The project wraps some common commands, most of which are implemented using anot
 !! Clear build products
 
 ```bash
-npm run clean
+pnpm run clean
 ```
 
 will delete the dist folder.
@@ -18,7 +18,7 @@ will delete the dist folder.
 !! Upgrade dependencies
 
 ```bash
-npm run update && npm install
+pnpm run update && pnpm install
 ```
 
 will automatically update packages such as tw5-typed, tiddlywiki-plugin-dev, etc. It is recommended to run this every once in a while.
@@ -26,13 +26,13 @@ will automatically update packages such as tw5-typed, tiddlywiki-plugin-dev, etc
 !! Create a plugin
 
 ```bash
-npm run new
+pnpm run new
 ```
 
 !! Enter live development mode
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 After a short compilation, a web server will open and a browser will open it to see the effect. The page will be automatically recompiled and refreshed as the content of the plugin is modified.
@@ -42,7 +42,7 @@ This page is read-only, changes to it are not written back to the wiki folder, s
 !! Entering documentation writing mode
 
 ```bash
-npm run dev:wiki
+pnpm run dev:wiki
 ```
 
 The page started is an editable page that allows you to edit the contents of the wiki folder directly.
@@ -50,8 +50,28 @@ The page started is an editable page that allows you to edit the contents of the
 !! Running tests
 
 ```bash
-npm run test
+pnpm run test
 ```
+
+!! Running Playwright E2E tests
+
+```bash
+pnpm run test:playwright
+```
+
+Headless mode (no visible browser window), suitable for CI and quick checks.
+
+```bash
+pnpm run test:playwright:headed
+```
+
+Headed mode (visible browser window). If your test is very short, the browser may open and close quickly.
+
+```bash
+pnpm run test:playwright:debug
+```
+
+Debug mode opens Playwright Inspector and pauses execution, recommended when you cannot observe the headed browser clearly.
 
 See [[012-About debugging|$:/plugins/Modern.TiddlyDev/doc/tutorials/en/012-关于调试]] for details.
 
@@ -62,13 +82,13 @@ There are two forms.
 # Build several separate plugins directly, in JSON format.
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 # Build as a plugin library.
 
 ```bash
-npm run build:library
+pnpm run build:library
 ```
 
 The result of the build is in dist.
@@ -80,13 +100,13 @@ Build the plugin library + build the wiki documentation to publish as a web page
 The online form, where the core and media files are external, can speed up the page opening, but the page can only be used online, after downloading it cannot be used due to missing core and media files:
 
 ```bash
-npm run publish
+pnpm run publish
 ```
 
 Offline form, i.e. packaged as a single file wiki that can be downloaded and used:
 
 ```bash
-npm run publish:offline
+pnpm run publish:offline
 ```
 
 The results of the build are in dist.
