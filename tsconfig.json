@@ -3,7 +3,8 @@
   "compilerOptions": {
     "declaration": false,
     "jsx": "react-jsx",
-    "baseUrl": "./",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "noEmit": true,
     "types": ["node", "tw5-typed"],
     "lib": ["DOM", "ESNext"]
