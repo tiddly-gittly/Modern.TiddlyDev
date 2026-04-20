@@ -49,7 +49,7 @@ You should notice that there are already a lot of folders and files in this proj
 * node_modules is the installation path for npm packages, which can be removed and reinstalled using npm install afterwards;
 * src is the main directory for plugin development, where each folder contains a plugin;
 * wiki is the wiki project presented in development mode and release mode, used for development testing, and documentation generation;
-* .eslintignore .eslintrc.js and other hidden files, as well as package.json and tsconfig.json are the relevant configuration files for the project, so please do not modify them if you don't known what you are doing;
+* eslint.config.mjs and other hidden files, as well as package.json and tsconfig.json are the relevant configuration files for the project, so please do not modify them if you don't known what you are doing;
 
 In src, there is already a `plugin-name` sample project for demo, you can start development by modifying this project or just delete it. Let's keep it and go directly into development mode to see the effect by typing this in the console:
 
