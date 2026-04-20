@@ -1,0 +1,9 @@
+title: $:/plugins/your-name/plugin-name/language/zh-Hans/Readme
+
+\procedure lingo-base() $:/plugins/your-name/plugin-name/language/
+
+! <<lingo Name>>
+
+<<lingo Description>>
+
+在这里写自述文档。

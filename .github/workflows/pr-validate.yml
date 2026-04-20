@@ -1,0 +1,106 @@
+name: PR Validation - Test and Build
+
+on:
+  pull_request:
+    branches:
+      - master
+      - main
+    paths-ignore:
+      - '*.md'
+      - '.vscode/**'
+      - '.idea/**'
+  workflow_dispatch:
+
+concurrency:
+  group: pr-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 'latest'
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
+
+      - name: Cache dependencies
+        uses: actions/cache@v5
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Install Playwright Browser
+        if: ${{ hashFiles('wiki/tiddlers/tests/playwright/**/*.ts') != '' }}
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Lint Code
+        run: pnpm exec eslint ./src --max-warnings 0
+        continue-on-error: true
+
+      - name: Run Tests
+        run: pnpm run test
+
+      - name: Run Playwright E2E Tests
+        if: ${{ hashFiles('wiki/tiddlers/tests/playwright/**/*.ts') != '' }}
+        run: pnpm run test:playwright
+
+      - name: Build Plugins
+        run: pnpm run build
+
+      - name: Build Static Website
+        run: pnpm run publish
+
+      - name: Upload Build Artifacts
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: build-artifacts
+          path: dist/
+          retention-days: 5
+
+      - name: Comment PR with Results
+        if: failure() && github.event_name == 'pull_request'
+        uses: actions/github-script@v9
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '❌ PR validation failed. Please check the workflow logs for details.'
+            })
+
+      - name: Comment PR with Success
+        if: success() && github.event_name == 'pull_request'
+        uses: actions/github-script@v9
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '✅ PR validation passed successfully!'
+            })
