@@ -13,6 +13,7 @@ concurrency:
 
 jobs:
   e2e:
+    if: ${{ hashFiles('wiki/tiddlers/tests/playwright/**/*.ts') != '' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
